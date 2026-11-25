@@ -1,0 +1,26 @@
+# ---- 依赖与构建产物（可按文档命令重建）----
+node_modules/
+dist/
+
+# ---- 离线单文件试玩包（由 node scripts/build-single-file.mjs 重新生成）----
+release/
+
+# ---- 测试与探针运行产物 ----
+test-results/
+playwright-report/
+blob-report/
+shots-*/
+*.log
+.playwright-cache/
+
+# ---- 源资产原件中的大体积二进制 ----
+# 这些原件未改动，SHA256 已登记在 assets/asset-manifest.json 与 文件校验-SHA256.txt，
+# 且完整保留在 2026-11-24 的原始交接 zip 中；运行时副本在 public/ 下正常入库。
+assets/source/**/*.zip
+assets/source/**/*.glb
+assets/source/**/*.unitypackage
+assets/source/**/*.blend
+
+# ---- 系统文件 ----
+.DS_Store
+._*

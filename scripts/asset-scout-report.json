@@ -1,0 +1,90 @@
+[
+  {
+    "slot": "ball-hit",
+    "localPath": "public/assets/audio/sfx/ball-hit.ogg",
+    "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney (www.kenney.nl)",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "d750cf88097d0c3e69920e6e14496e1444e1a9da01aa4cca8f5ec8cb44c57b4f",
+    "notes": "Original file: Audio/impactGlass_light_000.ogg from Kenney Impact Sounds pack (130 assets). Short sharp hard-material clack, best match for resin billiard ball-ball collision. Ogg Vorbis 44.1 kHz stereo, 6526 bytes, unmodified. Pack zip fetched via kenney.nl public signed download-link endpoint (page HTML 403s without a browser User-Agent)."
+  },
+  {
+    "slot": "cushion",
+    "localPath": "public/assets/audio/sfx/cushion.ogg",
+    "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney (www.kenney.nl)",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+    "notes": "Original file: Audio/impactSoft_medium_000.ogg from Kenney Impact Sounds pack. Soft rubbery medium thud, matches ball-cushion bump. Ogg Vorbis 44.1 kHz stereo, 5351 bytes, unmodified."
+  },
+  {
+    "slot": "cue-strike",
+    "localPath": "public/assets/audio/sfx/cue-strike.ogg",
+    "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+    "author": "Kenney (www.kenney.nl)",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "1723a9fd25103ed41af06054814e84e65f4a772bac86ab2dc927da93d9592ff5",
+    "notes": "Original file: Audio/impactWood_medium_000.ogg from Kenney Impact Sounds pack. Sharp wooden tap, matches cue tip striking ball. Chosen over Kenney UI Audio mouseclick1.ogg (4686 bytes, below the 5 KB sanity threshold). Ogg Vorbis 44.1 kHz stereo, 6575 bytes, unmodified."
+  },
+  {
+    "slot": "pocket",
+    "localPath": "public/assets/audio/sfx/pocket.mp3",
+    "sourceUrl": "https://freesound.org/people/Yarmonics/sounds/441857/",
+    "author": "Yarmonics (freesound.org)",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "94c3fea34ba935271a6fc21bcc5ff9298503c4666dbde7415bfae027c8337f93",
+    "notes": "Sound 441857 'B_1 pool ball falling.wav' — literal pool-ball drop recording, ~0.72 s per page (0.79 s measured from MP3 frames). Sound page states Creative Commons 0. Downloaded anonymous HQ preview https://freesound.org/data/previews/441/441857_9109395-hq.mp3 (no login). MP3 48 kHz, 19968 bytes, unmodified (kept preview format per task; original upload is .wav)."
+  },
+  {
+    "slot": "hairdryer-loop",
+    "localPath": "public/assets/audio/sfx/hairdryer-loop.mp3",
+    "sourceUrl": "https://freesound.org/people/Iamgiorgio/sounds/371815/",
+    "author": "Iamgiorgio (freesound.org)",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "853d27145665f4ca98016cb26d2ba5c8d18e19a4cdf85492ff97ad7a89ac12ac",
+    "notes": "Sound 371815 'H6_hair-dryer.mp3' — real hair dryer recording, 5.67 s per page (5.77 s measured from MP3 frames), within the requested ~2-6 s loop window; steady blower whoosh suitable for looping. Sound page states Creative Commons 0. Downloaded anonymous HQ preview https://freesound.org/data/previews/371/371815_5302340-hq.mp3 (no login). MP3 22.05 kHz, 108203 bytes, unmodified. Other CC0 candidates (Breviceps 457028 22 s, SoundBiterSFX 746598 36 s, Tom_Kaszuba 658321 76 s, Ultra-Edward 815169 38 s, jakobhandersen 213910 8.8 s) were rejected as too long."
+  },
+  {
+    "slot": "icon-hand",
+    "localPath": "public/assets/icons/hand.svg",
+    "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/open-palm.svg",
+    "author": "Skoll (game-icons.net)",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "b6741fda599e65a93b0f7ad60dc0c7a32f837667617d62a7039012b46ae65376",
+    "notes": "Icon 'open-palm' by Skoll, from github.com/game-icons/icons (path skoll/open-palm.svg; repo has no svg/ prefix). lorc/open-palm does not exist; skoll/open-palm chosen over lorc/hand and lorc/grab as the clearest open-hand micro-adjustment glyph. HTTP 200, valid <svg ...>...</svg>, 828 bytes, unmodified. Attribution required: 'open-palm' icon by Skoll, game-icons.net, CC BY 3.0. Icon page: https://game-icons.net/1x1/skoll/open-palm.html"
+  },
+  {
+    "slot": "icon-hairdryer",
+    "localPath": "public/assets/icons/hairdryer.svg",
+    "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/wind-hole.svg",
+    "author": "Lorc (game-icons.net)",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "aeb5c94b6986f9976f3f74ed4e5fbeae8fed335f10034ab7257b6620944ad0b1",
+    "notes": "No 'dryer'/'hair dryer' icon exists in the full repo tree (searched dryer/hair; only delapouite/hair-strands, unrelated). Fallback per task: 'wind-hole' by Lorc — a hole blasting wind, closest blower glyph (chosen over tornado/wind-slap). HTTP 200, valid SVG, 1464 bytes, unmodified. Attribution required: 'wind-hole' icon by Lorc, game-icons.net, CC BY 3.0. Icon page: https://game-icons.net/1x1/lorc/wind-hole.html"
+  },
+  {
+    "slot": "icon-fake",
+    "localPath": "public/assets/icons/fake.svg",
+    "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/domino-mask.svg",
+    "author": "Lorc (game-icons.net)",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "downloadedAt": "2026-11-19",
+    "sha256": "fb21f150ef4492aca202f5d71e87000b2e5b708806b4b1d8c35b3bbdfc70fdec",
+    "notes": "Icon 'domino-mask' by Lorc — masked-face deception glyph for the fake-free-ball skill (chosen over delapouite/spy). HTTP 200, valid SVG, 1009 bytes, unmodified. Attribution required: 'domino-mask' icon by Lorc, game-icons.net, CC BY 3.0. Icon page: https://game-icons.net/1x1/lorc/domino-mask.html"
+  }
+]

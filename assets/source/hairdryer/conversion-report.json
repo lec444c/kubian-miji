@@ -1,0 +1,58 @@
+{
+  "source": "assets/source/hairdryer/HairDryer_Low_Poly.blend",
+  "output": "public/assets/models/hairdryer.glb",
+  "blenderVersion": "4.5.3 LTS",
+  "meshObjects": [
+    {
+      "name": "Main_Body",
+      "vertices": 3941,
+      "polygons": 3926,
+      "dimensions": [
+        0.24596577882766724,
+        0.07964130491018295,
+        0.18389146029949188
+      ]
+    },
+    {
+      "name": "Inside",
+      "vertices": 1024,
+      "polygons": 1216,
+      "dimensions": [
+        0.06788460910320282,
+        0.06762624531984329,
+        0.12888284027576447
+      ]
+    },
+    {
+      "name": "Plastic",
+      "vertices": 1017,
+      "polygons": 988,
+      "dimensions": [
+        0.15330834686756134,
+        0.08105313032865524,
+        0.08979898691177368
+      ]
+    },
+    {
+      "name": "Logo",
+      "vertices": 100,
+      "polygons": 96,
+      "dimensions": [
+        0.011498654261231422,
+        0.08337316662073135,
+        0.04623817652463913
+      ]
+    },
+    {
+      "name": "Wire_and_plug",
+      "vertices": 1776,
+      "polygons": 1716,
+      "dimensions": [
+        0.03295072540640831,
+        0.09359409660100937,
+        0.2983740270137787
+      ]
+    }
+  ],
+  "outputBytes": 529308
+}

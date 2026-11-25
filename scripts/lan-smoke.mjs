@@ -1,0 +1,34 @@
+import { chromium } from '@playwright/test';
+const URL = 'http://172.21.3.71:4173/';
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = [];
+page.on('pageerror', e => errors.push(e.message));
+await page.goto(URL, { waitUntil: 'load', timeout: 30000 });
+await page.locator('[data-field="mode"] [data-value="classic"]').click();
+await page.locator('[data-field="playMode"] [data-value="practice"]').click();
+await page.getByRole('button', { name: '开 局' }).click();
+await page.evaluate(() => window.__creativeEight.cancelAi());
+await page.waitForFunction(() => {
+  const view = window.__creativeEight.getState().view;
+  const fit = view.traditionalFit ?? view.tableFit;
+  return fit !== null && Math.abs(fit.clothTopY - 0.79) < 0.01;
+}, null, { timeout: 45000 });
+await page.waitForFunction(() => window.__creativeEight.getState().phase === 'breakPlacement', null, { timeout: 15000 });
+await page.waitForFunction(() => window.__creativeEight.getState().view.camera.mode === 'top', null, { timeout: 15000 });
+await page.keyboard.press('Space');
+await page.waitForFunction(() => window.__creativeEight.getState().phase === 'aiming', null, { polling: 100, timeout: 15000 });
+await page.waitForFunction(() => window.__creativeEight.getState().view.camera.mode === 'aim', null, { timeout: 15000 });
+await page.keyboard.down('Space');
+// 第十二轮摩擦 0.7：满蓄力（1.35s）开球满足“四颗目标球碰库”且散开充分。
+await page.waitForTimeout(1400);
+await page.keyboard.up('Space');
+await page.waitForFunction(() => window.__creativeEight.getState().phase === 'rolling', null, { timeout: 15000 });
+await page.waitForFunction(() => window.__creativeEight.getState().view.camera.mode === 'top', null, { timeout: 15000 });
+await page.screenshot({ path: 'D:/game race/shots-refine/08-lan-smoke.png' });
+const state = await page.evaluate(() => {
+  const view = window.__creativeEight.getState().view;
+  return { phase: window.__creativeEight.getState().phase, mode: view.camera.mode, clothTopY: (view.traditionalFit ?? view.tableFit)?.clothTopY, traditional: view.traditionalFit !== null, room: view.roomBackground };
+});
+console.log('LAN SMOKE OK', JSON.stringify(state), 'pageErrors=', errors.length);
+await browser.close();

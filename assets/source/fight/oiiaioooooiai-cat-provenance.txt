@@ -1,0 +1,15 @@
+Fight skill cat provenance: user-supplied GLB
+Acquired: 2026-11-23
+Source file: assets/source/fight/oiiaioooooiai_cat.glb
+Bytes: 8322576
+SHA-256: fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5
+
+Embedded glTF asset metadata (transcribed from the GLB, not independently verified):
+Title: Oiiaioooooiai Cat
+Author: Zhuier (https://sketchfab.com/Zhuier)
+License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+Source: https://sketchfab.com/3d-models/oiiaioooooiai-cat-30d27bf7fb224849b76e208a6eccdb36
+
+Notes: Local fight demo projectile only. Attribution must be preserved if the declared
+CC BY 4.0 applies. The declaration is not a commercial-license clearance or independent
+rights check. The separately supplied 13 FBX motions remain under their own unverified provenance.

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "comfy-cafe-hdri",
+    "original": "D:\\game race\\assets\\source\\round3\\comfy_cafe_4k.exr",
+    "runtime": "public/assets/textures/comfy_cafe_4k.exr",
+    "originalSha256": "81418b38ffc1ae5c263339d8ed363d822434bea5b62a2393a973e8bd0e9570fb",
+    "runtimeSha256": "81418b38ffc1ae5c263339d8ed363d822434bea5b62a2393a973e8bd0e9570fb"
+  },
+  {
+    "id": "pool-table-traditional-source",
+    "original": "D:\\game race\\assets\\source\\round3\\pool_table_traditional.glb",
+    "runtime": null,
+    "originalSha256": "5028c2acdc960fe9a7d0303293843c0f6aa2c5a5fc94b0f37d3475f6a2b30cba",
+    "note": "Optimised runtime copy is produced by scripts/optimize-table.mjs"
+  },
+  {
+    "id": "bgm-track-1",
+    "original": "D:\\game race\\assets\\source\\round3\\pulsebox-a-background-jazz-music-448453.mp3",
+    "runtime": "public/assets/audio/bgm/track-1.mp3",
+    "originalSha256": "52220795a5ccc735b1f818774e96c66647cfdd625e1df7dfcc00b8918d5f37c9",
+    "runtimeSha256": "172a67013b4d2658d1ec4ae6de5ee28f9815fb1af2e5bfd9ac04088ec6f47166",
+    "inputI": "-15.86",
+    "outputI": "-16.28",
+    "outputTp": "-1.76"
+  },
+  {
+    "id": "bgm-track-2",
+    "original": "D:\\game race\\assets\\source\\round3\\pulsebox-a-jazz-background-music-448455.mp3",
+    "runtime": "public/assets/audio/bgm/track-2.mp3",
+    "originalSha256": "66c0002f1947381f4968006457b832bc9ad6d1d8941238d84a8bf1d56c8522ac",
+    "runtimeSha256": "0082bfef22ef67405770a8bb543d90572209d52ee557900f3ed09523563a24df",
+    "inputI": "-15.14",
+    "outputI": "-16.24",
+    "outputTp": "-1.72"
+  },
+  {
+    "id": "bgm-track-3",
+    "original": "D:\\game race\\assets\\source\\round3\\happinessinmusic-free-lounge-music-478072.mp3",
+    "runtime": "public/assets/audio/bgm/track-3.mp3",
+    "originalSha256": "e70a0a3f01b8145144035b0a6359d1ef75b8c10fc31cf2f812f0bf6a9f4d6e0d",
+    "runtimeSha256": "1e32b787f5d005ead8a8a0eee03e2990828d9d4758d570572e3ee20028f3c9e4",
+    "inputI": "-14.09",
+    "outputI": "-16.27",
+    "outputTp": "-3.89"
+  },
+  {
+    "id": "bgm-track-4",
+    "original": "D:\\game race\\assets\\source\\round3\\faespencer-background-music-instrumental-207886.mp3",
+    "runtime": "public/assets/audio/bgm/track-4.mp3",
+    "originalSha256": "ed41b062bae7fa015970687754d39961596c1b8562c105397d5fc38f35887f70",
+    "runtimeSha256": "0fc38560a709c5f7dbc78f99936acba886d195b02b6c877010c46a1fe590e08f",
+    "inputI": "-12.50",
+    "outputI": "-16.26",
+    "outputTp": "-3.31"
+  }
+]

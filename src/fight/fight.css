@@ -1,0 +1,102 @@
+.fight-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-top:10px;padding:13px 16px;border:1px solid var(--felt);border-radius:9px;background:var(--felt-soft);color:#205b43;font-weight:700;cursor:pointer}.fight-entry span{font-size:11px;font-weight:400}.fight-entry:hover{background:#d2e6d9}.fight-entry[hidden]{display:none}
+
+/* 与台球模式同一套暖色咖啡馆主题（style.css 的纸色/咖啡/台呢/琥珀令牌）。 */
+.fight-mode{--fight-ink:var(--ink);--fight-opponent:#b0624f;position:absolute;inset:0;z-index:30;background:linear-gradient(180deg,#f7f3ec 0%,#f2ebdf 62%,#ece3d4 100%);color:var(--fight-ink);isolation:isolate;font-family:"Segoe UI","Microsoft YaHei",sans-serif}
+.fight-stage{position:absolute;inset:176px 0 190px}.fight-mode:has(.fight-lab[open]) .fight-stage{bottom:244px}.fight-stage canvas{display:block;width:100%;height:100%;touch-action:none}
+
+.fight-top{position:absolute;top:10px;left:12px;right:12px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);backdrop-filter:blur(12px);z-index:3}
+.fight-title{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.fight-mark{width:28px;height:28px;flex:none;border:1.5px solid var(--amber-deep);border-radius:50%;display:grid;place-items:center;color:var(--amber-deep);font-family:Georgia,"Microsoft YaHei",serif;font-size:15px;background:var(--amber-soft)}
+.fight-title b{display:block;font-family:Georgia,"Microsoft YaHei",serif;font-size:16px;letter-spacing:2px;font-weight:600;color:var(--espresso)}
+.fight-title div>span{display:block;font-size:10px;letter-spacing:1px;color:var(--ink-faint);margin-top:2px}
+.fight-top nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+
+.fight-mode button,.fight-mode select{border:1px solid var(--line);background:var(--card);border-radius:8px;color:var(--ink-soft);font-size:12px;padding:7px 12px;cursor:pointer;min-height:34px;transition:.18s}
+.fight-mode button:hover,.fight-mode button.held{border-color:#c9b99d;color:var(--espresso);background:var(--paper-2)}
+.fight-mode button[aria-pressed=true]{border-color:#2f7d5d66;color:var(--felt);background:var(--felt-soft)}
+.fight-mode button:focus-visible,.fight-mode select:focus-visible,.fight-mode summary:focus-visible,.fight-mode input:focus-visible{outline:2px solid var(--felt);outline-offset:2px}
+.fight-mode button:disabled{opacity:.5;cursor:wait}
+
+.fight-score{position:absolute;top:72px;left:50%;transform:translateX(-50%);width:min(1000px,calc(100% - 24px));display:grid;grid-template-columns:1fr 80px 1fr;gap:20px;padding:10px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);backdrop-filter:blur(12px);pointer-events:none;z-index:2}
+.fight-player>div:first-child{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:7px}
+.fight-player strong{font-size:13px;color:var(--felt);font-weight:600}
+.fight-player span{font-size:12px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.fight-player small{display:block;margin-top:6px;color:var(--ink-soft);font-size:11px}
+.fight-health{height:13px;background:#e9e1d3;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fight-health i{display:block;height:100%;width:100%;background:linear-gradient(180deg,#3f9a72,#2f7d5d);transform-origin:left center}
+.fight-player.opponent strong{color:var(--fight-opponent)}
+.fight-player.opponent .fight-health i{background:linear-gradient(180deg,#c6735f,#b0624f);transform-origin:right center}
+.fight-player.opponent small{text-align:right}
+.fight-clock{text-align:center;margin-top:-4px}
+.fight-clock b{font:600 36px/1.15 Georgia,"Microsoft YaHei",serif;color:var(--espresso);font-variant-numeric:tabular-nums}
+.fight-clock span{display:block;font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);margin-top:4px}
+.fight-rage{position:relative;height:13px;margin-top:5px;background:#efe7da;border:1px solid #d9c6a6;border-radius:999px;overflow:hidden}
+.fight-rage i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#d99a4b,#b8782e);transform-origin:left center;transform:scaleX(0)}
+.fight-rage span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;line-height:1;color:#4a382a;letter-spacing:.5px}
+.fight-player.opponent .fight-rage i{transform-origin:right center}
+.fight-rage.full{border-color:#c0453e;box-shadow:0 0 8px #c0453e55}
+.fight-rage.full span{color:#8d2f28;font-weight:600}
+
+.fight-center{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);max-width:calc(100% - 32px);min-width:min(340px,calc(100% - 32px));padding:22px 28px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 30px 80px rgba(20,16,12,.3);text-align:center;z-index:2}
+.fight-center[hidden]{display:none}
+.fight-center b{display:block;font:600 30px Georgia,"Microsoft YaHei",serif;letter-spacing:2px;color:var(--espresso);text-wrap:balance}
+.fight-center span{display:block;margin-top:10px;font-size:12px;line-height:1.6;color:var(--ink-soft);max-width:48ch;overflow-wrap:anywhere}
+.fight-center button{margin-top:14px}
+.fight-progress{height:10px;margin-top:16px;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fight-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#d99a4b,#a56a24);border-radius:999px;transition:width .2s ease}
+.fight-load-percent{margin-top:8px!important;font:600 20px Georgia,"Microsoft YaHei",serif!important;color:var(--amber-deep)!important;letter-spacing:1px}
+.fight-hit{position:absolute;left:50%;top:29%;transform:translateX(-50%);font-size:20px;font-weight:700;color:var(--espresso);opacity:0;pointer-events:none;text-shadow:0 1px 0 #fffdf8,0 2px 8px rgba(43,38,32,.25)}
+
+.fight-combo{position:absolute;left:22px;top:215px;display:flex;align-items:baseline;gap:7px;padding:7px 13px;border:1px solid #c9b99d;border-radius:9px;background:var(--panel);box-shadow:var(--shadow);color:var(--ink-soft);font-size:13px;font-weight:600;pointer-events:none;z-index:2}
+.fight-combo[hidden]{display:none}
+.fight-combo b{font-size:22px;color:var(--espresso);font-variant-numeric:tabular-nums}
+.fight-combo span{font-size:10px;color:var(--ink-faint)}
+.fight-combo.hot{border-color:var(--amber-deep);background:var(--amber-soft);color:var(--amber-deep)}
+.fight-combo.hot b{color:#7c4f14}
+.fight-combo.hot span{color:var(--amber-deep)}
+
+.fight-bottom{position:absolute;inset-inline:0;bottom:0;padding:10px 22px 12px;background:var(--paper);border-top:1px solid var(--line)}
+.fight-instructions{font-size:12px;color:var(--ink-soft);text-align:center;line-height:1.8}
+.fight-instructions b{font-weight:600;color:var(--espresso);margin-left:10px;background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:0 6px;font-size:11px}
+.fight-skills{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.fight-skills button{display:flex;align-items:center;gap:8px;min-height:38px;padding:6px 12px;background:var(--card);border-color:var(--line);color:var(--ink);touch-action:none;user-select:none;text-align:left}
+.fight-skills button:hover:not(:disabled){border-color:#c9b99d;background:var(--paper-2)}
+.fight-skills button b{width:22px;height:22px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--amber-soft);color:var(--amber-deep);font:600 13px Georgia,serif}
+.fight-skills button span{font-size:12px;color:var(--espresso);font-weight:600;white-space:nowrap}
+.fight-skills button small{font-size:10px;color:var(--ink-faint);font-variant-numeric:tabular-nums;min-width:36px;text-align:right}
+.fight-skills button.cooling{opacity:.68}
+.fight-skills button[data-skill="ball"]{border-color:#9dc4b1}
+.fight-skills button[data-skill="ball"] b{background:var(--felt-soft);color:var(--felt)}
+.fight-skills button[data-skill="cat"]{border-color:#d9c6a6}
+.fight-skills button[data-skill="volley"]{border-color:#cdbfa8}
+.fight-skills button[data-skill="dog"]{border-color:#cf9a8c;background:#fdf3ef}
+.fight-skills button[data-skill="dog"] b{background:var(--danger-soft);color:var(--danger)}
+.fight-skills button.rage-ready{border-color:var(--danger);background:var(--danger-soft);box-shadow:0 0 10px #c0453e33}
+.fight-skills button.rage-ready b{background:var(--danger);color:#fff}
+.fight-touch{display:flex;justify-content:center;gap:8px;margin-top:9px}
+.fight-touch button{min-width:55px;min-height:40px;touch-action:none;user-select:none}
+.fight-touch [data-tap="KeyJ"],.fight-touch [data-tap="KeyK"]{border-color:#d9c6a6;background:var(--amber-soft);color:var(--espresso)}
+.fight-touch [data-tap="Digit4"]{border-color:#cf9a8c;background:#fdf3ef;color:#8d2f28}
+.fight-lab{margin-top:8px;border-top:1px solid var(--line);padding-top:7px;font-size:12px}
+.fight-lab summary{cursor:pointer;color:var(--ink-soft);width:fit-content}
+.fight-lab-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding-top:8px}
+.fight-lab-row label{display:flex;gap:8px;align-items:center;color:var(--espresso)}
+.fight-lab-row span{color:var(--ink-faint)}
+.fight-lab select{padding:5px 10px;background:var(--card);color:var(--espresso)}
+.fight-mode .exit-dialog{color:var(--ink);background:var(--card)}
+.fight-mode .exit-dialog button{background:var(--paper-2);color:var(--ink);border-color:var(--line)}
+.fight-mode .exit-dialog .primary{background:var(--espresso);color:#fff;border-color:var(--espresso)}
+
+/* 大招播报保持暗红电影化全屏层，与暖色界面形成对比。 */
+.fight-broadcast{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;background:radial-gradient(ellipse at center,#4a0d06d9 0%,#1d0503f2 72%);opacity:0}
+.fight-broadcast[hidden]{display:none}
+.fight-broadcast.show{animation:broadcast-in 2.6s ease-out forwards}
+.fight-broadcast img{max-width:min(72vw,640px);max-height:52vh;object-fit:contain;filter:drop-shadow(0 0 26px #ff3b1f)}
+.fight-broadcast b{font-size:clamp(34px,7vw,72px);color:#ffd23f;text-shadow:0 0 18px #ff2a1a,0 3px 0 #7a1408;letter-spacing:4px;text-align:center}
+.fight-broadcast span{font-size:14px;color:#ffb347;letter-spacing:6px}
+@keyframes broadcast-in{0%{opacity:0;transform:scale(1.12)}8%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:scale(1.02)}}
+
+@media(max-width:760px){.fight-stage{inset:190px 0 204px}.fight-mode:has(.fight-lab[open]) .fight-stage{bottom:302px}.fight-top{top:8px;left:8px;right:8px;padding:7px 10px;align-items:flex-start}.fight-mark{width:24px;height:24px;font-size:13px}.fight-title{gap:7px}.fight-title b{font-size:14px;letter-spacing:1px}.fight-title div>span{font-size:9px}.fight-top nav{gap:5px;max-width:72%}.fight-mode button{padding:6px 8px;font-size:11px;min-height:30px}.fight-score{top:92px;width:calc(100% - 16px);gap:8px;padding:8px 10px;grid-template-columns:1fr 44px 1fr}.fight-player strong{font-size:11px}.fight-player span{font-size:9px}.fight-player small{font-size:10px}.fight-clock b{font-size:24px;white-space:nowrap}.fight-clock span{font-size:9px}.fight-bottom{padding:8px 10px}.fight-instructions{display:none}.fight-skills{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:0}.fight-skills button{min-width:0;justify-content:center;gap:5px;padding:6px 5px}.fight-skills button b{width:18px;height:18px;font-size:11px}.fight-skills button span{font-size:10px;white-space:normal;line-height:1.2}.fight-skills button small{font-size:9px;min-width:0}.fight-touch{gap:5px;flex-wrap:wrap;margin-top:6px}.fight-touch button{min-width:42px;min-height:42px;flex:1}.fight-lab-row{gap:8px}.fight-center b{font-size:24px}.fight-center{min-width:min(300px,calc(100% - 24px));padding:18px 20px}.fight-combo{left:12px;top:198px;padding:5px 9px;font-size:11px}.fight-combo b{font-size:17px}}
+@media(max-height:540px){.fight-stage{inset:136px 0 140px}.fight-mode:has(.fight-lab[open]) .fight-stage{bottom:201px}.fight-top{padding-block:5px;top:6px}.fight-score{top:58px;padding-block:6px}.fight-player small{margin-top:3px}.fight-bottom{padding-block:5px}.fight-instructions{display:none}.fight-skills{margin-top:0}.fight-skills button{min-height:32px;padding-block:4px}.fight-touch{margin-top:5px}.fight-touch button{min-height:32px;padding-block:5px}.fight-lab{margin-top:4px;padding-top:4px}.fight-center b{font-size:24px}}
+@media(max-width:760px) and (max-height:540px){.fight-stage{inset:132px 0 150px}.fight-mode:has(.fight-lab[open]) .fight-stage{bottom:211px}.fight-skills{grid-template-columns:repeat(4,1fr)}.fight-skills button span{white-space:normal;line-height:1.15}.fight-mark{display:none}}
+@media(prefers-reduced-motion:reduce){.fight-mode *{scroll-behavior:auto;transition:none!important}.fight-entry{transition:none}.fight-broadcast.show{animation:none;opacity:1}}

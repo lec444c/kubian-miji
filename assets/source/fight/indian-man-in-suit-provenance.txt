@@ -1,0 +1,15 @@
+Fight character provenance: user-supplied GLB
+Acquired: 2026-11-23
+Source file: assets/source/fight/indian_man_in_suit.glb
+Bytes: 9549256
+SHA-256: 94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c
+
+Embedded glTF asset metadata (transcribed from the GLB, not independently verified):
+Title: Indian Man in suit
+Author: Pixel_Monster (https://sketchfab.com/ar.jethin)
+License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+Source: https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa
+
+Notes: Local fight demo only. Attribution must be preserved if the declared CC BY 4.0
+applies. The declaration is not a commercial-license clearance or independent rights check.
+The separately supplied 11 FBX motions remain under their own unverified provenance.

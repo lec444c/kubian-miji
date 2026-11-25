@@ -1,0 +1,4228 @@
+{
+  "schemaVersion": 1,
+  "acquiredDate": "2026-11-23",
+  "tool": {
+    "script": "scripts/prepare-fight-assets.mjs",
+    "scriptSha256": "4bd8915226d5761d78a4bfb79a138949c78cffe1c21f6c0068f445c9ef980533",
+    "nodeVersion": "v24.21.0",
+    "threeRevision": "187",
+    "fbxLoaderSha256": "04daa9a7054f17838b78a114e7d400c05d08d72afa7b62f2fc1d508909a6df3c"
+  },
+  "sourceProvenance": {
+    "description": "User-supplied FBX attachments retained locally; original third-party source URL and author not verified.",
+    "restrictions": "User attachment origin, authorship and third-party redistribution/commercial rights are unverified. No mesh is present. Local demo preprocessing only; not a commercial-license certification or clearance for external release. Mixamorig/mixamo.com names are technical metadata, not proof of source or license."
+  },
+  "processing": {
+    "selection": "Use source.animations[0]; rename the cloned AnimationClip to its mapping key.",
+    "skeleton": "Idle FBXLoader static/rest T-pose bone-local position, quaternion and scale, captured immediately after parse. No mixer, animation evaluation or frame-0 pose is applied. Names are unchanged FBXLoader names; parent is the nearest ancestor Bone or null.",
+    "coordinates": "Y-up, +Z forward, centimeters. No axis conversion or baked scaling; unitScale=0.01 indicates centimeters to meters, applied once by the consumer.",
+    "rootMotion": {
+      "track": "mixamorigHips.position",
+      "method": "Set X and Z to absolute zero at EVERY existing key, not first-key subtraction. Preserve every Y sample in original centimeters (apart from JSON decimal rounding).",
+      "reason": "Prevent planar root translation from adding to rules-driven actor movement.",
+      "rotations": "All rotation tracks, including Hips turns/yaw, are retained. No rotational root-motion removal."
+    },
+    "time": "Keep FBXLoader clip durations, track order, all key counts and timestamps; no trim, optimize, resampling, downsampling or time scaling. JSON numbers, including duration/timestamps, are rounded to six decimal places only. Exact original durations are retained separately in this report.",
+    "serialization": "Three.AnimationClip.toJSON(clip), compact JSON with six-decimal numeric rounding; stable content-derived clip UUIDs for reproducible reruns.",
+    "character": "Byte-for-byte copy of the user-supplied self-contained Indian Man in Suit GLB. Runtime normalizes its 1.83x centimetre root scale to 1.8 m and adapts Mixamo-style joint names to the rig contract; no mesh conversion, no animation retargeting, embedded animation unused.",
+    "executive": "Byte-for-byte copy of the user-supplied static Executive In A Navy Suit GLB (no skeleton). Runtime auto-rigging binds its meshes to a posed clone of the Indian skeleton; no source mesh edit.",
+    "audio": "Byte-for-byte copies of the supplied fight audio. laowu-cat.mp3 is the first 2 seconds of the cat scream, trimmed once with imageio_ffmpeg ffmpeg 7.1 (libmp3lame -q:a 2 -t 2); fight-bgm/punch-a/punch-b are unmodified copies."
+  },
+  "restPose": {
+    "sourcePath": "assets/source/fight/原地/Great Sword Idle.fbx",
+    "boneCount": 65,
+    "hips": {
+      "name": "mixamorigHips",
+      "parent": null,
+      "position": [
+        0,
+        104.2749,
+        0
+      ],
+      "quaternion": [
+        0.006459,
+        0,
+        0,
+        0.999979
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "sources": [
+    {
+      "key": "idle",
+      "sourcePath": "assets/source/fight/原地/Great Sword Idle.fbx",
+      "bytes": 424416,
+      "sha256": "2bb0973c29a64dac07488f7f7ea8c9c2972d946d6a981be78b406f95ac50ac89",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 2,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 2,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 61,
+          "valueCount": 183
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        }
+      ]
+    },
+    {
+      "key": "walk",
+      "sourcePath": "assets/source/fight/Great Sword Walk.fbx",
+      "bytes": 373120,
+      "sha256": "6447dc8671dce1614b068bcdeb0be18c828be2a2df7b92a2a4ea9fa426c60725",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.3666666746139526,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.366667,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 42,
+          "valueCount": 126
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 42,
+          "valueCount": 168
+        }
+      ]
+    },
+    {
+      "key": "run",
+      "sourcePath": "assets/source/fight/Great Sword Run.fbx",
+      "bytes": 311024,
+      "sha256": "d3e56846ccbe5ee93f1fe5992c3ca99941271473e5d8d9bcb62d9738713d1271",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.6000000238418579,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.6,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 19,
+          "valueCount": 57
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 19,
+          "valueCount": 76
+        }
+      ]
+    },
+    {
+      "key": "jump",
+      "sourcePath": "assets/source/fight/Great Sword Jump.fbx",
+      "bytes": 316560,
+      "sha256": "0f75b8d3f7127220be80622d8467b71b42e8513c34b8dbaf53af033d6b8a179a",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.6333333253860474,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.633333,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 20,
+          "valueCount": 60
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 58,
+          "valueCount": 232
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 61,
+          "valueCount": 244
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 20,
+          "valueCount": 80
+        }
+      ]
+    },
+    {
+      "key": "jumpBack",
+      "sourcePath": "assets/source/fight/Great Sword Jump(1).fbx",
+      "bytes": 335312,
+      "sha256": "229547b275b05ca8d2b973d5feea25645929606c358787f7101460d7d26c062f",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.8999999761581421,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.9,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 28,
+          "valueCount": 84
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 28,
+          "valueCount": 112
+        }
+      ]
+    },
+    {
+      "key": "turn",
+      "sourcePath": "assets/source/fight/转向/Great Sword Turn.fbx",
+      "bytes": 329920,
+      "sha256": "9d4d6836c52441864deb9609c348bd0e6eb63aae9072605e69ee27277338475c",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.8333333134651184,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.833333,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 26,
+          "valueCount": 78
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 26,
+          "valueCount": 104
+        }
+      ]
+    },
+    {
+      "key": "turnAlt",
+      "sourcePath": "assets/source/fight/转向/Great Sword Turn(1).fbx",
+      "bytes": 322352,
+      "sha256": "b5645500d1e3b1af6ad116074309eb1804a7e7ce71e1028a0cde8b636f9f5a56",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.7333333492279053,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.733333,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 23,
+          "valueCount": 69
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 38,
+          "valueCount": 152
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 23,
+          "valueCount": 92
+        }
+      ]
+    },
+    {
+      "key": "impact",
+      "sourcePath": "assets/source/fight/受击/Great Sword Impact.fbx",
+      "bytes": 333296,
+      "sha256": "25f486b1709eac4f8abc26eb7ceddaef1a567203c85f2569f7c0050015ea178b",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 0.8666666746139526,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 0.866667,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 27,
+          "valueCount": 81
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 72,
+          "valueCount": 288
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 27,
+          "valueCount": 108
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        }
+      ]
+    },
+    {
+      "key": "impactAlt",
+      "sourcePath": "assets/source/fight/受击/Great Sword Impact(1).fbx",
+      "bytes": 384176,
+      "sha256": "663d8fe41c279fb6d6e497df3c29d8234ca7694cbb44096ed79e43cdc51144ff",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.2666666507720947,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.266667,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 39,
+          "valueCount": 117
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        }
+      ]
+    },
+    {
+      "key": "slash",
+      "sourcePath": "assets/source/fight/攻击/Great Sword Slash.fbx",
+      "bytes": 424048,
+      "sha256": "b8dd4df06b25ddc4dc118f81327a6da98552dcfb0ad6cc696c0722cd069626bc",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.7999999523162842,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.8,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 55,
+          "valueCount": 165
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 119,
+          "valueCount": 476
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 189,
+          "valueCount": 756
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 298,
+          "valueCount": 1192
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 228,
+          "valueCount": 912
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 55,
+          "valueCount": 220
+        }
+      ]
+    },
+    {
+      "key": "slashAlt",
+      "sourcePath": "assets/source/fight/攻击/Great Sword Slash(1).fbx",
+      "bytes": 372960,
+      "sha256": "d72bb52dd65be767fc63c011395d6a098042c4fb8526a1f07d02b59c864ae51f",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.2666666507720947,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.266667,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 39,
+          "valueCount": 117
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 139,
+          "valueCount": 556
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 39,
+          "valueCount": 156
+        }
+      ]
+    },
+    {
+      "key": "skillBall",
+      "sourcePath": "assets/source/fight/技能/Great Sword Slash.fbx",
+      "bytes": 424000,
+      "sha256": "5676f82afdef10916beeb09b9204e59898e2cbc590c56f189dcc2693dda4b0a0",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.8333333730697632,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.833333,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 56,
+          "valueCount": 168
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 114,
+          "valueCount": 456
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 114,
+          "valueCount": 456
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 178,
+          "valueCount": 712
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 56,
+          "valueCount": 224
+        }
+      ]
+    },
+    {
+      "key": "skillVolley",
+      "sourcePath": "assets/source/fight/技能/Standing Draw Arrow.fbx",
+      "bytes": 360624,
+      "sha256": "0aa014d815005c3843061b9013e92810a03b5383e5cfd900b4f261ddb7df3f0e",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 1.0333333015441895,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 1.033333,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 32,
+          "valueCount": 96
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 32,
+          "valueCount": 128
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        }
+      ]
+    },
+    {
+      "key": "death",
+      "sourcePath": "assets/source/fight/Standing Death Left 01.fbx",
+      "bytes": 483280,
+      "sha256": "14fc9963f2e94ec9ce2901936870fe2450f075b48080180b0a73d27cf888eb02",
+      "boneCount": 65,
+      "meshCount": 0,
+      "animationCount": 1,
+      "selectedAnimationIndex": 0,
+      "originalClipName": "mixamo.com",
+      "duration": 2.2666666507720947,
+      "trackCount": 53,
+      "rotationTrackCount": 52,
+      "outputDuration": 2.266667,
+      "tracks": [
+        {
+          "name": "mixamorigHips.position",
+          "keyCount": 69,
+          "valueCount": 207
+        },
+        {
+          "name": "mixamorigHips.quaternion",
+          "keyCount": 115,
+          "valueCount": 460
+        },
+        {
+          "name": "mixamorigSpine.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigSpine1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigSpine2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigNeck.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigHead.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightShoulder.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightArm.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightForeArm.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHand.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandThumb1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandThumb2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandThumb3.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandIndex1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandIndex2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandIndex3.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandMiddle1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandMiddle2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandMiddle3.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandRing1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandRing2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandRing3.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandPinky1.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandPinky2.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightHandPinky3.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftShoulder.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftArm.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftForeArm.quaternion",
+          "keyCount": 106,
+          "valueCount": 424
+        },
+        {
+          "name": "mixamorigLeftHand.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftHandThumb1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandThumb3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandIndex3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandMiddle3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandRing3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky1.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky2.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigLeftHandPinky3.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        },
+        {
+          "name": "mixamorigRightUpLeg.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightLeg.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightFoot.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigRightToeBase.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftUpLeg.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftLeg.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftFoot.quaternion",
+          "keyCount": 69,
+          "valueCount": 276
+        },
+        {
+          "name": "mixamorigLeftToeBase.quaternion",
+          "keyCount": 1,
+          "valueCount": 4
+        }
+      ]
+    }
+  ],
+  "output": {
+    "path": "public/assets/fight/motions.json",
+    "bytes": 770775,
+    "sha256": "cc8df3bb7321e349aaeaf5d25af1a2f078b6f4f7a847b5b6c90857d7c540b165",
+    "url": "/assets/fight/motions.json",
+    "schemaVersion": 1,
+    "unitScale": 0.01,
+    "clipKeys": [
+      "idle",
+      "walk",
+      "run",
+      "jump",
+      "jumpBack",
+      "turn",
+      "turnAlt",
+      "impact",
+      "impactAlt",
+      "slash",
+      "slashAlt",
+      "skillBall",
+      "skillVolley",
+      "death"
+    ]
+  },
+  "character": {
+    "url": "/assets/fight/character/indian_man_in_suit.glb",
+    "suppliedSource": {
+      "path": "assets/source/fight/indian_man_in_suit.glb",
+      "bytes": 9549256,
+      "sha256": "94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c"
+    },
+    "output": {
+      "path": "public/assets/fight/character/indian_man_in_suit.glb",
+      "bytes": 9549256,
+      "sha256": "94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c"
+    },
+    "provenance": {
+      "path": "assets/source/fight/indian-man-in-suit-provenance.txt",
+      "bytes": 801,
+      "sha256": "8a1f55206a16248e7b828facaf7892ef0b8e8e54a2fd26d5c1407e5f7680ccef"
+    },
+    "embeddedMetadata": {
+      "author": "Pixel_Monster (https://sketchfab.com/ar.jethin)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa",
+      "title": "Indian Man in suit"
+    },
+    "licenseNote": "Declared CC BY 4.0 in the embedded glTF metadata; attribution is recorded but the declaration is not independently verified.",
+    "normalization": "Runtime scale to 1.8 m and joint-name adaptation in src/fight/characterModel.ts. No mesh conversion, no skin or animation retargeting, embedded animation unused."
+  },
+  "cat": {
+    "url": "/assets/fight/cat/oiiaioooooiai_cat.glb",
+    "suppliedSource": {
+      "path": "assets/source/fight/oiiaioooooiai_cat.glb",
+      "bytes": 8322576,
+      "sha256": "fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5"
+    },
+    "output": {
+      "path": "public/assets/fight/cat/oiiaioooooiai_cat.glb",
+      "bytes": 8322576,
+      "sha256": "fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5"
+    },
+    "provenance": {
+      "path": "assets/source/fight/oiiaioooooiai-cat-provenance.txt",
+      "bytes": 799,
+      "sha256": "3a0d9ea047831041bd7b7f40134012374c7b6a09afb07c7511864e38fd01f6c3"
+    },
+    "embeddedMetadata": {
+      "author": "Zhuier (https://sketchfab.com/Zhuier)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/oiiaioooooiai-cat-30d27bf7fb224849b76e208a6eccdb36",
+      "title": "Oiiaioooooiai Cat"
+    },
+    "licenseNote": "Declared CC BY 4.0 in the embedded glTF metadata; attribution is recorded but the declaration is not independently verified.",
+    "normalization": "Runtime centers and scales a clone to a ~0.9 m spinning projectile; embedded animation is not played."
+  },
+  "audio": {
+    "laowu-cat": {
+      "url": "/assets/fight/audio/laowu-cat.mp3",
+      "suppliedSource": {
+        "path": "assets/source/fight/audio/laowu-cat-2s.mp3",
+        "bytes": 25996,
+        "sha256": "bc5bb1867dd4331ce4391a1a0c8ce43127190150dd279cfca6ad92fb750557d2"
+      },
+      "origin": {
+        "path": "assets/source/fight/audio/laowu-cat-source.mp3",
+        "bytes": 294705,
+        "sha256": "76b652309403ec73a4b20d98111ecf29df19d2ef1bdb998e419618d12877748e"
+      },
+      "output": {
+        "path": "public/assets/fight/audio/laowu-cat.mp3",
+        "bytes": 25996,
+        "sha256": "bc5bb1867dd4331ce4391a1a0c8ce43127190150dd279cfca6ad92fb750557d2"
+      },
+      "licenseNote": "User-supplied attachment; authorship and third-party redistribution/commercial rights unverified. Local demo only."
+    },
+    "fight-bgm": {
+      "url": "/assets/fight/audio/fight-bgm.mp3",
+      "suppliedSource": {
+        "path": "assets/source/fight/audio/fight-bgm-source.mp3",
+        "bytes": 6802944,
+        "sha256": "32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4"
+      },
+      "origin": {
+        "path": "assets/source/fight/audio/fight-bgm-source.mp3",
+        "bytes": 6802944,
+        "sha256": "32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4"
+      },
+      "output": {
+        "path": "public/assets/fight/audio/fight-bgm.mp3",
+        "bytes": 6802944,
+        "sha256": "32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4"
+      },
+      "licenseNote": "User-supplied attachment; authorship and third-party redistribution/commercial rights unverified. Local demo only."
+    },
+    "punch-a": {
+      "url": "/assets/fight/audio/punch-a.mp3",
+      "suppliedSource": {
+        "path": "assets/source/fight/audio/punch-a-source.mp3",
+        "bytes": 32600,
+        "sha256": "4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41"
+      },
+      "origin": {
+        "path": "assets/source/fight/audio/punch-a-source.mp3",
+        "bytes": 32600,
+        "sha256": "4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41"
+      },
+      "output": {
+        "path": "public/assets/fight/audio/punch-a.mp3",
+        "bytes": 32600,
+        "sha256": "4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41"
+      },
+      "licenseNote": "User-supplied attachment; authorship and third-party redistribution/commercial rights unverified. Local demo only."
+    },
+    "punch-b": {
+      "url": "/assets/fight/audio/punch-b.mp3",
+      "suppliedSource": {
+        "path": "assets/source/fight/audio/punch-b-source.mp3",
+        "bytes": 50155,
+        "sha256": "d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797"
+      },
+      "origin": {
+        "path": "assets/source/fight/audio/punch-b-source.mp3",
+        "bytes": 50155,
+        "sha256": "d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797"
+      },
+      "output": {
+        "path": "public/assets/fight/audio/punch-b.mp3",
+        "bytes": 50155,
+        "sha256": "d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797"
+      },
+      "licenseNote": "User-supplied attachment; authorship and third-party redistribution/commercial rights unverified. Local demo only."
+    }
+  },
+  "validation": {
+    "boneCount": 65,
+    "clipCount": 14,
+    "tracksPerClip": 53,
+    "rotationTracksPerClip": 52,
+    "noMeshesInSources": true,
+    "allSamplesCompared": true,
+    "serializedClipsParseAndValidate": true,
+    "staticPoseNotFrameZero": true,
+    "characterCopyByteIdentical": true,
+    "characterBones": 74,
+    "characterMeshes": 11,
+    "characterHeightMeters": 1.8,
+    "catCopyByteIdentical": true,
+    "catMeshes": 1,
+    "catAnimations": 1,
+    "executiveCopyByteIdentical": true,
+    "executiveSkins": 0,
+    "audioCopiesByteIdentical": true
+  },
+  "executiveRemoved": "Round 22 (2026-11-23): executive_in_a_navy_suit.glb removed at user request; both fighters use indian_man_in_suit.glb. Source copy, runtime copy, provenance file and manifest entries deleted; D-drive original untouched.",
+  "dog": {
+    "source": "assets/source/fight/labrador_dog.glb",
+    "output": "public/assets/fight/dog/labrador_dog.glb",
+    "bytes": 19312512,
+    "sha256": "0e30a09051903e2327c31371dc3dd973ca9da9c07a1c8aea5ca5f1af5bcda4fc",
+    "structure": "1 skin, 2 meshes, 1 material, 3 embedded images, 1 animation clip; bbox height ~2.78 m, length ~5.44 m before runtime normalization.",
+    "license": "Embedded CC-BY-4.0 (kenchoo, Sketchfab), transcribed not verified."
+  },
+  "dagouAudio": {
+    "source": "assets/source/fight/audio/dagou-source.mp3",
+    "durationSeconds": 1.86,
+    "chant": {
+      "output": "public/assets/fight/audio/dagou-chant.mp3",
+      "range": "0-0.87 s",
+      "sha256": "cf0008d6aae469c0b3f4731d3752a94b01a08e71b0bb42b71d15968d2b13a686"
+    },
+    "bark": {
+      "output": "public/assets/fight/audio/dagou-bark.mp3",
+      "range": "0.88-1.78 s",
+      "sha256": "1fd44b1ec48114737f0200ef8166008cc6f0b49d8d86d313d388455aea6f5d25"
+    },
+    "method": "50 ms RMS envelope syllable boundaries; imageio_ffmpeg ffmpeg 7.1; not a labeled stem split."
+  },
+  "dagouBanner": {
+    "source": "assets/source/fight/dagou-banner.webp",
+    "output": "public/assets/fight/dagou-banner.webp",
+    "sha256": "2a7497de6261a3780956c08b0fae7c9e4d418ef555e68b07b27e6e351bbe6505"
+  },
+  "particles": {
+    "pack": "Kenney Particle Pack 1.1 (CC0, bundled License.txt)",
+    "archive": "assets/source/fight/particles/kenney_particle-pack.zip",
+    "selected": [
+      "public/assets/fight/particles/fire_01.png",
+      "public/assets/fight/particles/flame_04.png",
+      "public/assets/fight/particles/flare_01.png",
+      "public/assets/fight/particles/light_01.png",
+      "public/assets/fight/particles/magic_05.png",
+      "public/assets/fight/particles/spark_04.png",
+      "public/assets/fight/particles/star_06.png",
+      "public/assets/fight/particles/smoke_08.png",
+      "public/assets/fight/particles/slash_01.png",
+      "public/assets/fight/particles/trace_01.png",
+      "public/assets/fight/particles/twirl_01.png",
+      "public/assets/fight/particles/circle_05.png",
+      "public/assets/fight/particles/muzzle_02.png",
+      "public/assets/fight/particles/scorch_01.png"
+    ]
+  }
+}

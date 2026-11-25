@@ -1,0 +1,337 @@
+Third-Party Notices
+===================
+
+tailuge/billiards
+-----------------
+Upstream source: https://github.com/tailuge/billiards
+Pinned commit: 92a2818928e9ab8576fd300615509c88b0b0f183
+Source archive: https://codeload.github.com/tailuge/billiards/tar.gz/92a2818928e9ab8576fd300615509c88b0b0f183
+Local source snapshot: third_party/tailuge-billiards/
+License: GNU General Public License, version 3 (GPLv3), 29 June 2007.
+License text: licenses/tailuge-billiards-LICENSE.txt
+
+The snapshot under third_party/tailuge-billiards/ is retained for porting,
+reference, and tests. Source code copied or adapted from this project, and
+modifications to such copied or adapted code, will be made in this project's
+src/ directory. The user has explicitly accepted direct copying and
+modification under GPLv3.
+
+Reference visuals supplied from the user's billiards-master.zip:
+- dist/models/p8.gltf and p8.bin -> public/assets/models/p8.gltf and p8.bin.
+  The FullCloth node is fitted to the physics bed in src/view/ReferenceTable.ts.
+- src/view/balltexturefactory.ts and ballmaterialfactory.ts ->
+  src/view/ReferenceBall.ts. Adapted to Y-up world-axis rolling, cached square
+  number textures, clearcoat materials, and local contact shadows.
+- src/view/cuemesh.ts -> src/view/ReferenceCue.ts. Adapted to a local +X tip
+  convention and the Demo's charge/retraction animation.
+These adapted files and the reference table remain under GPLv3.
+
+Quaternius Universal Base Characters Standard
+---------------------------------------------
+Source: https://quaternius.com/packs/universalbasecharacters.html
+Local supplied archive: assets/source/quaternius-base/Universal Base Characters[Standard].zip
+License: CC0 1.0 Universal, per the included License_Standard.txt.
+The actual supplied full bodies are Superhero_Male_FullBody and
+Superhero_Female_FullBody, not Regular full bodies. The deployed glTF image
+aliases are corrected to existing supplied PNG files; texture pixels are not
+regenerated. Runtime files are under public/assets/characters/.
+
+Quaternius Universal Animation Library Standard
+-----------------------------------------------
+Source: https://quaternius.com/packs/universalanimationlibrary.html
+Local supplied archive: assets/source/quaternius-animations/Universal Animation Library[Standard].zip
+License: CC0 1.0 Universal, per the included License.txt.
+The deployed GLB contains 43 named animation entries, including A_TPose.
+Idle_Loop, Walk_Loop, Interact, and PickUp_Table are used or retained as local
+humanoid motions. No remote animation service is used.
+
+Vintage hairdryer by Zejak
+--------------------------
+Listing: https://www.cgtrader.com/free-3d-models/household/other/vintage-hairdryer
+Local supplied archive: assets/source/hairdryer/BLEND.zip
+Source model: assets/source/hairdryer/HairDryer_Low_Poly.blend
+License evidence: assets/source/hairdryer/readme.rtf, signed Zejak, permits use
+in 3D projects and renders and states that credit is not required.
+Converted locally with Blender 4.5.3 LTS to public/assets/models/hairdryer.glb.
+The conversion report and all source/output SHA-256 hashes are recorded in
+assets/asset-manifest.json. One empty roughness image could not be exported;
+no successful export of that image is claimed.
+
+Pool Table Traditional by fizyman
+---------------------------------
+Source: https://sketchfab.com/3d-models/pool-table-traditional-e0b938c0c2e74eb794a49ebde2543977
+License: Creative Commons Attribution 4.0 (CC BY 4.0), as recorded in the
+supplied GLB asset metadata. File supplied directly by the user.
+Local source: assets/source/round3/pool_table_traditional.glb
+Runtime copy: public/assets/models/pool-table-traditional.glb, produced by
+scripts/optimize-table.mjs (baked-in balls and duplicate cue removed, textures
+resized to 1024px). The table and ceiling lamp visuals are fitted at runtime in
+src/view/TraditionalTable.ts without changing physics geometry. Since round 5
+the visible cue is the standalone CC0 - Cue Stick GLB below; the table model's
+own cue mesh is culled at install.
+
+CC0 - Cue Stick by plaggy
+-------------------------
+Source: https://sketchfab.com/3d-models/cc0-cue-stick-311d2a1ac8d64037b6b9f8561d6d13ed
+License: Creative Commons Attribution 4.0 (CC BY 4.0), as recorded in the
+supplied GLB asset extras. Despite the "CC0" file name, the embedded license
+is CC-BY-4.0, so attribution is retained here. File supplied directly by the
+user.
+Local source: assets/source/round5/cc0_-_cue_stick.glb
+Runtime copy: public/assets/models/cc0_-_cue_stick.glb, served unchanged.
+src/view/CueStick.ts aligns the diagonally authored shaft by covariance axis,
+places the thin tip at the local origin and normalises length to 1.45 m and
+butt diameter to 31 mm; computeCuePose aims the axis through the cue-ball
+centre and elevates the shaft so it never penetrates the ball or the rail cap.
+
+Sitting Room with Baked Textures by jimbogies
+--------------------------------------------
+Source: https://sketchfab.com/3d-models/sitting-room-with-baked-textures-61fdbbef86b9496d80644492a84c916f
+License: Creative Commons Attribution 4.0 (CC BY 4.0), as recorded in the
+supplied GLB asset extras. File supplied directly by the user.
+Local source: assets/source/round4/sitting_room_with_baked_textures.glb
+Runtime copy: public/assets/models/sitting_room_with_baked_textures.glb,
+served unchanged. src/view/SceneView.ts centres the shell on the table, culls
+the baked coffee table inside the playfield and splits the ceiling into its
+own mesh so the top camera can hide it. Replaces the former comfy_cafe HDRI
+background, which was removed in round 4.
+
+Background music (Pixabay)
+--------------------------
+Files supplied directly by the user; all under the Pixabay Content License
+(https://pixabay.com/service/license-summary/), no attribution required.
+- pulsebox, "Background Jazz Music", https://pixabay.com/music/id-448453/
+- pulsebox, "Jazz Background Music", https://pixabay.com/music/id-448455/
+- happinessinmusic, "Free Lounge Music", https://pixabay.com/music/id-478072/
+- faespencer, "Background Music Instrumental", https://pixabay.com/music/id-207886/
+Runtime copies public/assets/audio/bgm/track-1..4.mp3 are loudness-normalized
+locally with two-pass ffmpeg loudnorm (I=-16 LUFS, TP=-1.5 dBTP, LRA=11);
+measured input/output loudness is recorded in assets/asset-manifest.json.
+
+Sound effects (CC0)
+-------------------
+- Kenney Impact Sounds pack, https://kenney.nl/assets/impact-sounds, CC0 1.0:
+  impactGlass_light_000.ogg -> public/assets/audio/sfx/ball-hit.ogg,
+  impactSoft_medium_000.ogg -> public/assets/audio/sfx/cushion.ogg,
+  impactWood_medium_000.ogg -> public/assets/audio/sfx/cue-strike.ogg.
+- Yarmonics, "B_1 pool ball falling", freesound.org/people/Yarmonics/sounds/441857/,
+  CC0 1.0 -> public/assets/audio/sfx/pocket.mp3 (HQ preview, unmodified).
+- Iamgiorgio, "H6_hair-dryer.mp3", freesound.org/people/Iamgiorgio/sounds/371815/,
+  CC0 1.0 -> public/assets/audio/sfx/hairdryer-loop.mp3 (HQ preview, unmodified).
+
+Skill icons (game-icons.net, CC BY 3.0)
+---------------------------------------
+Attribution required by CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/):
+- "open-palm" icon by Skoll, https://game-icons.net/1x1/skoll/open-palm.html
+  -> public/assets/icons/hand.svg (手部微操)
+- "wind-hole" icon by Lorc, https://game-icons.net/1x1/lorc/wind-hole.html
+  -> public/assets/icons/hairdryer.svg (吹风机)
+- "domino-mask" icon by Lorc, https://game-icons.net/1x1/lorc/domino-mask.html
+  -> public/assets/icons/fake.svg (假自由球)
+Icons are unmodified SVGs from github.com/game-icons/icons, tinted at runtime
+with CSS mask-image.
+
+Additional background music (user-provided attachments, 2026-11-21)
+------------------------------------------------------------------
+Files supplied directly by the user from D:/智器云杯; Tunetank is inferred
+from the attachment filenames, not independently verified as the artist.
+- Original attachment: tunetank-relaxed-elevator-lounge-cafe-music-347740.mp3
+  Source: file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-relaxed-elevator-lounge-cafe-music-347740.mp3
+  Runtime copy: public/assets/audio/bgm/track-5.mp3
+  Bytes: 10516992
+  SHA-256: cf020a9e90979a11ae93d0d9e4d9bca3081ca92cb3ed8337efdf34c4ae90ff5e
+- Original attachment: tunetank-cafe-music-349477.mp3
+  Source: file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-cafe-music-349477.mp3
+  Runtime copy: public/assets/audio/bgm/track-6.mp3
+  Bytes: 4151808
+  SHA-256: ccb9d0cef3ae194e08dbeb8bd45bc7a97a3730fa539b9f271ef5e4806808edb7
+- Original attachment: tunetank-cafe-music-348881.mp3
+  Source: file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-cafe-music-348881.mp3
+  Runtime copy: public/assets/audio/bgm/track-7.mp3
+  Bytes: 6244310
+  SHA-256: bd4d96d5fccca7de55a518b65a82037ee4df85f480aeb52bb3bd44bdc99d5bcd
+License evidence: none accompanied these attachments. The user authorized
+this import for local secondary development only; that authorization is not
+proof of third-party rights. External distribution and commercial-use
+permission remain pending rights evidence; these tracks are not cleared for
+release. No verified Pixabay commercial-use license is asserted for them.
+These three files were copied byte-for-byte, without loudness normalization,
+transcoding or metadata edits. No loudness measurements are claimed. The
+normalization and license statements for tracks 1-4 above do not apply to
+tracks 5-7. No online lookup or upload was performed. SHA-256 hashes and byte
+counts are also recorded in both synchronized asset-manifest.json files.
+
+Replacement cue-strike and ball-collision audio (user attachment, 2026-11-21)
+---------------------------------------------------------------------------
+Original: u_7fupvvf5ym-billiard-pool-hit-371618.mp3
+Source: file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/u_7fupvvf5ym-billiard-pool-hit-371618.mp3
+Packaged original: assets/source/user-hit/u_7fupvvf5ym-billiard-pool-hit-371618.mp3
+Original SHA-256: d8c1f7b5866d3ab83ff5fc9f2393b197f76cd915fa7f724ff9a317251309fd85
+The filename token u_7fupvvf5ym is not independently verified as an author.
+No license proof accompanied the attachment. The user requested local editing
+and integration; third-party redistribution/commercial rights are unverified.
+No public release or upload was performed. The CC0 statements for the old
+Kenney samples do not apply to these two replacement clips.
+- cue-strike-user.wav: source 0.036-0.198 s, duration 0.162 s, peak -5 dBFS.
+- ball-hit-user.wav: source 0.361-0.534 s, duration 0.173 s, peak -8 dBFS.
+Round 16 leaves these WAV/source bytes unchanged. Impact playback adds local
+runtime EQ (250 Hz low shelf -4 dB; 2.4 kHz presence +3 dB, Q 0.8) and a
+code-generated deterministic 0.30 s stereo room response (18 ms pre-delay,
+88% dry / 12% wet, 0.65 static headroom). No external impulse-response asset,
+service or new third-party audio is used. These processing changes do not
+change the attachment's unverified redistribution/commercial-rights status.
+Both runtime outputs are under public/assets/audio/sfx/, mono 48 kHz PCM16 WAV,
+with an 80 Hz high-pass filter, 1 ms fade-in and 24 ms fade-out. The first,
+lower-frequency attack is assigned to cue strike; the later brighter attack
+is assigned to ball collision. These are editorial assignments from one mixed
+recording, not authenticated separate stems. No sound was AI-generated.
+The original is unchanged; exact processing, output hashes and measurements
+are in assets/source/user-hit/processing-report.json and both asset manifests.
+Reproduce locally using scripts/prepare-user-hit-audio.py with Python/FFmpeg.
+The old cue-strike.ogg and ball-hit.ogg are retained as historical assets but
+are no longer mapped to runtime strike/collision playback.
+
+BEGIN FIGHT ASSET PREPROCESSING NOTICE (2026-11-23)
+Fight assets: local-only preprocessing
+-------------------------------------
+Acquired/registered: 2026-11-23. Workflow: scripts/prepare-fight-assets.mjs.
+14 FBXs supplied as user attachments under assets/source/fight/.
+User attachment origin, authorship and third-party redistribution/commercial rights are unverified. No mesh is present. Local demo preprocessing only; not a commercial-license certification or clearance for external release. Mixamorig/mixamo.com names are technical metadata, not proof of source or license.
+Each FBX has 65 bones, 53 tracks (52 rotation tracks), and no mesh.
+Output: public/assets/fight/motions.json; schemaVersion=1, unitScale=0.01.
+Idle FBXLoader static/rest T-pose bone-local position, quaternion and scale, captured immediately after parse. No mixer, animation evaluation or frame-0 pose is applied. Names are unchanged FBXLoader names; parent is the nearest ancestor Bone or null.
+Y-up, +Z forward, centimeters. No axis conversion or baked scaling; unitScale=0.01 indicates centimeters to meters, applied once by the consumer.
+Set X and Z to absolute zero at EVERY existing key, not first-key subtraction. Preserve every Y sample in original centimeters (apart from JSON decimal rounding).
+All rotation tracks, including Hips turns/yaw, are retained. No rotational root-motion removal.
+Keep FBXLoader clip durations, track order, all key counts and timestamps; no trim, optimize, resampling, downsampling or time scaling. JSON numbers, including duration/timestamps, are rounded to six decimal places only. Exact original durations are retained separately in this report.
+Character: user-supplied Indian Man in Suit GLB (assets/source/fight/indian_man_in_suit.glb).
+Embedded metadata: title "Indian Man in suit", author Pixel_Monster (https://sketchfab.com/ar.jethin), license CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/), source https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa.
+The license declaration is transcribed from embedded metadata; it is not independently verified.
+Attribution is preserved. Local demo only; not a commercial-license clearance.
+Runtime normalizes height to 1.8 m and adapts joint names; no mesh conversion, no animation retargeting, embedded animation unused.
+Cat: user-supplied Oiiaioooooiai Cat GLB (assets/source/fight/oiiaioooooiai_cat.glb).
+Embedded metadata: title "Oiiaioooooiai Cat", author Zhuier (https://sketchfab.com/Zhuier), license CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/), source https://sketchfab.com/3d-models/oiiaioooooiai-cat-30d27bf7fb224849b76e208a6eccdb36.
+The cat license declaration is transcribed from embedded metadata; it is not independently verified.
+Attribution is preserved. Runtime centers and scales a clone to a spinning projectile; embedded animation unused.
+Second character (round 21) removed at user request in round 22: executive_in_a_navy_suit.glb source/runtime copies, provenance file and manifest entries deleted; both fighters now use the Indian Man in Suit model. The D-drive original attachment is untouched.
+Ultimate dog: user-supplied Labrador Dog GLB (assets/source/fight/labrador_dog.glb), skinned with one animation clip.
+Embedded metadata: title "Labrador Dog", author kenchoo (https://sketchfab.com/kenchoo), license CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/), source https://sketchfab.com/3d-models/labrador-dog-1f56cfbab07e4fe49b5d9e521c82073a.
+The dog license declaration is transcribed from embedded metadata; it is not independently verified.
+Attribution is preserved. Runtime normalizes and scales a clone as the rage-ultimate projectile; embedded animation played while charging.
+Ultimate voice line: user-supplied 大狗大狗叫叫叫 audio (assets/source/fight/audio/dagou-source.mp3, 1.86 s).
+Trimmed with imageio_ffmpeg ffmpeg 7.1 into dagou-chant.mp3 (0-0.87 s, cast loop) and dagou-bark.mp3 (0.88-1.78 s, hit). Segments chosen from the RMS envelope, not a labeled stem split.
+Audio authorship and third-party redistribution/commercial rights are unverified; local demo only.
+Ultimate banner: user-supplied flaming-dog WebP (assets/source/fight/dagou-banner.webp), shown in the near-fullscreen skill-name broadcast. Origin and third-party rights unverified; local demo only.
+Particle sprites: Kenney Particle Pack 1.1 by Kenney Vleugels (Kenney.nl), CC0 per bundled License.txt (assets/source/fight/particles/License.txt). 14 transparent PNGs copied byte-for-byte to public/assets/fight/particles/ for skill projectiles, trails, hit bursts and the ultimate explosion.
+Fight audio: user-supplied cat scream (first 2 s trimmed with ffmpeg 7.1), battle BGM and two impact punches.
+Audio authorship and third-party redistribution/commercial rights are unverified; local demo only.
+No GLB conversion, retargeting, source edits, downloads or uploads performed.
+Report: assets/source/fight/conversion-report.json; source measurements and processing evidence.
+All files below are registered in both synchronized asset-manifest.json files.
+- assets/source/fight/原地/Great Sword Idle.fbx
+  Bytes: 424416; SHA-256: 2bb0973c29a64dac07488f7f7ea8c9c2972d946d6a981be78b406f95ac50ac89
+- assets/source/fight/Great Sword Walk.fbx
+  Bytes: 373120; SHA-256: 6447dc8671dce1614b068bcdeb0be18c828be2a2df7b92a2a4ea9fa426c60725
+- assets/source/fight/Great Sword Run.fbx
+  Bytes: 311024; SHA-256: d3e56846ccbe5ee93f1fe5992c3ca99941271473e5d8d9bcb62d9738713d1271
+- assets/source/fight/Great Sword Jump.fbx
+  Bytes: 316560; SHA-256: 0f75b8d3f7127220be80622d8467b71b42e8513c34b8dbaf53af033d6b8a179a
+- assets/source/fight/Great Sword Jump(1).fbx
+  Bytes: 335312; SHA-256: 229547b275b05ca8d2b973d5feea25645929606c358787f7101460d7d26c062f
+- assets/source/fight/转向/Great Sword Turn.fbx
+  Bytes: 329920; SHA-256: 9d4d6836c52441864deb9609c348bd0e6eb63aae9072605e69ee27277338475c
+- assets/source/fight/转向/Great Sword Turn(1).fbx
+  Bytes: 322352; SHA-256: b5645500d1e3b1af6ad116074309eb1804a7e7ce71e1028a0cde8b636f9f5a56
+- assets/source/fight/受击/Great Sword Impact.fbx
+  Bytes: 333296; SHA-256: 25f486b1709eac4f8abc26eb7ceddaef1a567203c85f2569f7c0050015ea178b
+- assets/source/fight/受击/Great Sword Impact(1).fbx
+  Bytes: 384176; SHA-256: 663d8fe41c279fb6d6e497df3c29d8234ca7694cbb44096ed79e43cdc51144ff
+- assets/source/fight/攻击/Great Sword Slash.fbx
+  Bytes: 424048; SHA-256: b8dd4df06b25ddc4dc118f81327a6da98552dcfb0ad6cc696c0722cd069626bc
+- assets/source/fight/攻击/Great Sword Slash(1).fbx
+  Bytes: 372960; SHA-256: d72bb52dd65be767fc63c011395d6a098042c4fb8526a1f07d02b59c864ae51f
+- assets/source/fight/技能/Great Sword Slash.fbx
+  Bytes: 424000; SHA-256: 5676f82afdef10916beeb09b9204e59898e2cbc590c56f189dcc2693dda4b0a0
+- assets/source/fight/技能/Standing Draw Arrow.fbx
+  Bytes: 360624; SHA-256: 0aa014d815005c3843061b9013e92810a03b5383e5cfd900b4f261ddb7df3f0e
+- assets/source/fight/Standing Death Left 01.fbx
+  Bytes: 483280; SHA-256: 14fc9963f2e94ec9ce2901936870fe2450f075b48080180b0a73d27cf888eb02
+- public/assets/fight/motions.json
+  Bytes: 770775; SHA-256: cc8df3bb7321e349aaeaf5d25af1a2f078b6f4f7a847b5b6c90857d7c540b165
+- assets/source/fight/indian_man_in_suit.glb
+  Bytes: 9549256; SHA-256: 94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c
+- assets/source/fight/indian-man-in-suit-provenance.txt
+  Bytes: 801; SHA-256: 8a1f55206a16248e7b828facaf7892ef0b8e8e54a2fd26d5c1407e5f7680ccef
+- public/assets/fight/character/indian_man_in_suit.glb
+  Bytes: 9549256; SHA-256: 94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c
+- assets/source/fight/oiiaioooooiai_cat.glb
+  Bytes: 8322576; SHA-256: fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5
+- assets/source/fight/oiiaioooooiai-cat-provenance.txt
+  Bytes: 799; SHA-256: 3a0d9ea047831041bd7b7f40134012374c7b6a09afb07c7511864e38fd01f6c3
+- public/assets/fight/cat/oiiaioooooiai_cat.glb
+  Bytes: 8322576; SHA-256: fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5
+- assets/source/fight/audio/laowu-cat-source.mp3
+  Bytes: 294705; SHA-256: 76b652309403ec73a4b20d98111ecf29df19d2ef1bdb998e419618d12877748e
+- public/assets/fight/audio/laowu-cat.mp3
+  Bytes: 25996; SHA-256: bc5bb1867dd4331ce4391a1a0c8ce43127190150dd279cfca6ad92fb750557d2
+- assets/source/fight/audio/fight-bgm-source.mp3
+  Bytes: 6802944; SHA-256: 32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4
+- public/assets/fight/audio/fight-bgm.mp3
+  Bytes: 6802944; SHA-256: 32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4
+- assets/source/fight/audio/punch-a-source.mp3
+  Bytes: 32600; SHA-256: 4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41
+- public/assets/fight/audio/punch-a.mp3
+  Bytes: 32600; SHA-256: 4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41
+- assets/source/fight/audio/punch-b-source.mp3
+  Bytes: 50155; SHA-256: d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797
+- public/assets/fight/audio/punch-b.mp3
+  Bytes: 50155; SHA-256: d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797
+- assets/source/fight/conversion-report.json
+  Bytes: 114341; SHA-256: d70a270129a9f2c019a457220048eb239483c3246efebcff51fe132c5c471957
+- assets/source/fight/labrador_dog.glb
+  Bytes: 19312512; SHA-256: 0e30a09051903e2327c31371dc3dd973ca9da9c07a1c8aea5ca5f1af5bcda4fc
+- public/assets/fight/dog/labrador_dog.glb
+  Bytes: 19312512; SHA-256: 0e30a09051903e2327c31371dc3dd973ca9da9c07a1c8aea5ca5f1af5bcda4fc
+- assets/source/fight/audio/dagou-source.mp3
+  Bytes: 71176; SHA-256: e500f3534bce9ce7e0d0fbaadad89f0b34a85ca015f390c63d4e7f649a169349
+- public/assets/fight/audio/dagou-chant.mp3
+  Bytes: 24774; SHA-256: cf0008d6aae469c0b3f4731d3752a94b01a08e71b0bb42b71d15968d2b13a686
+- public/assets/fight/audio/dagou-bark.mp3
+  Bytes: 25192; SHA-256: 1fd44b1ec48114737f0200ef8166008cc6f0b49d8d86d313d388455aea6f5d25
+- assets/source/fight/dagou-banner.webp
+  Bytes: 6566; SHA-256: 2a7497de6261a3780956c08b0fae7c9e4d418ef555e68b07b27e6e351bbe6505
+- public/assets/fight/dagou-banner.webp
+  Bytes: 6566; SHA-256: 2a7497de6261a3780956c08b0fae7c9e4d418ef555e68b07b27e6e351bbe6505
+- assets/source/fight/particles/kenney_particle-pack.zip
+  Bytes: 15001764; SHA-256: b631d4b07f7002549fdcf155f01141ad482f79f3440e4e301eed49ce5f1d8958
+- assets/source/fight/particles/License.txt
+  Bytes: 651; SHA-256: f9e70b81d8cc07c4e07c9f2eff1d94fd371a06070b18cb67c651c41158ec2975
+- public/assets/fight/particles/fire_01.png
+  Bytes: 99891; SHA-256: 9727a9743ac6ab8dd4dd79f5fc5b0266290efae45f4d4452279eb5e4bcf3a978
+- public/assets/fight/particles/flame_04.png
+  Bytes: 70731; SHA-256: 71deb274feea6ae5e6bb82c802a6e4d22f168397aa36b7a9e89de863948f3cf5
+- public/assets/fight/particles/flare_01.png
+  Bytes: 42886; SHA-256: 254f5bd4f0548612bf29305d27899efdee8cb8d8306292761ebbddebd3e57935
+- public/assets/fight/particles/light_01.png
+  Bytes: 93470; SHA-256: caedcc5df5bcac4470244d2520d6a64b45b20c1ccf4d918da516c55e3fa365a6
+- public/assets/fight/particles/magic_05.png
+  Bytes: 74794; SHA-256: 92fb8c7a1d9bc14e052526c0505502c3e5b37d27502fa3d36d2c80b4565b62ef
+- public/assets/fight/particles/spark_04.png
+  Bytes: 83811; SHA-256: 3cba35b80a97c12283a8ecd41780a0412194de14562cbffc7f04e9157183f772
+- public/assets/fight/particles/star_06.png
+  Bytes: 35453; SHA-256: 65d3ff5aa87ec0770c11fe1293fdc70cdc5ccf0eabc2e2fd6a1ead922051035e
+- public/assets/fight/particles/smoke_08.png
+  Bytes: 90424; SHA-256: eae1d92c205a2654254281d470ee70cce86cf4e8e849db29e4d5edff0f67c695
+- public/assets/fight/particles/slash_01.png
+  Bytes: 25465; SHA-256: cb4787978122bb863866a1681af22a7dec39a4566f08c400f233740eb1d3730c
+- public/assets/fight/particles/trace_01.png
+  Bytes: 38406; SHA-256: 34de69bc3f665b23fe9bed15f388efd8e8e4dc1a99f2fc5db9ba8715c525711f
+- public/assets/fight/particles/twirl_01.png
+  Bytes: 51060; SHA-256: ba3f4996a5a91ea3cba6817a9b4770a385a82ef0b9350cbda5c0f140d182af7e
+- public/assets/fight/particles/circle_05.png
+  Bytes: 65336; SHA-256: 925b8ac284436f74f9cadf0ecd058da1c08fba65c098e4e34fd220603022f02e
+- public/assets/fight/particles/muzzle_02.png
+  Bytes: 58365; SHA-256: 96164063353cc0386b3d3ad0d64b9be6c369e1d5d8510f84fcf33604b4729084
+- public/assets/fight/particles/scorch_01.png
+  Bytes: 60598; SHA-256: ea72697696638786ccd4795a346d177b1b6a904331b5536a7e85a7ed927b93a5
+END FIGHT ASSET PREPROCESSING NOTICE (2026-11-23)

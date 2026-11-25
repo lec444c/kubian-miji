@@ -1,0 +1,2565 @@
+{
+  "schemaVersion": 1,
+  "projectRoot": "D:/game race",
+  "acquiredDate": "2026-11-18",
+  "hashAlgorithm": "SHA-256",
+  "pathConvention": "Project-root-relative paths with forward slashes",
+  "notes": "Runtime assets are local. The supplied hairdryer BLEND was converted to GLB with Blender 4.5.3 LTS; no remote conversion service is used.,The supplied Standard character archive contains Superhero male/female full bodies, not Regular full bodies. The two stale *_png.png glTF aliases were rewritten to the actual supplied PNG member names.,The uncompressed reference p8.gltf is used at runtime because its FullCloth semantic node is required for exact bed alignment; p8.min.gltf is retained as a reference output.,Intermediate duplicate files under assets/source/*/extracted are not separately listed; original ZIPs and deployed outputs are listed and hashed. Round-3 skill icons: opaque 512x512 background rect removed from runtime SVG copies so CSS alpha mask-image renders only the glyph.,Round 4 removed the comfy_cafe EXR (background and source archive deleted) and replaced it with the user-supplied sitting room GLB; the procedural room remains only as a load-failure fallback.,Round 5 replaced the table-extracted cue with the user-supplied cc0 cue stick GLB (CC-BY-4.0 by plaggy per asset extras) and added an elevated anti-penetration aiming pose.,Round 22: the round-21 executive character was removed at user request (both fighters share the Indian Man in Suit model); its source/runtime copies and manifest entries were deleted. Added labrador dog GLB, ultimate voice line segments, banner WebP and 14 Kenney CC0 particle sprites.",
+  "assets": [
+    {
+      "id": "quaternius-universal-base-characters-regular",
+      "name": "Universal Base Characters - Regular male/female",
+      "author": "Quaternius",
+      "sourceUrl": "https://quaternius.com/packs/universalbasecharacters.html",
+      "downloadUrl": "https://quaternius.itch.io/universal-base-characters",
+      "acquiredDate": "2026-11-18",
+      "license": "The official pack page labels the pack CC0; the separately captured current general Quaternius Asset License is QAL v1.0. No model was acquired, so no downloaded-file license is asserted.",
+      "licenseUrl": "https://quaternius.com/packs/license.html",
+      "usage": "Requested Regular-proportion male and female humanoid character meshes; not available locally.",
+      "restrictions": "No asset downloaded. A future acquisition must recheck the applicable license. The current QAL snapshot prohibits redistributing the assets themselves as standalone assets, asset packs, stock files, or templates.",
+      "status": "unavailable",
+      "reason": "The official page routes public download to Itch.io. Normal public Itch.io access failed/timed out in this environment, and no verified official public mirror containing the requested Regular male/female files was found. Superhero or third-party lookalike characters were not substituted. The later user-supplied Standard archive was inspected and contains Superhero full bodies rather than Regular full bodies; it is recorded separately without renaming the contents. The later user-supplied Standard archive was inspected and contains Superhero full bodies rather than Regular full bodies; it is recorded separately without renaming the contents.",
+      "licenseEvidence": [
+        "assets/source/quaternius-base/license-page.html",
+        "assets/source/quaternius-base/quaternius-license.html"
+      ],
+      "originalPaths": [],
+      "outputPaths": []
+    },
+    {
+      "id": "quaternius-universal-animation-library-standard",
+      "name": "Universal Animation Library Standard",
+      "author": "Quaternius",
+      "sourceUrl": "https://opengameart.org/content/universal-animation-library",
+      "downloadUrl": "https://opengameart.org/sites/default/files/universal_animation_librarystandard.zip",
+      "acquiredDate": "2026-11-18",
+      "license": "CC0 1.0 Universal, as stated by the Quaternius author's 2025 OpenGameArt distribution and the License.txt inside the downloaded ZIP.",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Humanoid animation source for idle, walking, interaction/reach-like actions, picking up objects, sitting, crouching, jogging, sprinting, jumping, and other gameplay motions. The deployed GLB is extracted from the user-supplied Standard ZIP. The deployed GLB is extracted from the user-supplied Standard ZIP.",
+      "restrictions": "CC0 dedication for this OpenGameArt package; attribution is not required by the captured evidence. The GLB requires compatible humanoid rig/retargeting and is not proof that an unavailable character mesh is present.",
+      "status": "available",
+      "requestedClipMapping": {
+        "idle": "Idle_Loop (exact idle clip)",
+        "walk": "Walk_Loop (exact walk clip); Walk_Formal_Loop is also included",
+        "reach": "No clip is literally named Reach. Interact is retained under its original name as a generic interaction candidate; PickUp_Table is also included. Neither is claimed to be a verified exact reach animation."
+      },
+      "licenseEvidence": [
+        "assets/source/quaternius-animations/oga-license-page.html",
+        "assets/source/quaternius-animations/License.txt"
+      ],
+      "documentationPaths": [
+        "assets/source/quaternius-animations/license-page.html",
+        "assets/source/quaternius-animations/animation-viewer.html"
+      ],
+      "originalPaths": [
+        "assets/source/quaternius-animations/universal_animation_librarystandard.zip",
+        "assets/source/quaternius-animations/Universal Animation Library[Standard].zip"
+      ],
+      "outputPaths": [
+        "public/assets/animations/universal-animation-library-standard.glb"
+      ],
+      "clipValidation": {
+        "path": "public/assets/animations/universal-animation-library-standard.glb",
+        "expectedClipCount": 43,
+        "clipCountNote": "The user-supplied Standard GLB contains 43 named entries including A_TPose; this differs from the previously downloaded OpenGameArt GLB and is recorded from the deployed file itself.",
+        "requiredClips": [
+          "Idle_Loop",
+          "Walk_Loop",
+          "Interact",
+          "PickUp_Table"
+        ],
+        "availableClips": [
+          "A_TPose",
+          "Crouch_Fwd_Loop",
+          "Crouch_Idle_Loop",
+          "Dance_Loop",
+          "Death01",
+          "Driving_Loop",
+          "Fixing_Kneeling",
+          "Hit_Chest",
+          "Hit_Head",
+          "Idle_Loop",
+          "Idle_Talking_Loop",
+          "Idle_Torch_Loop",
+          "Interact",
+          "Jog_Fwd_Loop",
+          "Jump_Land",
+          "Jump_Loop",
+          "Jump_Start",
+          "PickUp_Table",
+          "Pistol_Aim_Down",
+          "Pistol_Aim_Neutral",
+          "Pistol_Aim_Up",
+          "Pistol_Idle_Loop",
+          "Pistol_Reload",
+          "Pistol_Shoot",
+          "Punch_Cross",
+          "Punch_Jab",
+          "Push_Loop",
+          "Roll",
+          "Sitting_Enter",
+          "Sitting_Exit",
+          "Sitting_Idle_Loop",
+          "Sitting_Talking_Loop",
+          "Spell_Simple_Enter",
+          "Spell_Simple_Exit",
+          "Spell_Simple_Idle_Loop",
+          "Spell_Simple_Shoot",
+          "Sprint_Loop",
+          "Swim_Fwd_Loop",
+          "Swim_Idle_Loop",
+          "Sword_Attack",
+          "Sword_Idle",
+          "Walk_Formal_Loop",
+          "Walk_Loop"
+        ]
+      }
+    },
+    {
+      "id": "mehrasaur-billiards-pool-9ft",
+      "name": "Billiards Pack - 9 x 4.5 ft pool table, cue stick, and 16 pool balls",
+      "author": "mehrasaur",
+      "sourceUrl": "https://opengameart.org/content/billiards-pack",
+      "downloadUrl": "https://opengameart.org/sites/default/files/billiards_pack.zip",
+      "acquiredDate": "2026-11-18",
+      "license": "CC0 1.0 Universal, as stated on the OpenGameArt asset page.",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Local 9-foot pool table, cue stick, cue ball, and numbered balls 1-15 for a billiards scene.",
+      "restrictions": "CC0; attribution is not required by the captured page. Files remain OBJ/MTL and need an OBJ-capable loader or later conversion. Original names and directory layout are preserved so mtllib references remain valid.",
+      "status": "available",
+      "licenseEvidence": [
+        "assets/source/billiards/license-page.html"
+      ],
+      "originalPaths": [
+        "assets/source/billiards/billiards_pack.zip"
+      ],
+      "outputPaths": [
+        "public/assets/billiards/tables/table_pool [full].obj",
+        "public/assets/billiards/tables/table_pool [full].mtl",
+        "public/assets/billiards/sticks/cue_stick.obj",
+        "public/assets/billiards/sticks/cue_stick.mtl",
+        "public/assets/billiards/balls/pool/cue_ball.obj",
+        "public/assets/billiards/balls/pool/cue_ball.mtl",
+        "public/assets/billiards/balls/pool/1ball.obj",
+        "public/assets/billiards/balls/pool/1ball.mtl",
+        "public/assets/billiards/balls/pool/2ball.obj",
+        "public/assets/billiards/balls/pool/2ball.mtl",
+        "public/assets/billiards/balls/pool/3ball.obj",
+        "public/assets/billiards/balls/pool/3ball.mtl",
+        "public/assets/billiards/balls/pool/4ball.obj",
+        "public/assets/billiards/balls/pool/4ball.mtl",
+        "public/assets/billiards/balls/pool/5ball.obj",
+        "public/assets/billiards/balls/pool/5ball.mtl",
+        "public/assets/billiards/balls/pool/6ball.obj",
+        "public/assets/billiards/balls/pool/6ball.mtl",
+        "public/assets/billiards/balls/pool/7ball.obj",
+        "public/assets/billiards/balls/pool/7ball.mtl",
+        "public/assets/billiards/balls/pool/8ball.obj",
+        "public/assets/billiards/balls/pool/8ball.mtl",
+        "public/assets/billiards/balls/pool/9ball.obj",
+        "public/assets/billiards/balls/pool/9ball.mtl",
+        "public/assets/billiards/balls/pool/10ball.obj",
+        "public/assets/billiards/balls/pool/10ball.mtl",
+        "public/assets/billiards/balls/pool/11ball.obj",
+        "public/assets/billiards/balls/pool/11ball.mtl",
+        "public/assets/billiards/balls/pool/12ball.obj",
+        "public/assets/billiards/balls/pool/12ball.mtl",
+        "public/assets/billiards/balls/pool/13ball.obj",
+        "public/assets/billiards/balls/pool/13ball.mtl",
+        "public/assets/billiards/balls/pool/14ball.obj",
+        "public/assets/billiards/balls/pool/14ball.mtl",
+        "public/assets/billiards/balls/pool/15ball.obj",
+        "public/assets/billiards/balls/pool/15ball.mtl"
+      ]
+    },
+    {
+      "id": "kenney-furniture-kit-selection",
+      "name": "Kenney Furniture Kit - seven-piece interior selection",
+      "author": "Kenney",
+      "sourceUrl": "https://opengameart.org/content/furniture-kit",
+      "downloadUrl": "https://opengameart.org/sites/default/files/kenney_furniturePack.zip",
+      "acquiredDate": "2026-11-18",
+      "license": "CC0 1.0 Universal, as stated on Kenney's OpenGameArt asset page.",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Low-poly indoor chair, table, single bed, sofa, open bookcase, desk, and round floor lamp.",
+      "restrictions": "CC0; the page says credit to Kenney.nl is appreciated but not mandatory. Files remain OBJ/MTL. MTL materials use colors and the selected files reference no external texture maps.",
+      "status": "available",
+      "licenseEvidence": [
+        "assets/source/furniture/license-page.html"
+      ],
+      "originalPaths": [
+        "assets/source/furniture/kenney_furniturePack.zip"
+      ],
+      "outputPaths": [
+        "public/assets/furniture/chair.obj",
+        "public/assets/furniture/chair.mtl",
+        "public/assets/furniture/table.obj",
+        "public/assets/furniture/table.mtl",
+        "public/assets/furniture/bedSingle.obj",
+        "public/assets/furniture/bedSingle.mtl",
+        "public/assets/furniture/loungeSofa.obj",
+        "public/assets/furniture/loungeSofa.mtl",
+        "public/assets/furniture/bookcaseOpen.obj",
+        "public/assets/furniture/bookcaseOpen.mtl",
+        "public/assets/furniture/desk.obj",
+        "public/assets/furniture/desk.mtl",
+        "public/assets/furniture/lampRoundFloor.obj",
+        "public/assets/furniture/lampRoundFloor.mtl"
+      ]
+    },
+    {
+      "id": "cgtrader-vintage-hairdryer",
+      "name": "Vintage hairdryer - user-supplied HairDryer_Low_Poly.blend",
+      "author": "Zejak, as signed in the supplied readme.rtf",
+      "sourceUrl": "https://www.cgtrader.com/free-3d-models/household/other/vintage-hairdryer",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-18",
+      "license": "The supplied readme.rtf permits use of the model in 3D projects and renders and states that crediting is not required. No additional CGTrader page license is asserted.",
+      "licenseUrl": null,
+      "usage": "Local hairdryer skill prop, converted from the supplied BLEND to an embedded GLB with Blender 4.5.3 LTS and aligned so its barrel follows the target ball.",
+      "restrictions": "Personal, non-commercial Demo use at the user's direction. One empty roughness image had no size and was not exported; no replacement texture or successful export of that image is claimed.",
+      "status": "available",
+      "licenseEvidence": [
+        "assets/source/hairdryer/readme.rtf"
+      ],
+      "originalPaths": [
+        "assets/source/hairdryer/BLEND.zip",
+        "assets/source/hairdryer/HairDryer_Low_Poly.blend"
+      ],
+      "outputPaths": [
+        "public/assets/models/hairdryer.glb"
+      ],
+      "documentationPaths": [
+        "assets/source/hairdryer/conversion-report.json"
+      ]
+    },
+    {
+      "id": "quaternius-universal-base-characters-standard-superhero",
+      "name": "Universal Base Characters Standard - Superhero male/female full bodies",
+      "author": "Quaternius",
+      "sourceUrl": "https://quaternius.com/packs/universalbasecharacters.html",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-18",
+      "license": "CC0 1.0 Universal, as stated in License_Standard.txt inside the user-supplied ZIP.",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Local animated male and female full-body characters for the two billiards seats.",
+      "restrictions": "These are Superhero full bodies, not the originally requested Regular variants. Two nonexistent *_png.png aliases in the Godot glTF exports were corrected to the corresponding supplied PNG filenames; no texture content was generated.",
+      "status": "available",
+      "licenseEvidence": [
+        "assets/source/quaternius-base/License_Standard.txt"
+      ],
+      "documentationPaths": [],
+      "originalPaths": [
+        "assets/source/quaternius-base/Universal Base Characters[Standard].zip"
+      ],
+      "outputPaths": [
+        "public/assets/characters/Superhero_Female_FullBody.bin",
+        "public/assets/characters/Superhero_Male_FullBody.bin",
+        "public/assets/characters/T_Eye_Brown.png",
+        "public/assets/characters/T_Eye_Normal.png",
+        "public/assets/characters/T_Hair_1_BaseColor.png",
+        "public/assets/characters/T_Hair_1_Normal.png",
+        "public/assets/characters/T_Hair_2_BaseColor.png",
+        "public/assets/characters/T_Hair_2_Normal.png",
+        "public/assets/characters/T_Superhero_Female_Dark_BaseColor.png",
+        "public/assets/characters/T_Superhero_Female_Normal.png",
+        "public/assets/characters/T_Superhero_Female_Roughness.png",
+        "public/assets/characters/T_Superhero_Male_Dark.png",
+        "public/assets/characters/T_Superhero_Male_Normal.png",
+        "public/assets/characters/T_Superhero_Male_Roughness.png",
+        "public/assets/characters/female.gltf",
+        "public/assets/characters/male.gltf"
+      ]
+    },
+    {
+      "id": "tailuge-billiards-reference-table",
+      "name": "tailuge/billiards p8 reference pool table",
+      "author": "tailuge/billiards contributors",
+      "sourceUrl": "https://github.com/tailuge/billiards",
+      "downloadUrl": "https://github.com/tailuge/billiards/commit/92a2818928e9ab8576fd300615509c88b0b0f183",
+      "acquiredDate": "2026-11-18",
+      "license": "GNU General Public License v3.0; the upstream copyright and license are retained in the project LICENSE, NOTICE, licenses, and third_party snapshot.",
+      "licenseUrl": "https://github.com/tailuge/billiards/blob/master/LICENSE",
+      "usage": "Local reference table mesh. The uncompressed p8.gltf FullCloth node is fitted to the authoritative 2.54 m by 1.27 m physics bed; materials and imported lights are adapted in the view.",
+      "restrictions": "GPLv3 applies to copied and adapted table/model and source material. No claim is made that visual table meshes alter the validated physics geometry.",
+      "status": "available",
+      "licenseEvidence": [],
+      "documentationPaths": [],
+      "originalPaths": [
+        "assets/source/billiards/billiards-master.zip"
+      ],
+      "outputPaths": [
+        "public/assets/models/p8.gltf",
+        "public/assets/models/p8.bin",
+        "public/assets/models/p8.min.gltf",
+        "public/assets/models/p8.min.bin"
+      ]
+    },
+    {
+      "id": "pool-table-traditional",
+      "name": "Pool Table Traditional (table, cue, ceiling lamp)",
+      "author": "fizyman (Sketchfab)",
+      "sourceUrl": "https://sketchfab.com/3d-models/pool-table-traditional-e0b938c0c2e74eb794a49ebde2543977",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 4.0 (Sketchfab model license, recorded in the GLB asset metadata); file supplied directly by the user.",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "usage": "Replaces the reference table mesh, cue and hanging lamp visuals. Baked-in balls and the duplicate cue are removed at dev time; textures resized to 1024px. Runtime fit measures the cloth and cushion nose so the authoritative physics geometry is unchanged.",
+      "restrictions": "Attribution retained in NOTICE. Personal non-commercial Demo per user instruction.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round3/pool_table_traditional.glb"
+      ],
+      "outputPaths": [
+        "public/assets/models/pool-table-traditional.glb"
+      ]
+    },
+    {
+      "id": "bgm-track-1",
+      "name": "Background Jazz Music (BGM, normalized to -16 LUFS)",
+      "author": "pulsebox (Pixabay); file supplied directly by the user",
+      "sourceUrl": "https://pixabay.com/music/id-448453/",
+      "acquiredDate": "2026-11-19",
+      "license": "Pixabay Content License (free use, no attribution required); two-pass ffmpeg loudnorm I=-16 LUFS TP=-1.5 LRA=11 applied locally.",
+      "licenseUrl": "https://pixabay.com/service/license-summary/",
+      "usage": "Random-order background music playlist. Input integrated loudness -15.86 LUFS, output -16.28 LUFS, true peak -1.76 dBTP.",
+      "restrictions": "Local runtime use only.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round3/pulsebox-a-background-jazz-music-448453.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-1.mp3"
+      ]
+    },
+    {
+      "id": "bgm-track-2",
+      "name": "Jazz Background Music (BGM, normalized to -16 LUFS)",
+      "author": "pulsebox (Pixabay); file supplied directly by the user",
+      "sourceUrl": "https://pixabay.com/music/id-448455/",
+      "acquiredDate": "2026-11-19",
+      "license": "Pixabay Content License (free use, no attribution required); two-pass ffmpeg loudnorm I=-16 LUFS TP=-1.5 LRA=11 applied locally.",
+      "licenseUrl": "https://pixabay.com/service/license-summary/",
+      "usage": "Random-order background music playlist. Input integrated loudness -15.14 LUFS, output -16.24 LUFS, true peak -1.72 dBTP.",
+      "restrictions": "Local runtime use only.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round3/pulsebox-a-jazz-background-music-448455.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-2.mp3"
+      ]
+    },
+    {
+      "id": "bgm-track-3",
+      "name": "Free Lounge Music (BGM, normalized to -16 LUFS)",
+      "author": "happinessinmusic (Pixabay); file supplied directly by the user",
+      "sourceUrl": "https://pixabay.com/music/id-478072/",
+      "acquiredDate": "2026-11-19",
+      "license": "Pixabay Content License (free use, no attribution required); two-pass ffmpeg loudnorm I=-16 LUFS TP=-1.5 LRA=11 applied locally.",
+      "licenseUrl": "https://pixabay.com/service/license-summary/",
+      "usage": "Random-order background music playlist. Input integrated loudness -14.09 LUFS, output -16.27 LUFS, true peak -3.89 dBTP.",
+      "restrictions": "Local runtime use only.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round3/happinessinmusic-free-lounge-music-478072.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-3.mp3"
+      ]
+    },
+    {
+      "id": "bgm-track-4",
+      "name": "Background Music Instrumental (BGM, normalized to -16 LUFS)",
+      "author": "faespencer (Pixabay); file supplied directly by the user",
+      "sourceUrl": "https://pixabay.com/music/id-207886/",
+      "acquiredDate": "2026-11-19",
+      "license": "Pixabay Content License (free use, no attribution required); two-pass ffmpeg loudnorm I=-16 LUFS TP=-1.5 LRA=11 applied locally.",
+      "licenseUrl": "https://pixabay.com/service/license-summary/",
+      "usage": "Random-order background music playlist. Input integrated loudness -12.50 LUFS, output -16.26 LUFS, true peak -3.31 dBTP.",
+      "restrictions": "Local runtime use only.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round3/faespencer-background-music-instrumental-207886.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-4.mp3"
+      ]
+    },
+    {
+      "id": "round3-ball-hit",
+      "name": "Original file: Audio/impactGlass_light_000",
+      "author": "Kenney (www.kenney.nl)",
+      "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+      "acquiredDate": "2026-11-19",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Historical ball-ball collision sample, retained for provenance; superseded in runtime by user-billiard-hit-371618.",
+      "restrictions": "None beyond local runtime use.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/sfx/ball-hit.ogg"
+      ]
+    },
+    {
+      "id": "round3-cushion",
+      "name": "Original file: Audio/impactSoft_medium_000",
+      "author": "Kenney (www.kenney.nl)",
+      "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+      "acquiredDate": "2026-11-19",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Ball-cushion impact sample.",
+      "restrictions": "None beyond local runtime use.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/sfx/cushion.ogg"
+      ]
+    },
+    {
+      "id": "round3-cue-strike",
+      "name": "Original file: Audio/impactWood_medium_000",
+      "author": "Kenney (www.kenney.nl)",
+      "sourceUrl": "https://kenney.nl/assets/impact-sounds",
+      "acquiredDate": "2026-11-19",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Historical cue strike sample, retained for provenance; superseded in runtime by user-billiard-hit-371618.",
+      "restrictions": "None beyond local runtime use.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/sfx/cue-strike.ogg"
+      ]
+    },
+    {
+      "id": "round3-pocket",
+      "name": "Sound 441857 'B_1 pool ball falling",
+      "author": "Yarmonics (freesound.org)",
+      "sourceUrl": "https://freesound.org/people/Yarmonics/sounds/441857/",
+      "acquiredDate": "2026-11-19",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Ball dropping into pocket sample.",
+      "restrictions": "None beyond local runtime use.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/sfx/pocket.mp3"
+      ]
+    },
+    {
+      "id": "round3-hairdryer-loop",
+      "name": "Sound 371815 'H6_hair-dryer",
+      "author": "Iamgiorgio (freesound.org)",
+      "sourceUrl": "https://freesound.org/people/Iamgiorgio/sounds/371815/",
+      "acquiredDate": "2026-11-19",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Looped hairdryer blower sample for the hairdryer skill.",
+      "restrictions": "None beyond local runtime use.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/sfx/hairdryer-loop.mp3"
+      ]
+    },
+    {
+      "id": "round3-icon-hand",
+      "name": "Icon 'open-palm' by Skoll, from github",
+      "author": "Skoll (game-icons.net)",
+      "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/skoll/open-palm.svg",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "usage": "Skill icon for 手部微操 (open-palm).",
+      "restrictions": "Attribution required and retained in NOTICE.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/icons/hand.svg"
+      ]
+    },
+    {
+      "id": "round3-icon-hairdryer",
+      "name": "No 'dryer'/'hair dryer' icon exists in the full repo tree (searched dryer/hair; only delapouite/hair-strands, unrelated)",
+      "author": "Lorc (game-icons.net)",
+      "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/wind-hole.svg",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "usage": "Skill icon for 吹风机 (wind-hole).",
+      "restrictions": "Attribution required and retained in NOTICE.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/icons/hairdryer.svg"
+      ]
+    },
+    {
+      "id": "round3-icon-fake",
+      "name": "Icon 'domino-mask' by Lorc — masked-face deception glyph for the fake-free-ball skill (chosen over delapouite/spy)",
+      "author": "Lorc (game-icons.net)",
+      "sourceUrl": "https://raw.githubusercontent.com/game-icons/icons/master/lorc/domino-mask.svg",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "usage": "Skill icon for 假自由球 (domino-mask).",
+      "restrictions": "Attribution required and retained in NOTICE.",
+      "status": "available",
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/icons/fake.svg"
+      ]
+    },
+    {
+      "id": "sitting-room-baked",
+      "name": "Sitting Room with Baked Textures (room shell, floor, baked furniture)",
+      "author": "jimbogies (Sketchfab)",
+      "sourceUrl": "https://sketchfab.com/3d-models/sitting-room-with-baked-textures-61fdbbef86b9496d80644492a84c916f",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 4.0 (recorded in the supplied GLB asset extras); file handed over by the user from D:\\智器云杯.",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "usage": "Play environment replacing the cafe HDRI: floor at y=0, shell centred on the table, baked coffee table in the playfield culled at load, ceiling split out for the top camera. Baked textures shown unlit; served locally unchanged.",
+      "restrictions": "Attribution retained in NOTICE. Personal non-commercial Demo per user instruction. Local runtime use only; no remote fetch.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round4/sitting_room_with_baked_textures.glb"
+      ],
+      "outputPaths": [
+        "public/assets/models/sitting_room_with_baked_textures.glb"
+      ]
+    },
+    {
+      "id": "cc0-cue-stick",
+      "name": "CC0 - Cue Stick (billiard cue, single tapered mesh with baked wood textures)",
+      "author": "plaggy (Sketchfab)",
+      "sourceUrl": "https://sketchfab.com/3d-models/cc0-cue-stick-311d2a1ac8d64037b6b9f8561d6d13ed",
+      "acquiredDate": "2026-11-19",
+      "license": "CC BY 4.0 (recorded in the supplied GLB asset extras; the CC0 filename is not the license). File handed over by the user from D:\\智器云杯.",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "usage": "Visible aiming cue replacing the cue formerly extracted from the traditional table GLB. src/view/CueStick.ts aligns the diagonal shaft by covariance axis, puts the thin tip at local x=0, scales to 1.45 m length / 31 mm butt diameter; computeCuePose keeps the axis through the ball centre and elevates the shaft over the rail cap. Served locally unchanged.",
+      "restrictions": "Attribution retained in NOTICE. Personal non-commercial Demo per user instruction. Local runtime use only; no remote fetch.",
+      "status": "available",
+      "originalPaths": [
+        "assets/source/round5/cc0_-_cue_stick.glb"
+      ],
+      "outputPaths": [
+        "public/assets/models/cc0_-_cue_stick.glb"
+      ]
+    },
+    {
+      "id": "bgm-track-5",
+      "name": "Original attachment: tunetank-relaxed-elevator-lounge-cafe-music-347740.mp3",
+      "author": "Tunetank (inferred from the attachment filename; not independently verified)",
+      "sourceUrl": "file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-relaxed-elevator-lounge-cafe-music-347740.mp3",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-21",
+      "license": "No license evidence accompanied the user-provided attachment. No verified Pixabay commercial-use license is asserted.",
+      "licenseUrl": null,
+      "usage": "User-authorized local secondary development only. BGM file copied byte-for-byte; no loudness normalization, transcoding or metadata edits.",
+      "restrictions": "External distribution and commercial use require rights evidence; not cleared for release. The user's local-development authorization is not proof of third-party rights. No online lookup or upload was performed.",
+      "status": "available",
+      "licenseEvidence": [],
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-5.mp3"
+      ]
+    },
+    {
+      "id": "bgm-track-6",
+      "name": "Original attachment: tunetank-cafe-music-349477.mp3",
+      "author": "Tunetank (inferred from the attachment filename; not independently verified)",
+      "sourceUrl": "file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-cafe-music-349477.mp3",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-21",
+      "license": "No license evidence accompanied the user-provided attachment. No verified Pixabay commercial-use license is asserted.",
+      "licenseUrl": null,
+      "usage": "User-authorized local secondary development only. BGM file copied byte-for-byte; no loudness normalization, transcoding or metadata edits.",
+      "restrictions": "External distribution and commercial use require rights evidence; not cleared for release. The user's local-development authorization is not proof of third-party rights. No online lookup or upload was performed.",
+      "status": "available",
+      "licenseEvidence": [],
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-6.mp3"
+      ]
+    },
+    {
+      "id": "bgm-track-7",
+      "name": "Original attachment: tunetank-cafe-music-348881.mp3",
+      "author": "Tunetank (inferred from the attachment filename; not independently verified)",
+      "sourceUrl": "file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/tunetank-cafe-music-348881.mp3",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-21",
+      "license": "No license evidence accompanied the user-provided attachment. No verified Pixabay commercial-use license is asserted.",
+      "licenseUrl": null,
+      "usage": "User-authorized local secondary development only. BGM file copied byte-for-byte; no loudness normalization, transcoding or metadata edits.",
+      "restrictions": "External distribution and commercial use require rights evidence; not cleared for release. The user's local-development authorization is not proof of third-party rights. No online lookup or upload was performed.",
+      "status": "available",
+      "licenseEvidence": [],
+      "originalPaths": [],
+      "outputPaths": [
+        "public/assets/audio/bgm/track-7.mp3"
+      ]
+    },
+    {
+      "id": "user-billiard-hit-371618",
+      "name": "User-supplied billiard recording: cue strike and ball collision edits",
+      "author": "u_7fupvvf5ym (filename token only; actual author not independently verified)",
+      "sourceUrl": "file:///D:/%E6%99%BA%E5%99%A8%E4%BA%91%E6%9D%AF/u_7fupvvf5ym-billiard-pool-hit-371618.mp3",
+      "acquiredDate": "2026-11-21",
+      "license": "User-provided attachment; no third-party license evidence supplied",
+      "licenseUrl": null,
+      "usage": "Two locally edited impact samples replace cue strike and ball-ball collision playback at the user's request.",
+      "restrictions": "Local development authorization does not establish third-party redistribution or commercial rights. No public release clearance is asserted.",
+      "status": "available",
+      "licenseEvidence": [],
+      "originalPaths": [
+        "assets/source/user-hit/u_7fupvvf5ym-billiard-pool-hit-371618.mp3"
+      ],
+      "documentationPaths": [
+        "assets/source/user-hit/processing-report.json"
+      ],
+      "outputPaths": [
+        "public/assets/audio/sfx/cue-strike-user.wav",
+        "public/assets/audio/sfx/ball-hit-user.wav"
+      ],
+      "processing": {
+        "source": "assets/source/user-hit/u_7fupvvf5ym-billiard-pool-hit-371618.mp3",
+        "sourceSha256": "d8c1f7b5866d3ab83ff5fc9f2393b197f76cd915fa7f724ff9a317251309fd85",
+        "sourceDurationSeconds": 0.6791875,
+        "sampleRate": 48000,
+        "channels": 1,
+        "bitsPerSample": 16,
+        "tool": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+        "processing": "80 Hz high-pass; exact frame crop; 1 ms fade-in and 24 ms fade-out; peak normalization; PCM16 WAV",
+        "roleAssignment": "First lower-frequency attack used for cue strike; later brighter attack used for ball collision. The recording has no isolated-stem labels.",
+        "clips": [
+          {
+            "role": "strike",
+            "path": "public/assets/audio/sfx/cue-strike-user.wav",
+            "sourceStartSeconds": 0.036,
+            "sourceEndSeconds": 0.198,
+            "frames": 7776,
+            "durationSeconds": 0.162,
+            "targetPeakDbFS": -5,
+            "actualPeakDbFS": -5.0004,
+            "rmsDbFS": -21.365,
+            "gainDb": 0.9358,
+            "bytes": 15596,
+            "sha256": "92a3a5211609b5667cb2da462f0a4f1318c89fd6ffede4480613e37a41357f5c"
+          },
+          {
+            "role": "collision",
+            "path": "public/assets/audio/sfx/ball-hit-user.wav",
+            "sourceStartSeconds": 0.361,
+            "sourceEndSeconds": 0.534,
+            "frames": 8304,
+            "durationSeconds": 0.173,
+            "targetPeakDbFS": -8,
+            "actualPeakDbFS": -8.0001,
+            "rmsDbFS": -18.3372,
+            "gainDb": 0.8027,
+            "bytes": 16652,
+            "sha256": "cfd4b1496db2e470e2044354b1344ff761e958e2fd2ff2e044f5c6beef8e00d2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fight-user-great-sword-motions",
+      "name": "User-supplied Great Sword and Bow skeleton-only FBXs and preprocessed fight motions",
+      "author": "Unknown; attachment author and third-party origin not verified",
+      "sourceUrl": "file:///C:/Users/yuhongyi/Documents/Qoder/2026-11-21/5c7ca13c/game/assets/source/fight/",
+      "acquiredDate": "2026-11-23",
+      "license": "User attachments; no verified third-party license evidence supplied",
+      "licenseUrl": null,
+      "usage": "Local demo only: 14 animation-only sources and skeleton/clip JSON. No mesh supplied, generated or implied.",
+      "restrictions": "User attachment origin, authorship and third-party redistribution/commercial rights are unverified. No mesh is present. Local demo preprocessing only; not a commercial-license certification or clearance for external release. Mixamorig/mixamo.com names are technical metadata, not proof of source or license.",
+      "status": "available",
+      "releaseClearance": "Not cleared for external distribution or commercial release",
+      "licenseEvidence": [],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/原地/Great Sword Idle.fbx",
+        "assets/source/fight/Great Sword Walk.fbx",
+        "assets/source/fight/Great Sword Run.fbx",
+        "assets/source/fight/Great Sword Jump.fbx",
+        "assets/source/fight/Great Sword Jump(1).fbx",
+        "assets/source/fight/转向/Great Sword Turn.fbx",
+        "assets/source/fight/转向/Great Sword Turn(1).fbx",
+        "assets/source/fight/受击/Great Sword Impact.fbx",
+        "assets/source/fight/受击/Great Sword Impact(1).fbx",
+        "assets/source/fight/攻击/Great Sword Slash.fbx",
+        "assets/source/fight/攻击/Great Sword Slash(1).fbx",
+        "assets/source/fight/技能/Great Sword Slash.fbx",
+        "assets/source/fight/技能/Standing Draw Arrow.fbx",
+        "assets/source/fight/Standing Death Left 01.fbx"
+      ],
+      "outputPaths": [
+        "public/assets/fight/motions.json"
+      ],
+      "clipMapping": {
+        "idle": "原地/Great Sword Idle.fbx",
+        "walk": "Great Sword Walk.fbx",
+        "run": "Great Sword Run.fbx",
+        "jump": "Great Sword Jump.fbx",
+        "jumpBack": "Great Sword Jump(1).fbx",
+        "turn": "转向/Great Sword Turn.fbx",
+        "turnAlt": "转向/Great Sword Turn(1).fbx",
+        "impact": "受击/Great Sword Impact.fbx",
+        "impactAlt": "受击/Great Sword Impact(1).fbx",
+        "slash": "攻击/Great Sword Slash.fbx",
+        "slashAlt": "攻击/Great Sword Slash(1).fbx",
+        "skillBall": "技能/Great Sword Slash.fbx",
+        "skillVolley": "技能/Standing Draw Arrow.fbx",
+        "death": "Standing Death Left 01.fbx"
+      },
+      "processing": {
+        "selection": "Use source.animations[0]; rename the cloned AnimationClip to its mapping key.",
+        "skeleton": "Idle FBXLoader static/rest T-pose bone-local position, quaternion and scale, captured immediately after parse. No mixer, animation evaluation or frame-0 pose is applied. Names are unchanged FBXLoader names; parent is the nearest ancestor Bone or null.",
+        "coordinates": "Y-up, +Z forward, centimeters. No axis conversion or baked scaling; unitScale=0.01 indicates centimeters to meters, applied once by the consumer.",
+        "rootMotion": {
+          "track": "mixamorigHips.position",
+          "method": "Set X and Z to absolute zero at EVERY existing key, not first-key subtraction. Preserve every Y sample in original centimeters (apart from JSON decimal rounding).",
+          "reason": "Prevent planar root translation from adding to rules-driven actor movement.",
+          "rotations": "All rotation tracks, including Hips turns/yaw, are retained. No rotational root-motion removal."
+        },
+        "time": "Keep FBXLoader clip durations, track order, all key counts and timestamps; no trim, optimize, resampling, downsampling or time scaling. JSON numbers, including duration/timestamps, are rounded to six decimal places only. Exact original durations are retained separately in this report.",
+        "serialization": "Three.AnimationClip.toJSON(clip), compact JSON with six-decimal numeric rounding; stable content-derived clip UUIDs for reproducible reruns.",
+        "character": "Byte-for-byte copy of the user-supplied self-contained Indian Man in Suit GLB. Runtime normalizes its 1.83x centimetre root scale to 1.8 m and adapts Mixamo-style joint names to the rig contract; no mesh conversion, no animation retargeting, embedded animation unused.",
+        "audio": "Byte-for-byte copies of the supplied fight audio. laowu-cat.mp3 is the first 2 seconds of the cat scream, trimmed once with imageio_ffmpeg ffmpeg 7.1 (libmp3lame -q:a 2 -t 2); fight-bgm/punch-a/punch-b are unmodified copies. dagou-chant.mp3 (0-0.87 s) and dagou-bark.mp3 (0.88-1.78 s) are RMS-envelope segments of the supplied ultimate voice line, cut with the same ffmpeg."
+      }
+    },
+    {
+      "id": "fight-user-indian-man-in-suit",
+      "name": "User-supplied Indian Man in Suit rigged character (self-contained GLB)",
+      "author": "Pixel_Monster (https://sketchfab.com/ar.jethin)",
+      "sourceUrl": "https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa",
+      "acquiredDate": "2026-11-23",
+      "license": "CC BY 4.0 per embedded glTF metadata (not independently verified)",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "usage": "Fight mode character only; loaded locally; embedded animation unused.",
+      "restrictions": "User-supplied attachment. Embedded metadata declares CC BY 4.0 attribution; this is not an independent rights check or commercial clearance. Preserve attribution if the declared license applies. The separately supplied FBX motions remain unverified.",
+      "status": "available",
+      "releaseClearance": "Attribution required per declared CC BY 4.0; external distribution not independently cleared",
+      "licenseEvidence": [
+        "assets/source/fight/indian-man-in-suit-provenance.txt"
+      ],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/indian_man_in_suit.glb",
+        "assets/source/fight/indian-man-in-suit-provenance.txt"
+      ],
+      "outputPaths": [
+        "public/assets/fight/character/indian_man_in_suit.glb"
+      ],
+      "embeddedMetadata": {
+        "author": "Pixel_Monster (https://sketchfab.com/ar.jethin)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/indian-man-in-suit-985dd9756d89464b9380414b5b12d8aa",
+        "title": "Indian Man in suit"
+      },
+      "normalization": "Runtime uniform scale to 1.8 m and joint-name adaptation; no mesh conversion or animation retargeting."
+    },
+    {
+      "id": "fight-user-oiiaioooooiai-cat",
+      "name": "User-supplied Oiiaioooooiai Cat GLB (spinning skill projectile)",
+      "author": "Zhuier (https://sketchfab.com/Zhuier)",
+      "sourceUrl": "https://sketchfab.com/3d-models/oiiaioooooiai-cat-30d27bf7fb224849b76e208a6eccdb36",
+      "acquiredDate": "2026-11-23",
+      "license": "CC BY 4.0 per embedded glTF metadata (not independently verified)",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "usage": "Fight skill projectile visual only; loaded locally; embedded animation unused.",
+      "restrictions": "User-supplied attachment. Embedded metadata declares CC BY 4.0 attribution; this is not an independent rights check or commercial clearance. Preserve attribution if the declared license applies. The separately supplied FBX motions remain unverified.",
+      "status": "available",
+      "releaseClearance": "Attribution required per declared CC BY 4.0; external distribution not independently cleared",
+      "licenseEvidence": [
+        "assets/source/fight/oiiaioooooiai-cat-provenance.txt"
+      ],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/oiiaioooooiai_cat.glb",
+        "assets/source/fight/oiiaioooooiai-cat-provenance.txt"
+      ],
+      "outputPaths": [
+        "public/assets/fight/cat/oiiaioooooiai_cat.glb"
+      ],
+      "embeddedMetadata": {
+        "author": "Zhuier (https://sketchfab.com/Zhuier)",
+        "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+        "source": "https://sketchfab.com/3d-models/oiiaioooooiai-cat-30d27bf7fb224849b76e208a6eccdb36",
+        "title": "Oiiaioooooiai Cat"
+      },
+      "normalization": "Runtime centers and scales a clone to a ~0.9 m spinning projectile; no mesh conversion or animation retargeting."
+    },
+    {
+      "id": "fight-user-audio",
+      "name": "User-supplied fight audio (cat scream, battle BGM, two impact punches)",
+      "author": "Unknown; attachment author and third-party origin not verified",
+      "sourceUrl": "file:///C:/Users/yuhongyi/Documents/Qoder/2026-11-21/5c7ca13c/game/assets/source/fight/audio/",
+      "acquiredDate": "2026-11-23",
+      "license": "User attachments; no verified third-party license evidence supplied",
+      "licenseUrl": null,
+      "usage": "Local fight demo only: cat skill scream (first 2 s), independent fight background music, and two melee impact samples.",
+      "restrictions": "User attachment origin, authorship and third-party redistribution/commercial rights are unverified. Local demo only; not a commercial-license certification or clearance for external release.",
+      "status": "available",
+      "releaseClearance": "Not cleared for external distribution or commercial release",
+      "licenseEvidence": [],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/audio/laowu-cat-source.mp3",
+        "assets/source/fight/audio/fight-bgm-source.mp3",
+        "assets/source/fight/audio/punch-a-source.mp3",
+        "assets/source/fight/audio/punch-b-source.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/fight/audio/laowu-cat.mp3",
+        "public/assets/fight/audio/fight-bgm.mp3",
+        "public/assets/fight/audio/punch-a.mp3",
+        "public/assets/fight/audio/punch-b.mp3"
+      ],
+      "processing": {
+        "trim": "laowu-cat.mp3 = first 2 seconds of laowu-cat-source.mp3 via imageio_ffmpeg ffmpeg 7.1: -t 2 -c:a libmp3lame -q:a 2. Other tracks are byte-for-byte copies."
+      }
+    },
+    {
+      "id": "fight-user-labrador-dog",
+      "name": "Labrador Dog (ultimate skill projectile)",
+      "author": "kenchoo (Sketchfab)",
+      "sourceUrl": "https://sketchfab.com/3d-models/labrador-dog-1f56cfbab07e4fe49b5d9e521c82073a",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-23",
+      "license": "CC-BY-4.0 (transcribed from embedded GLB metadata; not independently verified)",
+      "licenseUrl": "http://creativecommons.org/licenses/by/4.0/",
+      "usage": "Local fight demo: rage ultimate summons the dog to charge, launch and stun the opponent.",
+      "restrictions": "Embedded CC-BY-4.0 declaration is transcribed, not independently verified; attribution required if redistributed. Not a commercial-license certification.",
+      "status": "available",
+      "releaseClearance": "Not cleared for external distribution or commercial release",
+      "licenseEvidence": [],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/labrador_dog.glb"
+      ],
+      "outputPaths": [
+        "public/assets/fight/dog/labrador_dog.glb"
+      ],
+      "processing": {
+        "copy": "Byte-for-byte copy; skinned mesh with one built-in animation clip, normalized and scaled at runtime."
+      }
+    },
+    {
+      "id": "fight-user-dagou-audio",
+      "name": "User-supplied ultimate voice line (大狗大狗叫叫叫)",
+      "author": "Unknown; attachment author and third-party origin not verified",
+      "sourceUrl": "file:///D:/智器云杯/大狗大狗叫叫叫（戴口罩）_爱给网_aigei_com.mp3",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-23",
+      "license": "User attachment; no verified third-party license evidence supplied",
+      "licenseUrl": null,
+      "usage": "Local fight demo: chant loop while casting the ultimate, bark segment on hit.",
+      "restrictions": "User attachment origin, authorship and third-party redistribution/commercial rights are unverified. Local demo only.",
+      "status": "available",
+      "releaseClearance": "Not cleared for external distribution or commercial release",
+      "licenseEvidence": [],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/audio/dagou-source.mp3"
+      ],
+      "outputPaths": [
+        "public/assets/fight/audio/dagou-chant.mp3",
+        "public/assets/fight/audio/dagou-bark.mp3"
+      ],
+      "processing": {
+        "trim": "dagou-chant.mp3 = 0-0.87 s (repeated 大狗大狗 syllables) with 10 ms fade-in / 30 ms fade-out; dagou-bark.mp3 = 0.88-1.78 s (叫叫叫 syllables) with 10 ms fade-in / 50 ms fade-out. Segments chosen from the 50 ms RMS envelope; not a labeled stem split. imageio_ffmpeg ffmpeg 7.1, 128 kbps."
+      }
+    },
+    {
+      "id": "fight-user-dagou-banner",
+      "name": "User-supplied flaming dog banner image (ultimate broadcast)",
+      "author": "Unknown; user-provided image, origin not verified",
+      "sourceUrl": "file:///C:/Users/yuhongyi/Documents/Qoder/2026-11-21/5c7ca13c/game/assets/source/fight/dagou-banner.webp",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-23",
+      "license": "User attachment; no verified third-party license evidence supplied",
+      "licenseUrl": null,
+      "usage": "Local fight demo: near-fullscreen ultimate name broadcast artwork.",
+      "restrictions": "User attachment origin and third-party redistribution/commercial rights are unverified. Local demo only.",
+      "status": "available",
+      "releaseClearance": "Not cleared for external distribution or commercial release",
+      "licenseEvidence": [],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/dagou-banner.webp"
+      ],
+      "outputPaths": [
+        "public/assets/fight/dagou-banner.webp"
+      ],
+      "processing": {
+        "copy": "Byte-for-byte copy of the user-provided WebP."
+      }
+    },
+    {
+      "id": "kenney-particle-pack",
+      "name": "Kenney Particle Pack 1.1 (selected transparent PNG sprites)",
+      "author": "Kenney Vleugels (Kenney.nl)",
+      "sourceUrl": "https://kenney.nl/assets/particle-pack",
+      "downloadUrl": null,
+      "acquiredDate": "2026-11-23",
+      "license": "CC0 (Creative Commons Zero), per bundled License.txt",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "usage": "Local fight demo: textured sprites for skill projectiles, hit bursts, trails and the ultimate explosion.",
+      "restrictions": "CC0 permits reuse; credit appreciated but not required. 14 of the pack PNGs are used at runtime.",
+      "status": "available",
+      "releaseClearance": "CC0; no known restriction",
+      "licenseEvidence": [
+        "assets/source/fight/particles/License.txt"
+      ],
+      "documentationPaths": [
+        "assets/source/fight/conversion-report.json"
+      ],
+      "originalPaths": [
+        "assets/source/fight/particles/kenney_particle-pack.zip",
+        "assets/source/fight/particles/License.txt"
+      ],
+      "outputPaths": [
+        "public/assets/fight/particles/fire_01.png",
+        "public/assets/fight/particles/flame_04.png",
+        "public/assets/fight/particles/flare_01.png",
+        "public/assets/fight/particles/light_01.png",
+        "public/assets/fight/particles/magic_05.png",
+        "public/assets/fight/particles/spark_04.png",
+        "public/assets/fight/particles/star_06.png",
+        "public/assets/fight/particles/smoke_08.png",
+        "public/assets/fight/particles/slash_01.png",
+        "public/assets/fight/particles/trace_01.png",
+        "public/assets/fight/particles/twirl_01.png",
+        "public/assets/fight/particles/circle_05.png",
+        "public/assets/fight/particles/muzzle_02.png",
+        "public/assets/fight/particles/scorch_01.png"
+      ],
+      "processing": {
+        "extract": "Unzipped locally; 14 transparent PNGs copied byte-for-byte to public/assets/fight/particles/. No remote service."
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/source/billiards/billiards-master.zip",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 12366606,
+      "sha256": "09581080ef6a51d68b61575878f81787ffc4943d2d76023ea22797f5632581d0",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/billiards/billiards_pack.zip",
+      "roles": [
+        "original-download"
+      ],
+      "bytes": 11236815,
+      "sha256": "a2fe9a6429d01848d4d106d347c36116599d8612a680a7578b0b37510610c063",
+      "operation": "Public HTTP download; original ZIP bytes retained"
+    },
+    {
+      "path": "assets/source/billiards/license-page.html",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 23856,
+      "sha256": "17c8feda91bc2eed0596644775d04d93f4eeac410687a660da4a4138d3e9e5f3",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/furniture/kenney_furniturePack.zip",
+      "roles": [
+        "original-download"
+      ],
+      "bytes": 5580414,
+      "sha256": "68afa4e6dc8a53942379fb47f1e84ec735d46b77bb1c1ceb968e245693dde067",
+      "operation": "Public HTTP download; original ZIP bytes retained"
+    },
+    {
+      "path": "assets/source/furniture/license-page.html",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 51325,
+      "sha256": "d9358e6a9b17cad3779204d1e894fb901c44b94549f730da228ef73c20aeee35",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/hairdryer/BLEND.zip",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 4417375,
+      "sha256": "eeb03ae8f503a1855649f1cfa4bb979e93a79d131fc938f4b6272cfed86d06d2",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/hairdryer/HairDryer_Low_Poly.blend",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 2505104,
+      "sha256": "af7f2c8390c1f3dbe3ba182f776740c188fa703081bbbfc086a99b913c48e7bd",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/hairdryer/conversion-report.json",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 1266,
+      "sha256": "974100d05bc8474e0f296222129bed3bedac497a4b71a8f3dbb8caa5d1b917c4",
+      "operation": "Blender conversion report"
+    },
+    {
+      "path": "assets/source/hairdryer/readme.rtf",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 1107,
+      "sha256": "633680d8c5c613aef7d0e0a2810d5a35c0892149f817f45dea35a34a9d4a48c1",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/quaternius-animations/License.txt",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 332,
+      "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+      "operation": "ZIP extraction only; byte-for-byte copy of Animation Library[Standard]/License.txt"
+    },
+    {
+      "path": "assets/source/quaternius-animations/Universal Animation Library[Standard].zip",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 15904933,
+      "sha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/quaternius-animations/animation-viewer.html",
+      "roles": [
+        "documentation"
+      ],
+      "bytes": 11061,
+      "sha256": "9d0f4ac58f164abf129927024c8a2fb418fa58ab8f507810767a7b0f3f24e894",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/quaternius-animations/license-page.html",
+      "roles": [
+        "documentation"
+      ],
+      "bytes": 19862,
+      "sha256": "9157d71e192638132706d6734bfb109b0647f150f305d4514b81a0cdfe9bf471",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/quaternius-animations/oga-license-page.html",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 32337,
+      "sha256": "e984f2109f3adf95c4c302e140be03d1628bbf82fd9c3202acee27d554b57f7e",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/quaternius-animations/universal_animation_librarystandard.zip",
+      "roles": [
+        "original-download"
+      ],
+      "bytes": 14541205,
+      "sha256": "18ff1a7215f4852b320203e8aaf02a1578b5c8eef9027fbaedfcedc7b85a3ac2",
+      "operation": "Public HTTP download; original ZIP bytes retained"
+    },
+    {
+      "path": "assets/source/quaternius-base/License_Standard.txt",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 806,
+      "sha256": "0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/quaternius-base/Universal Base Characters[Standard].zip",
+      "roles": [
+        "supplied-source"
+      ],
+      "bytes": 128968391,
+      "sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/quaternius-base/license-page.html",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 19966,
+      "sha256": "4d31a8888b388ef4d951678f997d3662ae993f1a01e0e1a41a916135240f332e",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "assets/source/quaternius-base/quaternius-license.html",
+      "roles": [
+        "license-evidence"
+      ],
+      "bytes": 10301,
+      "sha256": "d1b56be5228d372b049b45cc7447a823da7989a6cf7036f60cfac2284c8fcb0d",
+      "operation": "Public web page snapshot"
+    },
+    {
+      "path": "public/assets/animations/universal-animation-library-standard.glb",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 7618436,
+      "sha256": "69591853d817488edaa8fd9bf8fc1d821eaeaf789f8627b3cd23b41c4ed67997",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/10ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 410,
+      "sha256": "be9cfbdf737761d81c76fc217d566406f6c99c65be08e334dae0e585099142b4",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/10ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/10ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17063,
+      "sha256": "a9fe7066493600486f712b0e634b97e5b2d0ae6d571e043d0f1d34fc9c66428c",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/10ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/11ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 409,
+      "sha256": "72a0c3e6111ffb6ce7e9b607f0e2ae8bc2d0a6856e82f73d43480b66f61b00a0",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/11ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/11ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17062,
+      "sha256": "fc2cfddb2767b2f13d7fe3521d24b8d596638328e2c2d4f4f5c7c5053c65fea7",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/11ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/12ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 412,
+      "sha256": "2dd79cbb806471dbcabc6fc7a178e5e88b9a6f11e1e96368d5ee3b4d429dc38a",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/12ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/12ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17065,
+      "sha256": "c827eeba667513216496d25a6f9d3ac307f1c2d16ff5ead75caa6b63b35d6c57",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/12ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/13ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 412,
+      "sha256": "975f0c3d2ca6b1434c99f8d3e7bb5cf790d970c956bb7a146927f15c62f07815",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/13ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/13ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17065,
+      "sha256": "7872eee5e557b18c70a526fa02482c05cd7c6e7675656b3c62827d53fdcaabfb",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/13ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/14ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "5b6eb28a4e585c83ac6fa0f8c7d9972bd7ecef78c68864db110c05b44f775d20",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/14ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/14ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17064,
+      "sha256": "88e6d642ff654d3e19481481674f3aa6f7dec819bcecce477337d82d1279916c",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/14ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/15ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "e76b9c1a3ea6489a4d6cb77c24763b909c27e28ce5c12dea85662a87574f5055",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/15ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/15ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17064,
+      "sha256": "f0f2893d44d23ce35bd6001855926423621c4d378b9153b765ffbf4416b20e2d",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/15ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/1ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "a5c9245d3c62b12e6fbf13c2e04d871a9ce07646337c413711d4f8e372957f8b",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/1ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/1ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17071,
+      "sha256": "935a7075063c3607f10d6ad15707def9da1fcd259113df65c18facaca2178f91",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/1ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/2ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 409,
+      "sha256": "7bfcf4ebd243eb6fb7d9f5caa67ea8c72c5a5cf70d58a27595cdb8648b51b826",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/2ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/2ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17069,
+      "sha256": "8a146386e99bb60fe66c7203ddb71bff32c2d0dbb68dead26baa20851e25683a",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/2ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/3ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 408,
+      "sha256": "fe53ee1e3ebe8705970cbbe2a0f99ca47b28ad3810039a46d0406b0836498086",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/3ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/3ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17068,
+      "sha256": "d7228255163686e280b10d860acac5df7b6c12ae660bd55af9aa662b7fc60176",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/3ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/4ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "3473efd8b31ae2cf6eab836d6a450f346e9a145353fe2e1e02ea78278771c9d3",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/4ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/4ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17071,
+      "sha256": "f2ec9608b0f2a977b34a992632f0335b9bd02aec91a5970402d4bcb8c3066644",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/4ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/5ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "667f215b8209c12f485ec7306d20a03e354728376b1d447c8ae882a705c2b32e",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/5ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/5ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17071,
+      "sha256": "f1d37b3ab776d061edebc37aafc463aec2850b1921139d3343d75e173d179493",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/5ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/6ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 410,
+      "sha256": "be66d2cd37466c50fc14f81961a8db7cd18f09ff02d403907c299f5ff2ed8b56",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/6ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/6ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17070,
+      "sha256": "d054fbb9d27b20ac406c31232320c52227cf4f75a639b9517937fd50bd32aace",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/6ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/7ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 410,
+      "sha256": "d8e006ce04c4834d117ed717526315b662dba97cdf710142714074709a1febd8",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/7ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/7ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17070,
+      "sha256": "2d0ca0eec2e9fda9e8bc787341f19f0f64b812c01922b4c682e1983092181562",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/7ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/8ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 410,
+      "sha256": "fe98e0bca9a41e1a270e11b89e055b6236385c7110e028f9720513ecb64c802c",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/8ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/8ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17070,
+      "sha256": "a955769556bc815c4a85b466bd6caa13b291b3758a34b41b281cb9be665ee527",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/8ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/9ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 411,
+      "sha256": "adc706e5aa7bb13701923cd734e166906ccbc8caea9b339be5c9026f5bd92126",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/9ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/9ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17063,
+      "sha256": "c048ed443ade435f0701c690bacecff4e090d92125a975c16e2c875be96d70b6",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/9ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/cue_ball.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 235,
+      "sha256": "0e30ff2f691880aa028a0ae78677261d174ba6c6fa8976ceef3e7d192c63a72b",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/cue_ball.mtl"
+    },
+    {
+      "path": "public/assets/billiards/balls/pool/cue_ball.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 17070,
+      "sha256": "f836fca6df2ac21b042397b0dff45b4764882c7289ac181334d92f04da41d273",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/balls/pool/cue_ball.obj"
+    },
+    {
+      "path": "public/assets/billiards/sticks/cue_stick.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 950,
+      "sha256": "d5fb7cd64ef4233b8739245ff49e3df37d9709dfad809f636cdcae494b63d5c4",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/sticks/cue_stick.mtl"
+    },
+    {
+      "path": "public/assets/billiards/sticks/cue_stick.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 6274,
+      "sha256": "4752ec4e84b09220a2f9505dd87881de970d7dd3fb62c850c67e2bfad3444ace",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/sticks/cue_stick.obj"
+    },
+    {
+      "path": "public/assets/billiards/tables/table_pool [full].mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 599,
+      "sha256": "9c307678b43b1c7bf078a73a404f57d3da7078fcce1d8afa23a986559e982f27",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/tables/table_pool [full].mtl"
+    },
+    {
+      "path": "public/assets/billiards/tables/table_pool [full].obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 28066,
+      "sha256": "3a5f731c70d07e7e7b2eef500ad483d5ad612db7dd062a277ffe5740317f6136",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "dist/obj_mtl/tables/table_pool [full].obj"
+    },
+    {
+      "path": "public/assets/characters/Superhero_Female_FullBody.bin",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 990808,
+      "sha256": "3a8220a485b33d05d879115a50697728b45a151781106033afb8b8c243fca208",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/Superhero_Male_FullBody.bin",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 720076,
+      "sha256": "459003f9745853ae562a85506a2b94dd56515c1f37728f9fa3d2ce1a3e4cd92f",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Eye_Brown.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 35958,
+      "sha256": "d08e3356a83211bc6ca21fe3a8e39f4b5c1a3b8f85457fc2c0fb57be09935025",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Eye_Normal.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 15099,
+      "sha256": "9ed61f7726a54fe346a78b9e5a18905d8e2b88f86235d97f53cd207a26f3f8c7",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Hair_1_BaseColor.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 1570376,
+      "sha256": "bc7aa863bd22ab0a995cd838cceb4d3a5186ee54ee2fb0108fad85d20c057e6e",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Hair_1_Normal.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 4326126,
+      "sha256": "57fd0ad8c96a4d01b38769637e066cecaa285b456f6e48ce00863754a457affb",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Hair_2_BaseColor.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 1729467,
+      "sha256": "f9f4f2fb3eeeefb0b6f0fdef38b0770fd6607640c1c680b8139dd76697e9f9b3",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Hair_2_Normal.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 4710013,
+      "sha256": "172f230aae0d4366c3cfc0402b2e6d1811b11f8487344bff28605eeacac1558d",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Female_Dark_BaseColor.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 1319410,
+      "sha256": "d366843ee7d9e9f37ec87a0e1c98c7f2e45573c08eeb80a51a6d9344e68cf288",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Female_Normal.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 3940537,
+      "sha256": "cf922460b43ccd31e983e34db05514c9d451dd2f9cdd01a843978e797719f859",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Female_Roughness.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 3277022,
+      "sha256": "d2beabf2bd0313e32c68dcdbb80dca371a6e994fabf96efa97128bf9f14fa57b",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Male_Dark.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 1384380,
+      "sha256": "df680cbc1967a61e85998bfafb8f7bc0a36dd604bb3266486c4b06b1a184bb45",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Male_Normal.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 4252937,
+      "sha256": "9b25cf9200216eb754b79cf4c63b5380c419780788322f3c57cdd2b3e02679a6",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/T_Superhero_Male_Roughness.png",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 3152049,
+      "sha256": "c70dabf48574cda55644d556beae1ee7cf1bdcf68a50d259d20f2f2358f27991",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/characters/female.gltf",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 22939,
+      "sha256": "fd43e6c9a343a249cfebad1a24818794f6df50465a8ca7095b4642525a4cc5fc",
+      "operation": "Extracted glTF with only stale image aliases corrected"
+    },
+    {
+      "path": "public/assets/characters/male.gltf",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 22407,
+      "sha256": "3aa16f6ab5d3a141c2ef0bf90a84d0abea3b735c8328e7f5eb1c0299a9abd743",
+      "operation": "Extracted glTF with only stale image aliases corrected"
+    },
+    {
+      "path": "public/assets/furniture/bedSingle.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 462,
+      "sha256": "6e47e630e85d9419d6b44deaf8b0cced7278a70911c885623dbd3c31f7dd7672",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/bedSingle.mtl"
+    },
+    {
+      "path": "public/assets/furniture/bedSingle.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 16271,
+      "sha256": "1befe39e92d994b75ebcf62a2500ddad54075358c1ff42fefd23750b29bb40e6",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/bedSingle.obj"
+    },
+    {
+      "path": "public/assets/furniture/bookcaseOpen.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 144,
+      "sha256": "dc0e8eeb2fef684cc9ab72e9532312ef8796c5035d3c5f23ba768ef6dae17806",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/bookcaseOpen.mtl"
+    },
+    {
+      "path": "public/assets/furniture/bookcaseOpen.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 15485,
+      "sha256": "31beea66f34e64660c870e39c52ed2e81984939c88f4bd763c7dce56e9ef76a9",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/bookcaseOpen.obj"
+    },
+    {
+      "path": "public/assets/furniture/chair.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 144,
+      "sha256": "dc0e8eeb2fef684cc9ab72e9532312ef8796c5035d3c5f23ba768ef6dae17806",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/chair.mtl"
+    },
+    {
+      "path": "public/assets/furniture/chair.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 8682,
+      "sha256": "395ba37182de517f58a2b0993ffcf4ae01a858285e269191509c6e2f1fd406f2",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/chair.obj"
+    },
+    {
+      "path": "public/assets/furniture/desk.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 252,
+      "sha256": "879f1a0c7b9077151d66b370663c090217cf001722808860e7da01517060ffe6",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/desk.mtl"
+    },
+    {
+      "path": "public/assets/furniture/desk.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 12633,
+      "sha256": "fff1cb3b8ad7460c17eb0106a61f0fc42c5cc95719f7fc9ea5edddff66e1ccd2",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/desk.obj"
+    },
+    {
+      "path": "public/assets/furniture/lampRoundFloor.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 245,
+      "sha256": "16cdc879bcaa53a3919423553d022313030a8be768833b0613e50fb987fc2048",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/lampRoundFloor.mtl"
+    },
+    {
+      "path": "public/assets/furniture/lampRoundFloor.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 5325,
+      "sha256": "f2e46531dd98352951689c59b5f2a90b8b4b2a2b4482630a09c569423a7aabc4",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/lampRoundFloor.obj"
+    },
+    {
+      "path": "public/assets/furniture/loungeSofa.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 255,
+      "sha256": "13ee99712e516ddd57354d149de4d85feb7ecb39b2532a4fbd77e83c6603ef52",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/loungeSofa.mtl"
+    },
+    {
+      "path": "public/assets/furniture/loungeSofa.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 8015,
+      "sha256": "38dcb2da712205b8e5fed6a00051f5e737b14b2c77997fe51378b8e9ea67a538",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/loungeSofa.obj"
+    },
+    {
+      "path": "public/assets/furniture/table.mtl",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 144,
+      "sha256": "dc0e8eeb2fef684cc9ab72e9532312ef8796c5035d3c5f23ba768ef6dae17806",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/table.mtl"
+    },
+    {
+      "path": "public/assets/furniture/table.obj",
+      "roles": [
+        "runtime-output"
+      ],
+      "bytes": 8150,
+      "sha256": "cf5dae65dbf6d2251f66776d1718e01ae3997996072d1e5860cb9059b9cd7ddf",
+      "operation": "ZIP extraction only; byte-for-byte copy; no mesh or material conversion",
+      "sourceArchiveMember": "Models/table.obj"
+    },
+    {
+      "path": "public/assets/models/hairdryer.glb",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 529308,
+      "sha256": "55e5da371bdfa21201a13333578d0b1a4b853d597580e5dd6ee5cede59f1a7e4",
+      "operation": "Converted from the supplied BLEND with Blender 4.5.3 LTS; embedded GLB"
+    },
+    {
+      "path": "public/assets/models/p8.bin",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 68048,
+      "sha256": "890468e02ea7623df6299a4afba73caa23c5b065d339718be10a949d1d3c6f89",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/models/p8.gltf",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 17282,
+      "sha256": "4d344f95e5f3778c304849be45ae98d8bcc3df53e79639719293f31149038465",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/models/p8.min.bin",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 29588,
+      "sha256": "12a8736b6f41c855b4b4482758f8835a7b7a98a6ade76af2a075a4dc871dcf4b",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "public/assets/models/p8.min.gltf",
+      "roles": [
+        "runtime-asset"
+      ],
+      "bytes": 4954,
+      "sha256": "e8e5d9553bcabab8d0132bf269c23bd3357c9abf3ab5990410a9675f9f0fe01a",
+      "operation": "Copied byte-for-byte from the supplied archive"
+    },
+    {
+      "path": "assets/source/round3/pool_table_traditional.glb",
+      "sha256": "5028c2acdc960fe9a7d0303293843c0f6aa2c5a5fc94b0f37d3475f6a2b30cba",
+      "bytes": 79284636,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/models/pool-table-traditional.glb",
+      "sha256": "1bd1e5ccc8352472aebfda2e1bb4cfaca2b403e656023c6b8b4bf8da774526e0",
+      "bytes": 7996936,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "assets/source/round3/pulsebox-a-background-jazz-music-448453.mp3",
+      "sha256": "52220795a5ccc735b1f818774e96c66647cfdd625e1df7dfcc00b8918d5f37c9",
+      "bytes": 1223424,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/bgm/track-1.mp3",
+      "sha256": "172a67013b4d2658d1ec4ae6de5ee28f9815fb1af2e5bfd9ac04088ec6f47166",
+      "bytes": 919135,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "assets/source/round3/pulsebox-a-jazz-background-music-448455.mp3",
+      "sha256": "66c0002f1947381f4968006457b832bc9ad6d1d8941238d84a8bf1d56c8522ac",
+      "bytes": 3911424,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/bgm/track-2.mp3",
+      "sha256": "0082bfef22ef67405770a8bb543d90572209d52ee557900f3ed09523563a24df",
+      "bytes": 2935370,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "assets/source/round3/happinessinmusic-free-lounge-music-478072.mp3",
+      "sha256": "e70a0a3f01b8145144035b0a6359d1ef75b8c10fc31cf2f812f0bf6a9f4d6e0d",
+      "bytes": 7739904,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/bgm/track-3.mp3",
+      "sha256": "1e32b787f5d005ead8a8a0eee03e2990828d9d4758d570572e3ee20028f3c9e4",
+      "bytes": 5806750,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "assets/source/round3/faespencer-background-music-instrumental-207886.mp3",
+      "sha256": "ed41b062bae7fa015970687754d39961596c1b8562c105397d5fc38f35887f70",
+      "bytes": 5768672,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/bgm/track-4.mp3",
+      "sha256": "0fc38560a709c5f7dbc78f99936acba886d195b02b6c877010c46a1fe590e08f",
+      "bytes": 4327801,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/sfx/ball-hit.ogg",
+      "sha256": "d750cf88097d0c3e69920e6e14496e1444e1a9da01aa4cca8f5ec8cb44c57b4f",
+      "bytes": 6526,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/sfx/cushion.ogg",
+      "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+      "bytes": 5351,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/sfx/cue-strike.ogg",
+      "sha256": "1723a9fd25103ed41af06054814e84e65f4a772bac86ab2dc927da93d9592ff5",
+      "bytes": 6575,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/sfx/pocket.mp3",
+      "sha256": "94c3fea34ba935271a6fc21bcc5ff9298503c4666dbde7415bfae027c8337f93",
+      "bytes": 19968,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/sfx/hairdryer-loop.mp3",
+      "sha256": "853d27145665f4ca98016cb26d2ba5c8d18e19a4cdf85492ff97ad7a89ac12ac",
+      "bytes": 108203,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs"
+    },
+    {
+      "path": "public/assets/icons/hand.svg",
+      "sha256": "d868180fcf51815294e518a900f82951c1e9048fec0c9db5de4eaa936afe44cd",
+      "bytes": 801,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs Background rect stripped for CSS alpha mask-image (round 3)."
+    },
+    {
+      "path": "public/assets/icons/hairdryer.svg",
+      "sha256": "305c2c89731d8a6bd3e4291ec8d44cb57f111d7f2b3f0935074af5562e2bf35a",
+      "bytes": 1437,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs Background rect stripped for CSS alpha mask-image (round 3)."
+    },
+    {
+      "path": "public/assets/icons/fake.svg",
+      "sha256": "73520946e6713681da55cc7441c6cea2273bbfe54c0504190fc532d65760a1d7",
+      "bytes": 982,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round3-assets.mjs Background rect stripped for CSS alpha mask-image (round 3)."
+    },
+    {
+      "path": "assets/source/round4/sitting_room_with_baked_textures.glb",
+      "sha256": "228b32b0adf14ab5c98c699b4720855b78887ba5e1a7fc0be2d122f25cf12020",
+      "bytes": 13169032,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round4-assets.mjs"
+    },
+    {
+      "path": "public/assets/models/sitting_room_with_baked_textures.glb",
+      "sha256": "228b32b0adf14ab5c98c699b4720855b78887ba5e1a7fc0be2d122f25cf12020",
+      "bytes": 13169032,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round4-assets.mjs"
+    },
+    {
+      "path": "assets/source/round5/cc0_-_cue_stick.glb",
+      "sha256": "0da9efc8ff4f9683c6cd01a4a1154852edaf659a092ac2e8b7342bfa44033eb3",
+      "bytes": 12863492,
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Registered by scripts/register-round5-assets.mjs"
+    },
+    {
+      "path": "public/assets/models/cc0_-_cue_stick.glb",
+      "sha256": "0da9efc8ff4f9683c6cd01a4a1154852edaf659a092ac2e8b7342bfa44033eb3",
+      "bytes": 12863492,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Registered by scripts/register-round5-assets.mjs"
+    },
+    {
+      "path": "public/assets/audio/bgm/track-5.mp3",
+      "sha256": "cf020a9e90979a11ae93d0d9e4d9bca3081ca92cb3ed8337efdf34c4ae90ff5e",
+      "bytes": 10516992,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Copied byte-for-byte from the user-provided attachment; no loudness normalization, transcoding or metadata edits."
+    },
+    {
+      "path": "public/assets/audio/bgm/track-6.mp3",
+      "sha256": "ccb9d0cef3ae194e08dbeb8bd45bc7a97a3730fa539b9f271ef5e4806808edb7",
+      "bytes": 4151808,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Copied byte-for-byte from the user-provided attachment; no loudness normalization, transcoding or metadata edits."
+    },
+    {
+      "path": "public/assets/audio/bgm/track-7.mp3",
+      "sha256": "bd4d96d5fccca7de55a518b65a82037ee4df85f480aeb52bb3bd44bdc99d5bcd",
+      "bytes": 6244310,
+      "roles": [
+        "runtime-asset"
+      ],
+      "operation": "Copied byte-for-byte from the user-provided attachment; no loudness normalization, transcoding or metadata edits."
+    },
+    {
+      "path": "assets/source/user-hit/u_7fupvvf5ym-billiard-pool-hit-371618.mp3",
+      "bytes": 21733,
+      "sha256": "d8c1f7b5866d3ab83ff5fc9f2393b197f76cd915fa7f724ff9a317251309fd85"
+    },
+    {
+      "path": "assets/source/user-hit/processing-report.json",
+      "bytes": 1594,
+      "sha256": "acd20cc28f84df97a75e20cbf03131e3fafc7bb53dd5d7a6459ea35d5f1b4b1a"
+    },
+    {
+      "path": "public/assets/audio/sfx/cue-strike-user.wav",
+      "bytes": 15596,
+      "sha256": "92a3a5211609b5667cb2da462f0a4f1318c89fd6ffede4480613e37a41357f5c"
+    },
+    {
+      "path": "public/assets/audio/sfx/ball-hit-user.wav",
+      "bytes": 16652,
+      "sha256": "cfd4b1496db2e470e2044354b1344ff761e958e2fd2ff2e044f5c6beef8e00d2"
+    },
+    {
+      "path": "assets/source/fight/原地/Great Sword Idle.fbx",
+      "bytes": 424416,
+      "sha256": "2bb0973c29a64dac07488f7f7ea8c9c2972d946d6a981be78b406f95ac50ac89",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/Great Sword Walk.fbx",
+      "bytes": 373120,
+      "sha256": "6447dc8671dce1614b068bcdeb0be18c828be2a2df7b92a2a4ea9fa426c60725",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/Great Sword Run.fbx",
+      "bytes": 311024,
+      "sha256": "d3e56846ccbe5ee93f1fe5992c3ca99941271473e5d8d9bcb62d9738713d1271",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/Great Sword Jump.fbx",
+      "bytes": 316560,
+      "sha256": "0f75b8d3f7127220be80622d8467b71b42e8513c34b8dbaf53af033d6b8a179a",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/Great Sword Jump(1).fbx",
+      "bytes": 335312,
+      "sha256": "229547b275b05ca8d2b973d5feea25645929606c358787f7101460d7d26c062f",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/转向/Great Sword Turn.fbx",
+      "bytes": 329920,
+      "sha256": "9d4d6836c52441864deb9609c348bd0e6eb63aae9072605e69ee27277338475c",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/转向/Great Sword Turn(1).fbx",
+      "bytes": 322352,
+      "sha256": "b5645500d1e3b1af6ad116074309eb1804a7e7ce71e1028a0cde8b636f9f5a56",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/受击/Great Sword Impact.fbx",
+      "bytes": 333296,
+      "sha256": "25f486b1709eac4f8abc26eb7ceddaef1a567203c85f2569f7c0050015ea178b",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/受击/Great Sword Impact(1).fbx",
+      "bytes": 384176,
+      "sha256": "663d8fe41c279fb6d6e497df3c29d8234ca7694cbb44096ed79e43cdc51144ff",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/攻击/Great Sword Slash.fbx",
+      "bytes": 424048,
+      "sha256": "b8dd4df06b25ddc4dc118f81327a6da98552dcfb0ad6cc696c0722cd069626bc",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/攻击/Great Sword Slash(1).fbx",
+      "bytes": 372960,
+      "sha256": "d72bb52dd65be767fc63c011395d6a098042c4fb8526a1f07d02b59c864ae51f",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/技能/Great Sword Slash.fbx",
+      "bytes": 424000,
+      "sha256": "5676f82afdef10916beeb09b9204e59898e2cbc590c56f189dcc2693dda4b0a0",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/技能/Standing Draw Arrow.fbx",
+      "bytes": 360624,
+      "sha256": "0aa014d815005c3843061b9013e92810a03b5383e5cfd900b4f261ddb7df3f0e",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "assets/source/fight/Standing Death Left 01.fbx",
+      "bytes": 483280,
+      "sha256": "14fc9963f2e94ec9ce2901936870fe2450f075b48080180b0a73d27cf888eb02",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Existing user attachment retained unchanged; animation and bones only, no mesh; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/motions.json",
+      "bytes": 770775,
+      "sha256": "cc8df3bb7321e349aaeaf5d25af1a2f078b6f4f7a847b5b6c90857d7c540b165",
+      "roles": [
+        "runtime-output",
+        "local-demo-only"
+      ],
+      "operation": "FBXLoader static Idle T-pose and 14 complete clips; Hips X/Z zeroed, Y centimeters and all rotations retained; six-decimal JSON, no downsampling."
+    },
+    {
+      "path": "assets/source/fight/indian_man_in_suit.glb",
+      "bytes": 9549256,
+      "sha256": "94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied character GLB retained byte-for-byte. Embedded metadata declares CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/); attribution: Pixel_Monster (https://sketchfab.com/ar.jethin)."
+    },
+    {
+      "path": "assets/source/fight/indian-man-in-suit-provenance.txt",
+      "bytes": 801,
+      "sha256": "8a1f55206a16248e7b828facaf7892ef0b8e8e54a2fd26d5c1407e5f7680ccef",
+      "roles": [
+        "license-evidence",
+        "provenance"
+      ],
+      "operation": "Embedded GLB metadata transcribed for attribution; declaration not independently verified."
+    },
+    {
+      "path": "public/assets/fight/character/indian_man_in_suit.glb",
+      "bytes": 9549256,
+      "sha256": "94eebf2b9ca7a411fb3ebb9678bb7f90d49b32b4559a6837fe1a194ad5bdf22c",
+      "roles": [
+        "runtime-output"
+      ],
+      "operation": "Copied byte-for-byte from assets/source/fight/indian_man_in_suit.glb; loaded by FightView."
+    },
+    {
+      "path": "assets/source/fight/oiiaioooooiai_cat.glb",
+      "bytes": 8322576,
+      "sha256": "fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied cat GLB retained byte-for-byte. Embedded metadata declares CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/); attribution: Zhuier (https://sketchfab.com/Zhuier)."
+    },
+    {
+      "path": "assets/source/fight/oiiaioooooiai-cat-provenance.txt",
+      "bytes": 799,
+      "sha256": "3a0d9ea047831041bd7b7f40134012374c7b6a09afb07c7511864e38fd01f6c3",
+      "roles": [
+        "license-evidence",
+        "provenance"
+      ],
+      "operation": "Embedded GLB metadata transcribed for attribution; declaration not independently verified."
+    },
+    {
+      "path": "public/assets/fight/cat/oiiaioooooiai_cat.glb",
+      "bytes": 8322576,
+      "sha256": "fc04872b7109742ab861b5722fca84fc0fc233d136417aadcb56a0656259c3b5",
+      "roles": [
+        "runtime-output"
+      ],
+      "operation": "Copied byte-for-byte from assets/source/fight/oiiaioooooiai_cat.glb; loaded as the spinning projectile visual."
+    },
+    {
+      "path": "assets/source/fight/audio/laowu-cat-source.mp3",
+      "bytes": 294705,
+      "sha256": "76b652309403ec73a4b20d98111ecf29df19d2ef1bdb998e419618d12877748e",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied fight audio (laowu-cat) retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/audio/laowu-cat.mp3",
+      "bytes": 25996,
+      "sha256": "bc5bb1867dd4331ce4391a1a0c8ce43127190150dd279cfca6ad92fb750557d2",
+      "roles": [
+        "runtime-output",
+        "local-demo-only"
+      ],
+      "operation": "First 2 seconds of the cat scream trimmed with ffmpeg 7.1 (libmp3lame -q:a 2 -t 2); played on the cat skill."
+    },
+    {
+      "path": "assets/source/fight/audio/fight-bgm-source.mp3",
+      "bytes": 6802944,
+      "sha256": "32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied fight audio (fight-bgm) retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/audio/fight-bgm.mp3",
+      "bytes": 6802944,
+      "sha256": "32b8b6250aff3a271c209e1a36ad24747ed9a98e57601e47053d4f382a7a1db4",
+      "roles": [
+        "runtime-output",
+        "local-demo-only"
+      ],
+      "operation": "Copied byte-for-byte from assets/source/fight/audio/fight-bgm-source.mp3; fight background music."
+    },
+    {
+      "path": "assets/source/fight/audio/punch-a-source.mp3",
+      "bytes": 32600,
+      "sha256": "4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied fight audio (punch-a) retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/audio/punch-a.mp3",
+      "bytes": 32600,
+      "sha256": "4d67a18407f516b3771a1cd6a86d81e64b215e8ebce75eb54624dd24f7d95f41",
+      "roles": [
+        "runtime-output",
+        "local-demo-only"
+      ],
+      "operation": "Copied byte-for-byte from assets/source/fight/audio/punch-a-source.mp3; fight impact sound."
+    },
+    {
+      "path": "assets/source/fight/audio/punch-b-source.mp3",
+      "bytes": 50155,
+      "sha256": "d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied fight audio (punch-b) retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/audio/punch-b.mp3",
+      "bytes": 50155,
+      "sha256": "d90bb3922977876af1b96cb4c84487c2294002dc6750b885c79520ea5cc04797",
+      "roles": [
+        "runtime-output",
+        "local-demo-only"
+      ],
+      "operation": "Copied byte-for-byte from assets/source/fight/audio/punch-b-source.mp3; fight impact sound."
+    },
+    {
+      "path": "assets/source/fight/conversion-report.json",
+      "bytes": 114341,
+      "sha256": "d70a270129a9f2c019a457220048eb239483c3246efebcff51fe132c5c471957",
+      "roles": [
+        "conversion-report"
+      ],
+      "operation": "Locally measured source durations, track/key counts, SHA-256 hashes, output methods, tool versions and validation."
+    },
+    {
+      "path": "assets/source/fight/labrador_dog.glb",
+      "bytes": 19312512,
+      "sha256": "0e30a09051903e2327c31371dc3dd973ca9da9c07a1c8aea5ca5f1af5bcda4fc",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied dog GLB retained locally; embedded CC-BY-4.0 declaration transcribed, not independently verified."
+    },
+    {
+      "path": "public/assets/fight/dog/labrador_dog.glb",
+      "bytes": 19312512,
+      "sha256": "0e30a09051903e2327c31371dc3dd973ca9da9c07a1c8aea5ca5f1af5bcda4fc",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte runtime copy of the supplied dog GLB."
+    },
+    {
+      "path": "assets/source/fight/audio/dagou-source.mp3",
+      "bytes": 71176,
+      "sha256": "e500f3534bce9ce7e0d0fbaadad89f0b34a85ca015f390c63d4e7f649a169349",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied ultimate voice line retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/audio/dagou-chant.mp3",
+      "bytes": 24774,
+      "sha256": "cf0008d6aae469c0b3f4731d3752a94b01a08e71b0bb42b71d15968d2b13a686",
+      "roles": [
+        "runtime",
+        "derived"
+      ],
+      "operation": "Chant loop segment 0-0.87 s trimmed from dagou-source.mp3."
+    },
+    {
+      "path": "public/assets/fight/audio/dagou-bark.mp3",
+      "bytes": 25192,
+      "sha256": "1fd44b1ec48114737f0200ef8166008cc6f0b49d8d86d313d388455aea6f5d25",
+      "roles": [
+        "runtime",
+        "derived"
+      ],
+      "operation": "Bark hit segment 0.88-1.78 s trimmed from dagou-source.mp3."
+    },
+    {
+      "path": "assets/source/fight/dagou-banner.webp",
+      "bytes": 6566,
+      "sha256": "2a7497de6261a3780956c08b0fae7c9e4d418ef555e68b07b27e6e351bbe6505",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "User-supplied banner image retained locally; third-party rights unverified."
+    },
+    {
+      "path": "public/assets/fight/dagou-banner.webp",
+      "bytes": 6566,
+      "sha256": "2a7497de6261a3780956c08b0fae7c9e4d418ef555e68b07b27e6e351bbe6505",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte runtime copy of the banner image."
+    },
+    {
+      "path": "assets/source/fight/particles/kenney_particle-pack.zip",
+      "bytes": 15001764,
+      "sha256": "b631d4b07f7002549fdcf155f01141ad482f79f3440e4e301eed49ce5f1d8958",
+      "roles": [
+        "supplied-source"
+      ],
+      "operation": "Kenney Particle Pack 1.1 archive retained locally (CC0)."
+    },
+    {
+      "path": "assets/source/fight/particles/License.txt",
+      "bytes": 651,
+      "sha256": "f9e70b81d8cc07c4e07c9f2eff1d94fd371a06070b18cb67c651c41158ec2975",
+      "roles": [
+        "license-evidence"
+      ],
+      "operation": "Bundled CC0 license text of the Kenney Particle Pack."
+    },
+    {
+      "path": "public/assets/fight/particles/fire_01.png",
+      "bytes": 99891,
+      "sha256": "9727a9743ac6ab8dd4dd79f5fc5b0266290efae45f4d4452279eb5e4bcf3a978",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/fire_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/flame_04.png",
+      "bytes": 70731,
+      "sha256": "71deb274feea6ae5e6bb82c802a6e4d22f168397aa36b7a9e89de863948f3cf5",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/flame_04.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/flare_01.png",
+      "bytes": 42886,
+      "sha256": "254f5bd4f0548612bf29305d27899efdee8cb8d8306292761ebbddebd3e57935",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/flare_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/light_01.png",
+      "bytes": 93470,
+      "sha256": "caedcc5df5bcac4470244d2520d6a64b45b20c1ccf4d918da516c55e3fa365a6",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/light_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/magic_05.png",
+      "bytes": 74794,
+      "sha256": "92fb8c7a1d9bc14e052526c0505502c3e5b37d27502fa3d36d2c80b4565b62ef",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/magic_05.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/spark_04.png",
+      "bytes": 83811,
+      "sha256": "3cba35b80a97c12283a8ecd41780a0412194de14562cbffc7f04e9157183f772",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/spark_04.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/star_06.png",
+      "bytes": 35453,
+      "sha256": "65d3ff5aa87ec0770c11fe1293fdc70cdc5ccf0eabc2e2fd6a1ead922051035e",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/star_06.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/smoke_08.png",
+      "bytes": 90424,
+      "sha256": "eae1d92c205a2654254281d470ee70cce86cf4e8e849db29e4d5edff0f67c695",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/smoke_08.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/slash_01.png",
+      "bytes": 25465,
+      "sha256": "cb4787978122bb863866a1681af22a7dec39a4566f08c400f233740eb1d3730c",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/slash_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/trace_01.png",
+      "bytes": 38406,
+      "sha256": "34de69bc3f665b23fe9bed15f388efd8e8e4dc1a99f2fc5db9ba8715c525711f",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/trace_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/twirl_01.png",
+      "bytes": 51060,
+      "sha256": "ba3f4996a5a91ea3cba6817a9b4770a385a82ef0b9350cbda5c0f140d182af7e",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/twirl_01.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/circle_05.png",
+      "bytes": 65336,
+      "sha256": "925b8ac284436f74f9cadf0ecd058da1c08fba65c098e4e34fd220603022f02e",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/circle_05.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/muzzle_02.png",
+      "bytes": 58365,
+      "sha256": "96164063353cc0386b3d3ad0d64b9be6c369e1d5d8510f84fcf33604b4729084",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/muzzle_02.png (CC0)."
+    },
+    {
+      "path": "public/assets/fight/particles/scorch_01.png",
+      "bytes": 60598,
+      "sha256": "ea72697696638786ccd4795a346d177b1b6a904331b5536a7e85a7ed927b93a5",
+      "roles": [
+        "runtime"
+      ],
+      "operation": "Byte-for-byte copy of Kenney Particle Pack PNG (Transparent)/scorch_01.png (CC0)."
+    }
+  ],
+  "lastAcquiredDate": "2026-11-23"
+}

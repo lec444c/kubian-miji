@@ -1,0 +1,41 @@
+{
+  "source": "assets/source/user-hit/u_7fupvvf5ym-billiard-pool-hit-371618.mp3",
+  "sourceSha256": "d8c1f7b5866d3ab83ff5fc9f2393b197f76cd915fa7f724ff9a317251309fd85",
+  "sourceDurationSeconds": 0.6791875,
+  "sampleRate": 48000,
+  "channels": 1,
+  "bitsPerSample": 16,
+  "tool": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+  "processing": "80 Hz high-pass; exact frame crop; 1 ms fade-in and 24 ms fade-out; peak normalization; PCM16 WAV",
+  "roleAssignment": "First lower-frequency attack used for cue strike; later brighter attack used for ball collision. The recording has no isolated-stem labels.",
+  "clips": [
+    {
+      "role": "strike",
+      "path": "public/assets/audio/sfx/cue-strike-user.wav",
+      "sourceStartSeconds": 0.036,
+      "sourceEndSeconds": 0.198,
+      "frames": 7776,
+      "durationSeconds": 0.162,
+      "targetPeakDbFS": -5.0,
+      "actualPeakDbFS": -5.0004,
+      "rmsDbFS": -21.365,
+      "gainDb": 0.9358,
+      "bytes": 15596,
+      "sha256": "92a3a5211609b5667cb2da462f0a4f1318c89fd6ffede4480613e37a41357f5c"
+    },
+    {
+      "role": "collision",
+      "path": "public/assets/audio/sfx/ball-hit-user.wav",
+      "sourceStartSeconds": 0.361,
+      "sourceEndSeconds": 0.534,
+      "frames": 8304,
+      "durationSeconds": 0.173,
+      "targetPeakDbFS": -8.0,
+      "actualPeakDbFS": -8.0001,
+      "rmsDbFS": -18.3372,
+      "gainDb": 0.8027,
+      "bytes": 16652,
+      "sha256": "cfd4b1496db2e470e2044354b1344ff761e958e2fd2ff2e044f5c6beef8e00d2"
+    }
+  ]
+}
