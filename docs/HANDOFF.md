@@ -234,9 +234,9 @@
 
 ## 1. 项目概览
 
-- 技术栈：TypeScript（strict，`noUncheckedIndexedAccess`）+ Three.js 0.187 + Vite 8（rolldown）+ Vitest 5 + Playwright 1.56。
-- 玩法：经典中八 / 创意中八；单人 vs AI（简单/普通/困难）与练习模式。
-- 创意模式三个技能：手部微操、吹风机、假自由球；全部由权威状态机裁决，动画层不修改权威球态。
+- 技术栈：TypeScript（strict，`noUncheckedIndexedAccess`）+ Three.js 0.187 + Vite 8（rolldown）+ Vitest 5 + Playwright（`package.json` 声明 ^1.56，锁定安装 1.65.1）。
+- 玩法：经典中八 / 创意中八；单人 vs AI（easy/normal/hard，界面显示轻松/标准/挑战）与练习模式。另有「球杆格斗」：在原台球房间的空桌面上单人对电脑格斗（见第十七至二十四轮）。
+- 创意模式技能池 4 个：手部微操、吹风机、假自由球、绅士决斗（第二十三轮新增，格斗胜者直接赢下台球比赛）。开局从全部候选中选 3 个，10 分钟加时再从 2 个候选中选 1 个；全部经权威状态机提交，动画层不修改权威球态。
 - 边界：纯本地静态运行，无后端、无账号、无排行榜、无房间/匹配、无公网部署、无远程运行时依赖；所有资源在包内。
 - 许可证：GPLv3（见根目录 `LICENSE`、`NOTICE`）。上游参考 `tailuge/billiards` 固定提交 `92a2818928e9ab8576fd300615509c88b0b0f183`，快照在 `third_party/tailuge-billiards/`。
 
@@ -251,10 +251,10 @@ npm run dev:lan              # 局域网 0.0.0.0:5173
 npm run build                # tsc --noEmit && vite build -> dist/
 npm run preview              # http://127.0.0.1:4173（服务 dist）
 npm run preview:lan          # 局域网 0.0.0.0:4173
-npm test                     # Vitest 单元/集成（326 项 / 33 文件）
+npm test                     # Vitest 单元/集成（332 项 / 33 文件）
 npx playwright install chromium
-npm run test:e2e             # Playwright 共 60 项（串行 workers=1）
-npm run assets:verify        # 153 个资产文件 SHA256 校验
+npm run test:e2e             # Playwright 共 63 项（串行 workers=1）
+npm run assets:verify        # 173 个资产文件 SHA256 校验
 node scripts/check-third-party.mjs
 node scripts/verify-impact-room.mjs # 真实音频渲染：频谱、短混响、静音及清尾
 ```
@@ -263,28 +263,30 @@ node scripts/verify-impact-room.mjs # 真实音频渲染：频谱、短混响、
 
 - `test:e2e` 的 `round9-timescale.spec.ts` 使用系统 Chrome（`channel: 'chrome'`），机器需安装 Chrome；其余用 Playwright 自带 Chromium。软件渲染下整套耗时较长，建议预留约 25 分钟；请勿加 `tail` 管道截断输出。
 - 浏览器测试默认使用 4273 端口启动本工程预览，不复用已有服务，避免误测其他游戏副本。可用环境变量 `PLAYWRIGHT_PORT` 改测试端口；端口冲突时明确报错，不终止其他应用。本机 4273 已用于用户游戏服务，本轮测试用 4283：Git Bash 中 `PLAYWRIGHT_PORT=4283 npm run test:e2e`；PowerShell 中先执行 `$env:PLAYWRIGHT_PORT=4283`，再执行 `npm.cmd run test:e2e`。普通 `npm run preview` 仍使用 4173。
-- `npm run build` 后可用 `node scripts/build-single-file.mjs` 生成 `release/库边秘技-试玩版.html`（约 156.1 MiB、84 个内联资产，包含两名随机分配的格斗角色、猫咪投射物、内嵌贴图、14段动作、战斗音乐/猫叫/受击音频及原台球房间/球桌），再用 `node scripts/verify-single-file.mjs` 与 `node scripts/verify-fight-offline.mjs` 做 `file://` 离线实跑校验。
-- `scripts/lan-smoke.mjs` 里写死了原作者局域网地址 `http://172.21.3.71:4173`，换环境需改成本机地址。
+- `npm run build` 后可用 `node scripts/build-single-file.mjs` 生成 `release/库边秘技-试玩版.html`（约 148.5 MiB、101 个内联资产，包含同模型的 P1/P2 格斗角色、猫咪与猛犬、内嵌贴图、14段动作、战斗音乐/猫叫/受击/大狗喊话音频及原台球房间/球桌），再用 `node scripts/verify-single-file.mjs` 与 `node scripts/verify-fight-offline.mjs` 做 `file://` 离线实跑校验。
+- `scripts/lan-smoke.mjs` 的目标地址默认 `http://127.0.0.1:4173`，可用环境变量 `SMOKE_URL` 覆盖（截图路径用 `SMOKE_SHOT`）。该脚本的击球流程仍按第十五轮之前的空格蓄力编写，现行版本空格不蓄力/不击球，复用前需改为鼠标拖拽蓄力。其余早期诊断/导入脚本（`probe-round*`、`register-*`、`*.py` 等）仍留有原作者机器的 `D:/` 路径，不是启动或生产构建的依赖，复用前应逐个调整。
 - 探针脚本会启动浏览器，请串行执行（同一时间只跑一个），避免互相抢资源。
 
 ## 3. 目录结构
 
 ```
 src/app/        GameController（权威对局状态机/输入/技能/相机切换）、matchTypes、debugTypes
+src/controllers/ HumanController（玩家输入）与 PracticeController（练习模式双方轮换）
+src/core/        SeededRng（确定性随机）、MatchClock（对局时钟）
 src/sim/        Simulation（固定步长物理 1/512s、碰撞/袋口/旋转）、SimulationState（常量与袋口几何）
 src/rules/      中八规则（连击/犯规/自由球/清台/胜负）
-src/skills/     技能机器、假自由球确定性状态机、十加时抽选
+src/skills/     技能目录与技能机器、假自由球确定性状态机、开局与 10 分钟加时抽选
 src/ai/         击球规划与技能策略（三难度）
-src/view/       Three.js 场景、传统球桌/球杆/房间（SittingRoom 共享构建）、镜头、辅助线、球面加塞、球杆姿态
-src/fight/      格斗规则、三技能与投射物、连击/打倒/闪避、14段动作重定向、双角色骨名/身高适配与静态模型自动蒙皮、原房间空台桌面竞技场、跟随拉近镜头、格斗界面与输入
-src/ui/         HUD、设置弹窗、技能草稿、力度条
+src/view/       Three.js 场景、传统球桌/球杆/房间（SittingRoom 共享构建）、镜头、辅助线、球面加塞、球杆姿态、输入与蓄力
+src/fight/      FightSimulation（格斗规则：轻重击、连击打倒、防御怒气、三技能与怒气大招）、FightMode（菜单入口、绅士决斗流程、加载卡、键盘与触屏输入、暂停与播报）、FightView（投射物与 Kenney 粒子特效、P1/P2 座位标识、暖色界面）、FighterRig（14段动作重定向与双手持杆）、TabletopArena（原房间空台桌面竞技场）、characterModel（骨名适配与 1.8 米身高归一化）
+src/ui/         主菜单、HUD、设置与退出弹窗、技能抽选、技能栏、力度条
 src/view/AudioEffects.ts  WebAudio 音乐、音效与音量管理
 src/view/impactRoom.ts    确定性室内短混响脉冲与参数
-tests/          Vitest 单元与集成（物理、规则、技能、AI、视图几何）
+tests/          Vitest 单元与集成（物理、规则、技能、AI、格斗、音频、视图几何）
 e2e/            Playwright 真实浏览器验收
-scripts/        探针、诊断、资产导入/优化/校验、单文件打包
-public/assets/  运行时资源（模型/贴图/音频/图标，约 104 MiB）
-assets/source/  源资产与原始压缩包（306MB）
+scripts/        探针、诊断、资产导入/优化/校验、单文件打包与离线验证
+public/assets/  运行时资源（模型/贴图/音频/图标，约 148 MiB）
+assets/source/  源资产与原始压缩包（约 382 MiB）
 assets/asset-manifest.json  资产来源、转换与 SHA256 清单
 third_party/    上游 GPLv3 参考快照
 docs/           本说明与开发轮次记录
@@ -333,12 +335,29 @@ docs/           本说明与开发轮次记录
   - 格斗角色：用户提供的 `indian_man_in_suit.glb`，内嵌元数据声明作者 Pixel_Monster（Sketchfab）及 CC BY 4.0；署名已转录到 NOTICE 与资产清单。该声明未独立核验，不构成商业授权或公开发布许可。
   - 格斗猫投射物：用户提供的 `oiiaioooooiai_cat.glb`，内嵌元数据声明作者 Zhuier（Sketchfab）及 CC BY 4.0；署名已转录到 NOTICE 与资产清单。该声明未独立核验。
   - 第二十轮新增的挥击/拉弓动作（`技能/Great Sword Slash.fbx`、`技能/Standing Draw Arrow.fbx`）与原有 11 段格斗动作一样未随附第三方许可证明，公开分发/商用权利未核验。
-  - 第二十一轮新增第二角色 `executive_in_a_navy_suit.glb`，内嵌元数据声明作者 restore50（Sketchfab）及 CC BY 4.0；署名已转录到 NOTICE 与资产清单，声明未独立核验。倒地动作 `Standing Death Left 01.fbx` 与四个音频附件（战斗BGM、老吴猫叫、两段受击）未随附第三方许可证明，公开分发/商用权利未核验。
+  - 第二十一轮曾加入的第二角色 `executive_in_a_navy_suit.glb`（内嵌元数据声明作者 restore50，Sketchfab，CC BY 4.0）已按用户要求在第二十二轮移除，工程内源副本、运行时副本与清单条目均已删除，双方格斗角色同为 `indian_man_in_suit.glb`。倒地动作 `Standing Death Left 01.fbx` 与四个音频附件（战斗BGM、老吴猫叫、两段受击）未随附第三方许可证明，公开分发/商用权利未核验。
+  - 第二十二轮新增：猛犬 `labrador_dog.glb`，内嵌元数据声明作者 kenchoo（Sketchfab）及 CC BY 4.0，声明未独立核验；大狗喊话 MP3 与火焰狗播报图 WebP 为用户附件，未附许可证明，公开分发/商用权利未核验；Kenney 粒子包为 CC0（随包 License.txt）。
 - 原作者的「个人非商用、可直接复制修改」授权仅覆盖其本人使用；对外分发或商用请按上述各许可自行核对并保留署名与 GPLv3 义务。
 
 ## 9. 本包包含 / 未包含
 
-2026-11-22 完整交接包保留最新第十六轮代码与全部素材，增加根目录 `交接必读.txt`、逐文件 `文件校验-SHA256.txt` 和最新离线试玩 HTML；没有改动游戏代码。文档修正旧验收数字与音频模块路径。本次打包前重新通过类型检查、212 项单元/集成测试、120 个资产文件校验及第三方代码许可检查；浏览器测试仅重新列出 54 项清单，完整实跑结果沿用第十六轮记录。
+2026-11-24 交接包包含第二十四轮代码与全部素材，并附根目录 `交接必读.txt`、逐文件 `文件校验-SHA256.txt`（1145 个文件，不含自身）和最新离线试玩 HTML。打包前通过类型检查与生产构建、332 项单元/集成测试、173 个资产文件校验及第三方代码许可检查。浏览器测试库共 63 项；第二十三、二十四轮只重跑了与当轮改动相关的用例，完整实跑结果见各轮验收记录。
+
+接手复验（2026-11-25，macOS arm64，Node 26.8.2，Playwright 1.65.1）：类型检查、332 项单元/集成测试、生产构建、173 个资产文件校验与第三方许可检查通过。63 项浏览器测试首次完整实跑，60 项通过、3 项失败（34.8 分钟）：
+
+- `impact-audio.spec.ts:3` 断言已加载音效样本恰为 5 个，而第二十至二十二轮已增至 10 个；
+- `ui-round3.spec.ts:157` 断言开局技能候选为 3 个，而第二十三轮起为 4 个；
+- 以上两项是测试断言未随后续轮次更新，产品行为符合各轮记录，断言待修正。
+- `round7.spec.ts:170`（顶视辅助线）整套运行中失败、随后单独重跑通过（21.1 秒）；整套运行期间本机另开过浏览器页面，是否为负载导致的偶发尚未确认。
+
+接手时的未决事项（2026-11-25，均未处理，等队长决定）：
+
+- 两条过时的测试断言待修正：`e2e/impact-audio.spec.ts:23`（样本数应为 10）、`e2e/ui-round3.spec.ts:21`（开局候选应为 4）。
+- 技能说明书未写：4 个技能各自的「名称 / 谁的回合能用 / 能选什么球 / 效果 / 何时结束 / 异常处理」尚未成文，现行规则以 `src/skills/skillCatalog.ts`、`src/fight/FightSimulation.ts` 与各轮记录为准。
+- 绅士决斗是否进入比赛版未定；它不在参赛方案的「三个稳定技能」内，且格斗胜负直接决定台球比赛结果。
+- 尚无公网部署。公开部署前须先核验用户附件素材（三首音乐、击球录音、格斗动作 FBX、大狗音频、播报图）的分发授权，并履行 GPLv3 义务。
+
+在另一台机器上接续：本仓库不含 `node_modules/`、`dist/`、`release/` 和 `assets/source/` 内的大体积原件。克隆后从原始交接 zip 中只解出 `assets/source/` 与 `release/` 覆盖进来，不要整包覆盖，否则会还原掉仓库中已修改的文件。Windows 上克隆前执行 `git config --global core.autocrlf false`，否则文本文件被转为 CRLF，与 `文件校验-SHA256.txt` 对不上。
 
 包含：`src/`、`tests/`、`e2e/`、`scripts/`、`public/`、`assets/`、`third_party/`、`licenses/`、`LICENSE`、`NOTICE`、`docs/`、`index.html`、`package.json`、`package-lock.json`、`tsconfig.json`、`vite.config.ts`、`vitest.config.ts`、`playwright.config.ts`，以及上述交接入口、校验清单和 `release/库边秘技-试玩版.html`。
 
@@ -353,10 +372,12 @@ docs/           本说明与开发轮次记录
 
 1. `npm ci`
 2. `npm run typecheck`
-3. `npm test` → 应为 326/326（33 个文件）
+3. `npm test` → 应为 332/332（33 个文件）
 4. `npm run build`，再以 `npm run preview` 手动试玩；停止预览服务后再运行浏览器测试，或给测试指定独立端口
-5. `npx playwright install chromium`，电脑另外安装 Google Chrome 后执行 `npm run test:e2e` → 用例总数为 60；如 4273 被游戏服务占用，按第 2 节改用 4283
-6. `npm run assets:verify` → 应为 153 文件哈希全过
+5. `npx playwright install chromium`，电脑另外安装 Google Chrome 后执行 `npm run test:e2e` → 用例总数为 63；如 4273 被游戏服务占用，按第 2 节改用 4283
+6. `npm run assets:verify` → 应为 173 文件哈希全过
 7. `node scripts/check-third-party.mjs` → 应通过
 8. `node scripts/verify-impact-room.mjs` → 验证真实音频类的频段能量、短混响尾音、静音及退出清尾
-9. `node scripts/build-single-file.mjs`，再执行 `node scripts/verify-single-file.mjs` 与 `node scripts/verify-fight-offline.mjs` → 验证离线开局、空格不蓄力/击球、两段新击球采样实际启动播放、三首新增音乐实际播放、入袋球号显示、返回主菜单与重新开局，以及双角色随机分配14段动作/64映射/74骨骼/12点轻击与三个技能（自由球30/老吴出击24/万杆齐发20）的施放、命中、冷却与万杆打倒后起身；均无外部请求或脚本异常
+9. `node scripts/build-single-file.mjs`，再执行 `node scripts/verify-single-file.mjs` 与 `node scripts/verify-fight-offline.mjs`，均应无外部请求或脚本异常：
+   - 离线台球：启动、开球至落定、空格不蓄力/击球、击杆与撞球两段录音实际启动播放、10 个音效样本加载、3 首新增音乐实际播放、入袋球号显示、返回主菜单不刷新、重新开局后 16 球与 3 个技能完整；
+   - 离线格斗：加载进度 100%、同模型 P1/P2 双角色（74 骨骼 / 64 映射骨 / 11 蒙皮网格 / 14 段动作 / 2 个座位标识）、原房间空台 0 台球、轻击 12 与自由球 30 / 老吴出击 24 / 万杆齐发 20 的伤害和冷却、投射物命中后滞留可见、大招播报期间对局暂停、猛犬 60 伤害击飞并晕眩 3 秒、怒气清空、14 张粒子贴图、退出返回主菜单。

@@ -1,5 +1,8 @@
 import { chromium } from '@playwright/test';
-const URL = 'http://172.21.3.71:4173/';
+// 目标地址默认指向本机预览；局域网验证时用 SMOKE_URL=http://<本机局域网IP>:4173/ 覆盖。
+const URL = process.env.SMOKE_URL ?? 'http://127.0.0.1:4173/';
+// 待更新：下方击球流程仍按第十五轮之前的「空格蓄力」编写。现行版本瞄准阶段空格只用于摆位确认，
+// 不会蓄力或击球，因此脚本会停在等待 rolling 一步；复用前需改为鼠标左键后拖蓄力、松开击球。
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
 const errors = [];
@@ -25,7 +28,7 @@ await page.waitForTimeout(1400);
 await page.keyboard.up('Space');
 await page.waitForFunction(() => window.__creativeEight.getState().phase === 'rolling', null, { timeout: 15000 });
 await page.waitForFunction(() => window.__creativeEight.getState().view.camera.mode === 'top', null, { timeout: 15000 });
-await page.screenshot({ path: 'D:/game race/shots-refine/08-lan-smoke.png' });
+await page.screenshot({ path: process.env.SMOKE_SHOT ?? 'shots-refine/08-lan-smoke.png' });
 const state = await page.evaluate(() => {
   const view = window.__creativeEight.getState().view;
   return { phase: window.__creativeEight.getState().phase, mode: view.camera.mode, clothTopY: (view.traditionalFit ?? view.tableFit)?.clothTopY, traditional: view.traditionalFit !== null, room: view.roomBackground };
