@@ -67,7 +67,7 @@ test('满力度按钮开球散开：至少 6 颗目标球位移超 0.2m', async 
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase), { timeout: 280_000 })
     .toMatch(/^(aiming|ballInHand|gameOver)$/);
   // 满蓄力（1.0）开球在 Date.now() 随机种子下可能合法洗袋→自由球（breakSweep 只钉住
-  // 0.89 跨种子全合法，不含 1.0）。洗袋属正确规则，不影响目标球散开度；若落到自由球，
+  // 0.88 跨种子全合法，不含 1.0）。洗袋属正确规则，不影响目标球散开度；若落到自由球，
   // 原地放回白球并确认，回到瞄准态再读取散开结果。
   const phase = (): Promise<string> => page.evaluate(() => window.__creativeEight!.getState().phase);
   if ((await phase()) === 'ballInHand') {

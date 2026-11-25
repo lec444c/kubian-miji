@@ -47,7 +47,7 @@ test('开球摆位 Space 确定；左键后拖松开只击一杆，击球后自�
   expect(await page.evaluate(() => window.__creativeEight!.getState().human.power)).toBeCloseTo(80 / 220, 2);
   await page.mouse.up();
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase)).toBe('rolling');
-  // 击球后立即升起顶视，整张球桌可读；不再第一人称保持+环绕缓转。
+  // 击球后缓动升起顶视，整张球桌可读；不再第一人称保持+环绕缓转。
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.mode), { timeout: 30_000 }).toBe('top');
   await page.keyboard.press('Space');
   await expect(page.locator('[data-shots]')).toHaveText('0');

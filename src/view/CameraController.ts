@@ -30,6 +30,13 @@ export class CameraController {
   private aimLook = 0.025;
   private targetFov = 48;
   private lastUpdateMs: number | null = null;
+  private transition: {
+    elapsed: number;
+    duration: number;
+    fromPosition: THREE.Vector3;
+    fromTarget: THREE.Vector3;
+    fromFov: number;
+  } | null = null;
 
   constructor(private camera: THREE.PerspectiveCamera, private worldScale = 1) {
     this.desired.set(0, 1.9 * worldScale, 2.3 * worldScale);
@@ -46,11 +53,26 @@ export class CameraController {
     // to the first-person cue view, everything else settles into orbit.
     this.mode = phase === 'aiming' ? 'aim' : phase === 'other' ? 'orbit' : 'top';
     this.applyMode();
+    this.beginTransition();
   }
 
   setMode(mode: CameraMode): void {
+    if (mode === this.mode) return;
     this.mode = mode;
     this.applyMode();
+    this.beginTransition();
+  }
+
+  private beginTransition(): void {
+    this.transition = {
+      elapsed: 0,
+      // A visible, eased move lets the player follow a strike or placement. Once
+      // it ends, normal within-mode damping remains fast for aim/orbit tracking.
+      duration: 0.9,
+      fromPosition: this.camera.position.clone(),
+      fromTarget: this.lookTarget.clone(),
+      fromFov: this.camera.fov,
+    };
   }
 
   private applyMode(): void {
@@ -159,6 +181,27 @@ export class CameraController {
     const dt = this.lastUpdateMs === null ? 1 / 60 : Math.min(0.5, Math.max(0, (timeMs - this.lastUpdateMs) / 1000));
     this.lastUpdateMs = timeMs;
     if (this.mode === 'aim') this.updateAimDesired();
+    if (this.transition) {
+      const transition = this.transition;
+      transition.elapsed += dt;
+      const progress = Math.min(1, transition.elapsed / transition.duration);
+      // Smoothstep has zero velocity at both ends: no sudden cut when a shot
+      // starts, and no camera snap when the destination is reached.
+      const eased = progress * progress * (3 - 2 * progress);
+      this.camera.position.lerpVectors(transition.fromPosition, this.desired, eased);
+      this.lookTarget.lerpVectors(transition.fromTarget, this.desiredTarget, eased);
+      this.camera.fov = THREE.MathUtils.lerp(transition.fromFov, this.targetFov, eased);
+      this.camera.updateProjectionMatrix();
+      if (progress >= 1) {
+        this.camera.position.copy(this.desired);
+        this.lookTarget.copy(this.desiredTarget);
+        this.camera.fov = this.targetFov;
+        this.camera.updateProjectionMatrix();
+        this.transition = null;
+      }
+      this.camera.lookAt(this.lookTarget);
+      return;
+    }
     this.camera.position.lerp(this.desired, 1 - Math.exp(-dt * 9));
     this.lookTarget.lerp(this.desiredTarget, 1 - Math.exp(-dt * 10));
     // Snap to exact rest once close: residual sub-millimetre creep would otherwise

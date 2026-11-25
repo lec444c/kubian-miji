@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { CameraController } from '../../src/view/CameraController';
 
 describe('对局双镜头', () => {
-  it('瞄准第一人称，击球与摆球立即切顶视，回到瞄准恢复第一人称', () => {
+  it('瞄准第一人称，击球与摆球缓动切顶视，回到瞄准恢复第一人称', () => {
     const camera = new THREE.PerspectiveCamera(43, 16 / 9, 0.01, 60);
     const controller = new CameraController(camera);
     controller.setPhase('aiming');
@@ -24,6 +24,37 @@ describe('对局双镜头', () => {
     expect(controller.mode).toBe('top');
     controller.setPhase('other');
     expect(controller.mode).toBe('orbit');
+  });
+
+  it('模式切换有约 0.9 秒缓动，模式内跟踪仍快速收敛', () => {
+    const camera = new THREE.PerspectiveCamera(48, 16 / 9, 0.01, 60);
+    const controller = new CameraController(camera);
+    controller.setAim(0, new THREE.Vector3(-0.6, 0.8215, 0));
+    controller.setPhase('aiming');
+    for (let index = 0; index < 120; index += 1) controller.update(index * (1000 / 60));
+    const aimY = camera.position.y;
+
+    controller.setPhase('rolling');
+    expect(controller.mode).toBe('top');
+    for (let index = 120; index < 135; index += 1) controller.update(index * (1000 / 60));
+    expect(camera.position.y).toBeGreaterThan(aimY);
+    expect(camera.position.y).toBeLessThan(2.4);
+    for (let index = 135; index < 180; index += 1) controller.update(index * (1000 / 60));
+    expect(camera.position.y).toBeCloseTo(3.35, 3);
+
+    controller.setPhase('aiming');
+    controller.update(3000);
+    expect(Math.abs(camera.position.x)).toBeLessThan(0.02);
+    expect(camera.position.y).toBeGreaterThan(3.3);
+    for (let index = 3000; index < 3060; index += 1) controller.update(index * (1000 / 60));
+    expect(camera.position.x).toBeLessThan(-1.1);
+
+    // Once the mode transition has finished, a new cue/aim target is tracked
+    // with the original fast damping rather than another 0.9-second move.
+    controller.setAim(Math.PI, new THREE.Vector3(0.6, 0.8215, 0));
+    for (let index = 3060; index < 3084; index += 1) controller.update(index * (1000 / 60));
+    expect(camera.position.x).toBeGreaterThan(1.1);
+    expect(camera.position.y).toBeLessThan(1.4);
   });
 
   it('参考数字键调整参数并可重置', () => {

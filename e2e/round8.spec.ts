@@ -298,12 +298,12 @@ test('杆头落在所选击球点上：侧旋横移半个半径，高杆上抬�
   expect(await readSpin(page)).toEqual({ x: 0, y: 0 });
 });
 
-test('开球自动补力：确认摆位后力度 0.89，首杆结算后还原开局力度', async ({ page }) => {
+test('开球自动补力：确认摆位后力度 0.88，首杆结算后还原开局力度', async ({ page }) => {
   await startClassicPractice(page);
-  // 第十三轮摩擦 0.7、上限 10：开局力度仍可能四球碰库不足；补力 0.89（8.9 m/s）跨 40 种子
-  // 全合法且散开充分（breakSweep/breakScatter 单测钉住），保证首次交互不必然犯规。
-  expect(await page.evaluate(() => window.__creativeEight!.getState().human.power)).toBeCloseTo(0.89, 6);
-  await expect(page.locator('[data-power-number]')).toHaveText('89');
+  // 袋角碰撞修正后，补力 0.88（8.8 m/s）跨 100 个球堆种子全合法且散开充分
+  // （breakSweep/breakScatter 单测钉住），保证首次交互不必然犯规。
+  expect(await page.evaluate(() => window.__creativeEight!.getState().human.power)).toBeCloseTo(0.88, 6);
+  await expect(page.locator('[data-power-number]')).toHaveText('88');
   await page.locator('[data-strike]').click();
   await waitSettled(page);
   expect(await page.evaluate(() => window.__creativeEight!.getState().human.power)).toBeCloseTo(0.72, 6);

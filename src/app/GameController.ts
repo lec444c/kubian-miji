@@ -521,10 +521,10 @@ export class GameController {
     this.phase = 'aiming';
     if (wasBreak && this.isHumanSeat(seat)) {
       // 第十三轮摩擦 0.7、球速上限 10：开局力度（经典 0.72 / 创意 0.56）仍可能四球碰库不足，
-      // 自动补到 0.89（8.9 m/s，0.80–0.89 连续带 40/40 种子合法且散开充分；0.90 起洗袋
-      // 随种子混沌出现，见 breakSweep/breakScatter 单测），避免首次交互必犯规，结算后还原玩家原有力度。
+      // 自动补到 0.88（8.8 m/s，袋角碰撞修正后实测 100/100 种子合法且散开充分；0.89 在
+      // seed 12 白球洗袋，见 breakSweep/breakScatter 单测），避免首次交互必犯规，结算后还原玩家原有力度。
       if (this.breakPowerRestore === null) this.breakPowerRestore = this.human.power;
-      this.human.power = Math.max(this.human.power, 0.89);
+      this.human.power = Math.max(this.human.power, 0.88);
     }
     this.message = wasBreak
       ? `${seatName(seat)}已摆好白球，瞄准球堆后按住左键向后拖动蓄力开球。`

@@ -20,7 +20,10 @@ test('真实出杆与撞球分别播放用户录音的两段采样，而不是�
   await page.locator('[data-field="mode"] [data-value="classic"]').click();
   await page.locator('[data-field="playMode"] [data-value="practice"]').click();
   await page.getByRole('button', { name: '开 局' }).click();
-  await expect.poll(() => page.evaluate(() => window.__creativeEight!.audio().loadedSamples.sort())).toEqual(['collision', 'cushion', 'hairdryer', 'pocket', 'strike']);
+  // 第二十至二十二轮样本由 5 个增至 10 个（新增受击两段、老吴猫叫、大狗喊话与犬吠）。
+  await expect.poll(() => page.evaluate(() => window.__creativeEight!.audio().loadedSamples.sort())).toEqual([
+    'collision', 'cushion', 'dagouBark', 'dagouChant', 'hairdryer', 'laowuCat', 'pocket', 'punchA', 'punchB', 'strike',
+  ]);
   await page.keyboard.press('Space');
   await page.evaluate(() => {
     const api = window.__creativeEight!;

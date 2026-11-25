@@ -1,7 +1,7 @@
 import { test, expect } from './fixtures';
 import type { Page } from '@playwright/test';
 
-/** 第九轮表现层慢放的墙钟比例验证。
+/** 表现层时间缩放的墙钟比例验证（2026-11-25 起为原速 1.0）。
  *  必须用真实 Chrome（高帧率）：软件渲染约 1 FPS 会触发每帧 0.25s 的 delta 钳制，
  *  墙钟/物理步比例不再等于 1/PRESENTATION_TIME_SCALE，无法据此断言慢放系数。
  *  channel 只能放在文件顶层（describe 内会强制新 worker，Playwright 禁止）。
@@ -10,7 +10,7 @@ import type { Page } from '@playwright/test';
  *  GC 停顿（约 0.8s 墙钟），游戏把该帧 delta 钳到 0.25s，但记录器看到的是真实墙钟间隔。
  *  直接用「总墙钟/总物理步」会被这一帧污染（实测 1.5 而非 1.176）；停顿边界帧的
  *  ds/dt 也会错位。正解：逐帧记录 dt/ds，剔除钳制帧及其前后 3 帧、再裁首尾各 3 帧，
- *  在清洁稳态窗口上求和比值 → 稳定 1.175≈1/0.85（两次实测一致）。 */
+ *  在清洁稳态窗口上求和比值 → 原速下应稳定在 1.0（旧慢放 0.85 时为 1.176）。 */
 test.use({ channel: 'chrome' });
 
 declare global {
@@ -41,7 +41,7 @@ const readCue = (page: Page): Promise<{ x: number; y: number }> =>
     return { x: ball.position.x, y: ball.position.y };
   });
 
-test('球速观感慢 15%：清洁窗口墙钟/物理步比例≈1/0.85，停点距离不变', async ({ page }) => {
+test('球按原速滚动：清洁窗口墙钟/物理步比例≈1.0，停点距离不变', async ({ page }) => {
   test.setTimeout(120_000);
   await startClassicPractice(page);
   await page.evaluate(() => {
@@ -104,9 +104,9 @@ test('球速观感慢 15%：清洁窗口墙钟/物理步比例≈1/0.85，停点
   expect(measure.cleanFrames).toBeGreaterThan(30);
   expect(measure.cleanSimMs).toBeGreaterThan(500);
   expect(measure.totalSimMs).toBeGreaterThan(500);
-  // 慢放只改步长→墙钟映射：清洁窗口比值 = 1/0.85 ≈ 1.176。
-  expect(measure.ratio).toBeGreaterThan(1.05);
-  expect(measure.ratio).toBeLessThan(1.3);
+  // 原速只表示物理步长按 1:1 映射到墙钟：清洁窗口比值 = 1.0。
+  expect(measure.ratio).toBeGreaterThan(0.9);
+  expect(measure.ratio).toBeLessThan(1.1);
   // 清台后首杆按规则判自由球属正确行为：白球原地放回并确认，回到瞄准态。
   const phase = (): Promise<string> => page.evaluate(() => window.__creativeEight!.getState().phase);
   await expect.poll(phase, { timeout: 60_000 }).toMatch(/^(aiming|ballInHand|gameOver)$/);
@@ -117,7 +117,7 @@ test('球速观感慢 15%：清洁窗口墙钟/物理步比例≈1/0.85，停点
     await expect.poll(phase, { timeout: 30_000 }).toBe('aiming');
   }
   const cue = await readCue(page);
-  // v=10×0.15=1.5 m/s、a=0.7 m/s^2 → s=v^2/2a≈1.607 m：慢放不得缩短移动距离。
+  // v=10×0.15=1.5 m/s、a=0.7 m/s^2 → s=v^2/2a≈1.607 m：时间缩放不得改变移动距离。
   // 0.2 力度会滚 2.86 m 撞库，故用 0.15 在库边前干净停住（停点 x≈1.107）。
   expect(cue.x).toBeGreaterThan(-0.5 + 1.45);
   expect(cue.x).toBeLessThan(-0.5 + 1.75);

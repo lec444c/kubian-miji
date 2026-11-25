@@ -1,10 +1,10 @@
 // 第十三轮诊断：摩擦 0.7、球速上限 10 下各力度开球是否满足“至少四颗目标球碰库”。
 // 真实 Chrome（channel:'chrome'）全画质运行，逐力度新开一局，读取结算消息。
-// 0.89 为自动补力（8.9 m/s，40/40 种子合法）；1.0=10 m/s 随机种子下可能合法洗袋→自由球。
+// 0.88 为自动补力（8.8 m/s，袋角修正后 100/100 种子合法）；1.0=10 m/s 随机种子下可能合法洗袋→自由球。
 import { chromium } from '@playwright/test';
 
 const BASE = process.env.BASE_URL ?? 'http://127.0.0.1:4173';
-const POWERS = [0.56, 0.68, 0.8, 0.89, 1.0];
+const POWERS = [0.56, 0.68, 0.8, 0.88, 1.0];
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });

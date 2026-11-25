@@ -135,7 +135,7 @@ test('吹风机在真实击球后暂停选球并提交有界减速', async ({ pa
     return true;
   }, null, { timeout: 15_000, polling: 50 });
   await expect(page.locator('.target-banner')).toContainText('物理已暂停');
-  // 击球后镜头立即升起顶视；等镜头落定再点球，避免坐标漂移。
+  // 击球后镜头缓动升起顶视；等镜头落定再点球，避免坐标漂移。
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.mode), { timeout: 30_000 }).toBe('top');
   // 物理暂停后候选冻结：选速度最快的运动球。慢速球（尤其开球后的白球）恢复后
   // 几步内即停，减速效果按规则随停球清理，轮询无法稳定观测；快球可观测约 3 秒。

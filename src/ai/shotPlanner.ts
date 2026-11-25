@@ -24,9 +24,9 @@ function normalizeAngle(angle: number): number {
 }
 
 function plannedPower(candidate: GhostAimCandidate, isBreak: boolean): number {
-  // Round 13: MAX_SHOT_SPEED 10 makes 0.94 (9.4 m/s) scratch on some rack seeds;
-  // 0.89 (8.9 m/s) is the top of the contiguous 40/40-legal break band.
-  if (isBreak) return 0.89;
+  // Round 13: 0.88 (8.8 m/s) is legal across 100/100 measured rack seeds after
+  // the jaw fix; 0.89 scratches on seed 12 because rack scatter is chaotic.
+  if (isBreak) return 0.88;
   // Coefficients raised to compensate for the less lubricated cloth so the AI
   // still reaches its intended pocket after the friction increase.
   const distancePower = candidate.cueDistance * 0.2 + candidate.objectDistance * 0.28;

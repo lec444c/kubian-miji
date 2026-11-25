@@ -74,7 +74,7 @@ await page.waitForFunction(() => window.__creativeEight.getState().phase === 'ai
 
 // 击球后滚动：自动顶视 + 咖啡馆背景 + 传统球桌
 await page.keyboard.down('Space');
-// 第十三轮摩擦 0.7、上限 10：满蓄力开球散开充分（自动补力 0.89 兜底）；随机种子下可能合法洗袋→自由球。
+// 第十三轮摩擦 0.7、上限 10：满蓄力开球散开充分（自动补力 0.88 兜底）；随机种子下可能合法洗袋→自由球。
 await page.waitForTimeout(1400);
 await page.keyboard.up('Space');
 await page.waitForFunction(() => window.__creativeEight.getState().phase === 'rolling', null, { timeout: 20000 });

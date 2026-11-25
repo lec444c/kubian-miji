@@ -130,13 +130,30 @@ describe('collisions, cushions and pockets', () => {
     expect(sim.currentOutcome!.pocketed[0]!.step).toBeLessThan(sim.currentOutcome!.pocketed[1]!.step);
   });
 
-  it('reflects from a pocket jaw instead of capturing or flying off', () => {
-    const sim = simulationWith(createBall(0, { x: 0.078, y: TABLE_HALF_Y - 0.05 }));
+  it('reflects from the real middle-pocket horn instead of capturing or flying off', () => {
+    const sim = simulationWith(createBall(0, { x: 0.08, y: 0.5 }));
     sim.strike(Math.PI / 2, 0.1);
-    for (let i = 0; i < 30; i += 1) sim.step();
+    sim.runUntilStopped(2000);
     expect(sim.currentOutcome?.cushionContacts).toContain(0);
     expect(sim.state.balls[0]).toMatchObject({ onTable: true, pocketed: false });
     expect(sim.currentOutcome?.flewOffTable).toEqual([]);
+  });
+
+  it('reflects from the corner short-rail jaw without clipping into it', () => {
+    const sim = simulationWith(createBall(0, { x: 1.18, y: 0.4 }));
+    sim.strike(Math.atan2(0.15, 0.07), 0.1);
+    sim.runUntilStopped(2000);
+    expect(sim.currentOutcome?.cushionContacts).toContain(0);
+    expect(sim.state.balls[0]).toMatchObject({ onTable: true, pocketed: false });
+    expect(sim.currentOutcome?.flewOffTable).toEqual([]);
+  });
+
+  it('keeps the middle-pocket mouth open for a clean capture', () => {
+    const sim = simulationWith(createBall(0, { x: 0, y: 0.5 }));
+    sim.strike(Math.PI / 2, 0.06);
+    sim.runUntilStopped(1000);
+    expect(sim.currentOutcome?.pocketed).toEqual([{ ballId: 0, pocketId: 4, step: expect.any(Number) }]);
+    expect(sim.state.balls[0]).toMatchObject({ onTable: false, pocketed: true });
   });
 
   it('bounces from an ordinary cushion rather than flying off', () => {

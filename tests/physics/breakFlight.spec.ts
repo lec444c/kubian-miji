@@ -18,8 +18,8 @@ describe('pocket-mouth backstop: no ball flies off the table', () => {
     expect(outcome.pocketed.some(ball => ball.ballId === 10)).toBe(true);
   }, 120000);
 
-  it('breaks across powers 0.80/0.89/1.00 and seeds 1..40 never fly a ball off', () => {
-    for (const power of [0.8, 0.89, 1.0]) {
+  it('breaks across powers 0.80/0.88/1.00 and seeds 1..40 never fly a ball off', () => {
+    for (const power of [0.8, 0.88, 1.0]) {
       for (let seed = 1; seed <= 40; seed += 1) {
         const sim = createRackedSimulation(seed);
         sim.strike(0, power);

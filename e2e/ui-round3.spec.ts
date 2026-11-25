@@ -18,8 +18,13 @@ async function startCreativePractice(page: Page): Promise<void> {
   await page.getByRole('button', { name: '开 局' }).click();
   for (let round = 0; round < 2; round += 1) {
     const options = page.locator('.draft-option');
-    await expect(options).toHaveCount(3);
-    for (let index = 0; index < 3; index += 1) await options.nth(index).click();
+    // 第二十三轮起技能池为 4 个：每个座位开局展示全部 4 个候选、仍选 3 个，且候选顺序每局随机。
+    await expect(options).toHaveCount(4);
+    // 下方「自由球自动顶视」用例需要「假自由球」，必须按技能点名选择。
+    // 按序号点前三个会随机漏掉一个技能，约有 1/4 的概率让该用例找不到技能卡。
+    await page.locator('.draft-option[data-id="fakeFreeBall"]').click();
+    for (let index = 0; index < 2; index += 1) await page.locator('.draft-option:not(.selected)').first().click();
+    await expect(page.locator('.draft-option.selected')).toHaveCount(3);
     await page.locator('[data-confirm]').click();
   }
   await page.evaluate(() => {
