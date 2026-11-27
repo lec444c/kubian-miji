@@ -70,5 +70,5 @@ export function createRack(seed = 0): BallState[] {
 }
 
 export function createRackedSimulation(seed = 0): Simulation {
-  return new Simulation({ balls: createRack(seed), step: 0, braking: [] });
+  return new Simulation({ balls: createRack(seed), step: 0, braking: [], pocketRadiusBonus: 0 });
 }

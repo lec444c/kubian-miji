@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { BALL_RADIUS, CUSHION_HALF_X, CUSHION_HALF_Y, FIXED_DT, TABLE_HALF_X, TABLE_HALF_Y, POCKETS, type SimulationState, type Vec2 } from '../sim/SimulationState';
 import { HEAD_STRING_X } from '../rules/placement';
-import { CameraController, type CameraAdjustment, type CameraMode, type CameraPhase } from './CameraController';
+import { cameraInOverheadVolume, CameraController, type CameraAdjustment, type CameraMode, type CameraPhase } from './CameraController';
 import { HairdryerEffect } from './HairdryerEffect';
 import { AssetLoader } from './assets/AssetLoader';
 import { createBallContactShadow, createReferenceBall } from './ReferenceBall';
@@ -35,6 +35,8 @@ export class SceneView {
   private sittingRoom: THREE.Group | null = null;
   private roomCeiling: THREE.Mesh | null = null;
   private lampGroup = new THREE.Group();
+  private lampBounds = new THREE.Box3();
+  private ceilingBounds = new THREE.Box3();
   private hemiLight = new THREE.HemisphereLight(0xdde5df, 0x211d19, 0.88);
   private keyLight = new THREE.DirectionalLight(0xfff1d9, 1.55);
   private shadowFloor!: THREE.Mesh;
@@ -76,6 +78,7 @@ export class SceneView {
     this.scene.add(this.world);
     this.cameraController = new CameraController(this.camera, WORLD_SCALE);
     this.buildRoom();
+    this.updateOverheadBounds();
     this.buildTable();
     this.buildBalls();
     this.buildCue();
@@ -302,6 +305,7 @@ export class SceneView {
         if (lamp) {
           this.disposeChildren(this.lampGroup);
           this.lampGroup.add(lamp);
+          this.updateOverheadBounds();
         }
       } catch (error) {
         console.warn('Traditional table could not be measured; keeping the reference table.', error);
@@ -358,6 +362,7 @@ export class SceneView {
       this.scene.add(group);
       this.sittingRoom = group;
       this.roomCeiling = ceiling;
+      this.updateOverheadBounds();
       const pmrem = new THREE.PMREMGenerator(this.renderer);
       const roomEnvironment = new RoomEnvironment();
       const environment = pmrem.fromScene(roomEnvironment, 0.04);
@@ -613,12 +618,14 @@ export class SceneView {
     tableFit: TableFit | null;
     traditionalFit: TraditionalTableFit | null;
     roomBackground: boolean;
+    roomOccluders: { lampVisible: boolean; ceilingVisible: boolean };
   } {
     return {
       camera: this.cameraController.getDebugState(),
       tableFit: this.referenceTableFit,
       traditionalFit: this.traditionalFit,
       roomBackground: this.roomBackground,
+      roomOccluders: { lampVisible: this.lampGroup.visible, ceilingVisible: this.roomCeiling?.visible ?? false },
     };
   }
   /** Deterministic aiming evidence in unscaled physics metres: the cue tip,
@@ -905,16 +912,26 @@ export class SceneView {
     return typeof id === 'number' ? id : null;
   }
 
+  private updateOverheadBounds(): void {
+    this.scene.updateMatrixWorld(true);
+    this.lampBounds.setFromObject(this.lampGroup);
+    if (this.roomCeiling) this.ceilingBounds.setFromObject(this.roomCeiling);
+    else this.ceilingBounds.makeEmpty();
+  }
+
   orbit(deltaX: number, deltaY: number): void { this.cameraController.orbit(deltaX, deltaY); }
 
   render(timeSeconds: number): void {
     const target = this.hairdryerBall === null ? null : this.ballMeshes.get(this.hairdryerBall)?.position ?? null;
     this.hairdryer.update(target, timeSeconds);
     this.cameraController.update(timeSeconds * 1000);
-    // The hanging lamp and the room ceiling would intersect the top-down
-    // camera; hide both in top view (walls stay, they read edge-on).
-    this.lampGroup.visible = this.cameraController.mode !== 'top';
-    if (this.roomCeiling) this.roomCeiling.visible = this.cameraController.mode !== 'top';
+    // A destination mode is selected before the eased camera move starts.
+    // Keep overhead geometry hidden until the real camera has cleared its
+    // footprint; otherwise top -> aim visibly passes through the lamp/ceiling.
+    this.lampGroup.visible = this.cameraController.mode !== 'top'
+      && !cameraInOverheadVolume(this.camera.position, this.lampBounds);
+    if (this.roomCeiling) this.roomCeiling.visible = this.cameraController.mode !== 'top'
+      && !cameraInOverheadVolume(this.camera.position, this.ceilingBounds);
     this.renderer.render(this.scene, this.camera);
   }
 

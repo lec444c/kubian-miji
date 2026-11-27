@@ -4,6 +4,16 @@ export type CameraMode = 'orbit' | 'top' | 'aim';
 export type CameraPhase = 'aiming' | 'rolling' | 'placing' | 'other';
 export type CameraAdjustment = 'fov' | 'distance' | 'look' | 'height';
 
+/** True while a camera is above, or inside, an overhead object's footprint.
+ * Mode names change at the start of a 0.9-second move, so visibility must use
+ * the actual camera position rather than the destination mode. */
+export function cameraInOverheadVolume(position: THREE.Vector3, bounds: THREE.Box3, margin = 0.1): boolean {
+  if (bounds.isEmpty()) return false;
+  return position.y > bounds.min.y - margin
+    && position.x >= bounds.min.x - margin && position.x <= bounds.max.x + margin
+    && position.z >= bounds.min.z - margin && position.z <= bounds.max.z + margin;
+}
+
 /**
  * First-person cue camera while aiming. The moment a shot is struck — and while
  * placing the cue ball (break or ball-in-hand) — the view rises straight to the

@@ -10,6 +10,9 @@ const ICON_PATHS: Partial<Record<SkillId, string>> = {
 /** 无外部图标的技能使用定义里的单字徽记（本项目原创字形样式，无第三方素材）。 */
 const ICON_GLYPHS: Partial<Record<SkillId, string>> = {
   gentlemanDuel: '决',
+  enhancedEnglish: '塞',
+  luckyPocket: '袋',
+  pierceShot: '穿',
 };
 
 export function skillIcon(id: SkillId, extraClass = ''): string {

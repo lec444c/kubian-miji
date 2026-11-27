@@ -1,6 +1,6 @@
 import type { BallGroup, Seat } from '../app/matchTypes';
 
-export type SkillId = 'hand' | 'hairdryer' | 'fakeFreeBall' | 'gentlemanDuel';
+export type SkillId = 'hand' | 'hairdryer' | 'fakeFreeBall' | 'gentlemanDuel' | 'enhancedEnglish' | 'luckyPocket' | 'pierceShot';
 
 export type SkillTargetKind = 'ownCushionBall' | 'movingBall' | 'none';
 

@@ -18,10 +18,10 @@ async function startCreativePractice(page: Page): Promise<void> {
   await page.getByRole('button', { name: '开 局' }).click();
   for (let round = 0; round < 2; round += 1) {
     const options = page.locator('.draft-option');
-    // 第二十三轮起技能池为 4 个：每个座位开局展示全部 4 个候选、仍选 3 个，且候选顺序每局随机。
-    await expect(options).toHaveCount(4);
+    // 技能池为 7 个：每个座位开局展示全部 7 个候选、仍选 3 个，且候选顺序每局随机。
+    await expect(options).toHaveCount(7);
     // 下方「自由球自动顶视」用例需要「假自由球」，必须按技能点名选择。
-    // 按序号点前三个会随机漏掉一个技能，约有 1/4 的概率让该用例找不到技能卡。
+    // 按序号点前三个会随机漏掉一个技能，约有 1/2 的概率让该用例找不到技能卡。
     await page.locator('.draft-option[data-id="fakeFreeBall"]').click();
     for (let index = 0; index < 2; index += 1) await page.locator('.draft-option:not(.selected)').first().click();
     await expect(page.locator('.draft-option.selected')).toHaveCount(3);
@@ -35,6 +35,33 @@ async function startCreativePractice(page: Page): Promise<void> {
   await page.keyboard.press('Space');
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase)).toBe('aiming');
 }
+
+test('顶视切回瞄准时，吊灯与天花板等镜头降下来再显示', async ({ page }) => {
+  await startClassicPractice(page);
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.roomBackground), { timeout: 30_000 }).toBe(true);
+  await page.keyboard.press('c');
+  await page.keyboard.press('c');
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.mode)).toBe('top');
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.position[1]), { timeout: 15_000 }).toBeGreaterThan(5);
+  expect(await page.evaluate(() => window.__creativeEight!.getState().view.roomOccluders)).toEqual({ lampVisible: false, ceilingVisible: false });
+
+  // Render one explicit 16 ms frame in the same browser task as the key event.
+  // This catches the original bug deterministically even under slow software WebGL:
+  // mode is already aim while the camera is still at the top-down height.
+  const transitionStart = await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    const now = performance.now() / 1000;
+    debug.renderFrame(now);
+    window.dispatchEvent(new KeyboardEvent('keydown', { key: 'c', code: 'KeyC', bubbles: true }));
+    debug.renderFrame(now + 0.016);
+    return debug.getState().view;
+  });
+  expect(transitionStart.camera.mode).toBe('aim');
+  expect(transitionStart.camera.position[1]).toBeGreaterThan(5);
+  expect(transitionStart.roomOccluders).toEqual({ lampVisible: false, ceilingVisible: false });
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.position[1]), { timeout: 15_000 }).toBeLessThan(2.4);
+  expect(await page.evaluate(() => window.__creativeEight!.getState().view.roomOccluders)).toEqual({ lampVisible: true, ceilingVisible: true });
+});
 
 test('设置面板调节音量并持久化，顶栏静音按钮与设置双向同步', async ({ page }) => {
   await startClassicPractice(page);
@@ -141,7 +168,7 @@ test('Shift+滚轮推拉环绕视角并钳制在房间内；普通滚轮只微�
     const position = window.__creativeEight!.getState().view.camera.position;
     return Math.hypot(position[0]!, position[2]!);
   });
-  await expect.poll(dist, { timeout: 10_000 }).toBeGreaterThan(3.5);
+  await expect.poll(dist, { timeout: 15_000 }).toBeGreaterThan(3.6);
   const before = await dist();
   await page.mouse.move(640, 500);
   // 普通滚轮 = 微调瞄准（第七轮），不再推拉视角。
@@ -156,7 +183,7 @@ test('Shift+滚轮推拉环绕视角并钳制在房间内；普通滚轮只微�
   await page.keyboard.down('Shift');
   for (let index = 0; index < 12; index += 1) await page.mouse.wheel(0, -240);
   await page.keyboard.up('Shift');
-  await expect.poll(async () => Math.abs((await dist()) - 2.88) < 0.01, { timeout: 10_000 }).toBe(true);
+  await expect.poll(async () => Math.abs((await dist()) - 2.88) < 0.01, { timeout: 15_000 }).toBe(true);
 });
 
 test('自由球自动顶视：鼠标拖动白球、WASD 微调、Space 确定', async ({ page }) => {
@@ -165,6 +192,7 @@ test('自由球自动顶视：鼠标拖动白球、WASD 微调、Space 确定', 
   await page.evaluate(() => window.__creativeEight!.advanceTime(10_100));
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().rule.ballInHand)).toBe(true);
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().placementCursor)).not.toBeNull();
+  await expect(page.locator('[data-reposition]')).toBeHidden();
   // 获得自由球即自动进入顶视，方便拖放。
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.mode), { timeout: 15_000 }).toBe('top');
   const before = await page.evaluate(() => window.__creativeEight!.getState().placementCursor!);
@@ -201,6 +229,7 @@ test('自由球自动顶视：鼠标拖动白球、WASD 微调、Space 确定', 
   // Space 只确认摆放，不蓄力；确认后回到第一人称瞄准。
   await page.keyboard.press('Space');
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase)).toBe('aiming');
+  await expect(page.locator('[data-reposition]')).toBeVisible();
   const state = await page.evaluate(() => window.__creativeEight!.getState());
   const cue = state.simulation.balls.find(ball => ball.id === 0)!;
   expect(cue.onTable).toBe(true);
@@ -209,4 +238,20 @@ test('自由球自动顶视：鼠标拖动白球、WASD 微调、Space 确定', 
   expect(state.placementCursor).toBeNull();
   expect(state.charging).toBe(false);
   await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().view.camera.mode)).toBe('aim');
+  // 误确认后仍可在本杆击球前重新进入摆放，不消耗杆数。
+  const shotNumber = state.rule.shotNumber;
+  await page.locator('[data-reposition]').click();
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase)).toBe('ballInHand');
+  await expect(page.locator('[data-reposition]')).toBeHidden();
+  const replacement = { x: 0.25, y: -0.1 };
+  expect(await page.evaluate(point => window.__creativeEight!.placeCue(point), replacement)).toBe(true);
+  await page.keyboard.press('Space');
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase)).toBe('aiming');
+  await expect(page.locator('[data-reposition]')).toBeVisible();
+  const replaced = await page.evaluate(() => window.__creativeEight!.getState());
+  const replacedCue = replaced.simulation.balls.find(ball => ball.id === 0)!;
+  expect(replacedCue.position.x).toBeCloseTo(replacement.x, 5);
+  expect(replacedCue.position.y).toBeCloseTo(replacement.y, 5);
+  expect(replaced.rule.shotNumber).toBe(shotNumber);
+  expect(replaced.charging).toBe(false);
 });

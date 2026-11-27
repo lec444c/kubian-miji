@@ -17,19 +17,29 @@ import { SkillMachine } from '../../src/skills/skillMachine';
     expect(second.remainingUses).toBe(1);
   });
 
-  it.each([0, 1, 2, 3, 4, 5])('draws min(5, poolSize) unique candidates for pool size %i', (poolSize) => {
+  it.each([0, 1, 2, 3, 4, 5, 6, 7])('draws min(7, poolSize) unique candidates for pool size %i', (poolSize) => {
     const pool = Array.from({ length: poolSize }, (_, index) => `skill-${index}`);
-    const candidates = drawUniqueCandidates(pool, new SeededRng(42), 5);
-    expect(candidates).toHaveLength(Math.min(5, poolSize));
+    const candidates = drawUniqueCandidates(pool, new SeededRng(42), 7);
+    expect(candidates).toHaveLength(Math.min(7, poolSize));
     expect(new Set(candidates).size).toBe(candidates.length);
     expect(pool).toHaveLength(poolSize);
   });
 
-  it.each([0, 1, 2, 3])('selects min(3, candidateCount) initial instances for %i skills', (poolSize) => {
+  it.each([0, 1, 2, 3, 4, 5, 6, 7])('selects min(3, candidateCount) initial instances for %i skills', (poolSize) => {
     const draft = draftInitialSkills(SKILL_IDS.slice(0, poolSize), new SeededRng(7));
-    expect(draft.candidates).toHaveLength(Math.min(5, poolSize));
+    expect(draft.candidates).toHaveLength(Math.min(7, poolSize));
     expect(new Set(draft.candidates).size).toBe(draft.candidates.length);
     expect(draft.instances).toHaveLength(Math.min(3, draft.candidates.length));
+  });
+
+  it('includes all seven opening skills and selects three', () => {
+    expect(SKILL_IDS).toHaveLength(7);
+    expect(SKILL_CATALOG.enhancedEnglish).toMatchObject({ name: '加塞强化', glyph: '塞', targetKind: 'none' });
+    expect(SKILL_CATALOG.luckyPocket).toMatchObject({ name: '幸运袋口', glyph: '袋', targetKind: 'none' });
+    expect(SKILL_CATALOG.pierceShot).toMatchObject({ name: '穿透击', glyph: '穿', targetKind: 'none' });
+    const draft = draftInitialSkills(SKILL_IDS, new SeededRng(11));
+    expect(draft.candidates).toHaveLength(7);
+    expect(draft.instances).toHaveLength(3);
   });
 
   it('draws at most two overtime candidates and creates fresh same-name instances', () => {

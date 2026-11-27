@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 async function draftDuel(page: Page): Promise<void> {
   const options = page.locator('.draft-option');
-  await expect(options).toHaveCount(4);
+  await expect(options).toHaveCount(7);
   await options.filter({ hasText: '绅士决斗' }).click();
   await options.filter({ hasText: '手部微操' }).click();
   await options.filter({ hasText: '假自由球' }).click();

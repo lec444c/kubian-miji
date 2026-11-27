@@ -30,7 +30,7 @@ export function draftSkills(
   phase: DraftPhase = 'initial',
   instanceId: SkillInstanceIdFactory = defaultInstanceId,
 ): SkillDraft {
-  const candidateLimit = phase === 'initial' ? 5 : 2;
+  const candidateLimit = phase === 'initial' ? 7 : 2;
   const candidates = drawUniqueCandidates(pool, rng, candidateLimit);
   const selectionCount = phase === 'initial' ? Math.min(3, candidates.length) : Math.min(1, candidates.length);
   const selectedIds = rng.shuffle(candidates).slice(0, selectionCount);

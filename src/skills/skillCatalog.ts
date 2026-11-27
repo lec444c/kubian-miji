@@ -33,9 +33,35 @@ export const SKILL_CATALOG: Readonly<Record<SkillId, Readonly<SkillDefinition>>>
     timing: '对局任意时刻',
     targetKind: 'none',
   }),
+  enhancedEnglish: Object.freeze({
+    id: 'enhancedEnglish',
+    name: '加塞强化',
+    description: '己方击球前使用，下一杆侧旋增强 50%；球速与上下旋不变。空杆也会消耗，效果仅持续一杆。',
+    glyph: '塞',
+    timing: '己方回合、击球前使用',
+    targetKind: 'none',
+  }),
+  luckyPocket: Object.freeze({
+    id: 'luckyPocket',
+    name: '幸运袋口',
+    description: '己方击球前使用，下一杆所有球的袋口捕获半径增加 2 厘米；全部球停止后恢复，不修改基础袋口尺寸。',
+    glyph: '袋',
+    timing: '己方回合、击球前使用',
+    targetKind: 'none',
+  }),
+  pierceShot: Object.freeze({
+    id: 'pierceShot',
+    name: '穿透击',
+    description: '己方击球前使用，下一杆白球穿过第一颗碰到的球；首球不受力但仍记为首碰，之后碰撞恢复正常。空杆也会消耗。',
+    glyph: '穿',
+    timing: '己方回合、击球前使用',
+    targetKind: 'none',
+  }),
 });
 
-export const SKILL_IDS: readonly SkillId[] = Object.freeze(['hand', 'hairdryer', 'fakeFreeBall', 'gentlemanDuel']);
+export const SKILL_IDS: readonly SkillId[] = Object.freeze([
+  'hand', 'hairdryer', 'fakeFreeBall', 'gentlemanDuel', 'enhancedEnglish', 'luckyPocket', 'pierceShot',
+]);
 
 export function createSkillInstance(skillId: SkillId, instanceId: string): SkillInstance {
   if (!SKILL_CATALOG[skillId]) throw new Error(`Unknown skill: ${skillId}`);

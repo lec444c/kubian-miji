@@ -35,7 +35,7 @@ export class MainMenu {
           </div>
           <button class="start-button">开 局</button>
           <button class="fight-entry" data-fight-entry>球杆格斗 <span>动作试玩 · 单人对电脑</span></button>
-          <p class="menu-note">本地 3D Demo · 鼠标瞄准 / 左键后拖蓄力，松开击球 / 摆位 Space 或 Enter 确认 / C 切换镜头<br>创意模式当前技能池为 4 个，开局从全部候选中选 3 个，各限用一次</p>
+          <p class="menu-note">本地 3D Demo · 鼠标瞄准 / 左键后拖蓄力，松开击球 / 摆位 Space 或 Enter 确认 / C 切换镜头<br>创意模式当前技能池为 7 个，开局从全部候选中选 3 个，各限用一次</p>
         </div>
       </section>`;
     this.element.querySelectorAll<HTMLElement>('[data-field]').forEach(group => {

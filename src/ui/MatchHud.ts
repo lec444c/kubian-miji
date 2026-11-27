@@ -29,6 +29,7 @@ export interface HudModel {
   charging: boolean;
   locked: boolean;
   canStrike: boolean;
+  canRepositionCue: boolean;
   canUseSkills: [boolean, boolean];
   skills: [SkillInstance[], SkillInstance[]];
   catalog: SkillDefinition[];
@@ -51,6 +52,7 @@ export class MatchHud {
     onPower: (power: number) => void;
     onSpin: (x: number, y: number) => void;
     onStrike: () => void;
+    onReposition: () => void;
     onCamera: () => void;
     onPause: () => void;
     onSettings: () => void;
@@ -101,7 +103,7 @@ export class MatchHud {
         </ul></aside>
       </header>
       <div class="corner bottom-left">
-        <div class="controls panel"><div class="control-group camera-controls"><button class="icon-button active" data-camera title="切换顶视 / 环绕 / 击球镜头">镜头 C</button></div><div class="control-group spin-group"><span class="control-label" data-spin-label>杆法</span><div data-spin-mount></div></div><div class="control-group power-wrap"><span class="control-label">力度</span><input type="range" min="2" max="100" step="1" value="56" data-power aria-label="击球力度"><span class="power-number" data-power-number>56</span></div><button class="strike" data-strike>击球 <small>或左键后拖蓄力，松开击球</small></button></div>
+        <div class="controls panel"><div class="control-group camera-controls"><button class="icon-button active" data-camera title="切换顶视 / 环绕 / 击球镜头">镜头 C</button></div><div class="control-group spin-group"><span class="control-label" data-spin-label>杆法</span><div data-spin-mount></div></div><div class="control-group power-wrap"><span class="control-label">力度</span><input type="range" min="2" max="100" step="1" value="56" data-power aria-label="击球力度"><span class="power-number" data-power-number>56</span></div><button class="reposition secondary hidden" data-reposition title="重新进入自由球摆放">重摆</button><button class="strike" data-strike>击球 <small>或左键后拖蓄力，松开击球</small></button></div>
       </div>`;
     this.skillBar = new SkillBar(callbacks.onSkill);
     // Round 13: the slider floor follows MIN_SHOT_POWER (the old hardcoded min="8"
@@ -121,6 +123,13 @@ export class MatchHud {
       strikeButton.addEventListener(name, event => {
         // A leftover focus must not turn Space into a shot via native click.
         // Keep mouse clicks and native Enter activation available.
+        if (event.code === 'Space') event.preventDefault();
+      });
+    }
+    const repositionButton = this.element.querySelector<HTMLButtonElement>('[data-reposition]')!;
+    repositionButton.addEventListener('click', callbacks.onReposition);
+    for (const name of ['keydown', 'keyup'] as const) {
+      repositionButton.addEventListener(name, event => {
         if (event.code === 'Space') event.preventDefault();
       });
     }
@@ -176,6 +185,9 @@ export class MatchHud {
     strike.disabled = !model.canStrike;
     strike.classList.toggle('charging', model.charging);
     strike.innerHTML = model.charging ? '蓄力中… <small>松开左键击球 · Esc 取消</small>' : '击球 <small>或左键后拖蓄力，松开击球</small>';
+    const reposition = this.element.querySelector<HTMLButtonElement>('[data-reposition]')!;
+    reposition.disabled = !model.canRepositionCue;
+    reposition.classList.toggle('hidden', !model.canRepositionCue);
     // 力度条始终跟随权威力度（含开球自动补力/还原），不再只在蓄力时同步。
     this.element.querySelector<HTMLInputElement>('[data-power]')!.value = String(Math.round(model.power * 100));
     text('[data-spin-label]', model.locked ? '杆法 · 已锁定' : '杆法');

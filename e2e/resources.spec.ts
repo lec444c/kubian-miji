@@ -11,7 +11,7 @@ test('运行时没有外部网络请求或严重脚本错误', async ({ page }) 
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
   await page.getByRole('button', { name: '开 局' }).click();
-  await expect(page.locator('.draft-option')).toHaveCount(4);
+  await expect(page.locator('.draft-option')).toHaveCount(7);
   expect(external).toEqual([]);
   expect(errors).toEqual([]);
 });

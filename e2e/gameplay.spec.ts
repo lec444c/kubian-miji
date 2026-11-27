@@ -23,8 +23,8 @@ async function startCreativePractice(page: Page, prefer: string[] = []): Promise
   await page.goto('/');
   await page.locator('[data-field="playMode"] [data-value="practice"]').click();
   await page.getByRole('button', { name: '开 局' }).click();
-  await confirmDraft(page, 4, 3, prefer);
-  await confirmDraft(page, 4);
+  await confirmDraft(page, 7, 3, prefer);
+  await confirmDraft(page, 7, 3);
   await expect(page.locator('[data-skills="0"] .skill-card')).toHaveCount(3);
   await expect(page.locator('[data-skills="1"] .skill-card')).toHaveCount(3);
   await page.evaluate(() => {
@@ -247,4 +247,104 @@ test('合法清台后打进 8 号显示胜负并可重开，窗口缩放保留�
   await page.locator('[data-restart]').click();
   await expect(page.locator('[data-shots]')).toHaveText('0');
   await expect(page.getByRole('heading', { name: '甲方获胜' })).toHaveCount(0);
+});
+
+test('加塞强化由真实技能按钮发动，下一杆放大侧旋后恢复', async ({ page }) => {
+  await startCreativePractice(page, ['加塞强化']);
+  await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    for (let id = 1; id <= 15; id++) debug.removeBall(id);
+    debug.setBall(0, { x: -0.5, y: 0 });
+    debug.setCurrentPlayer(0);
+  });
+  const face = page.locator('[data-spin-face]');
+  await face.focus();
+  await page.keyboard.press('ArrowRight');
+  await page.keyboard.press('ArrowRight');
+  const button = page.locator('[data-skills="0"] .skill-card').filter({ hasText: '加塞强化' });
+  await expect(button).toBeEnabled();
+  await button.click();
+  const active = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(active.human.spin.x).toBeCloseTo(0.1);
+  expect(active.enhancements[0].sideSpinMultiplier).toBe(1.5);
+  expect(active.skills[0].find(instance => instance.skillId === 'enhancedEnglish')!.remainingUses).toBe(0);
+  await expect(button).toBeDisabled();
+  await page.locator('[data-power]').evaluate((input: HTMLInputElement) => {
+    input.value = '30';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+  await page.locator('[data-strike]').click();
+  const shot = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(shot.phase).toBe('rolling');
+  expect(Math.abs(shot.simulation.balls[0]!.angularVelocity.z)).toBeGreaterThan(0);
+  expect(shot.human.spin).toEqual({ x: 0, y: 0 });
+  expect(shot.enhancements[0]).toEqual({ sideSpinMultiplier: 1, pocketRadiusBonus: 0, pierceNextShot: false });
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase), { timeout: 60_000 }).not.toBe('rolling');
+});
+
+test('幸运袋口由真实技能按钮发动，仅增益当前杆且停球后恢复', async ({ page }) => {
+  await startCreativePractice(page, ['幸运袋口']);
+  await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    for (let id = 1; id <= 15; id++) debug.removeBall(id);
+    debug.setBall(0, { x: -0.5, y: 0 });
+    debug.setCurrentPlayer(0);
+  });
+  const button = page.locator('[data-skills="0"] .skill-card').filter({ hasText: '幸运袋口' });
+  await expect(button).toBeEnabled();
+  await button.click();
+  const active = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(active.enhancements[0].pocketRadiusBonus).toBeCloseTo(0.02);
+  expect(active.simulation.pocketRadiusBonus).toBe(0);
+  expect(active.skills[0].find(instance => instance.skillId === 'luckyPocket')!.remainingUses).toBe(0);
+  await expect(button).toBeDisabled();
+  const rolling = await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    debug.strike(0, 0.3);
+    return debug.getState();
+  });
+  expect(rolling.phase).toBe('rolling');
+  expect(rolling.simulation.pocketRadiusBonus).toBeCloseTo(0.02);
+  expect(rolling.enhancements[0]).toEqual({ sideSpinMultiplier: 1, pocketRadiusBonus: 0, pierceNextShot: false });
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase), { timeout: 60_000 }).not.toBe('rolling');
+  const stopped = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(stopped.simulation.pocketRadiusBonus).toBe(0);
+});
+
+test('穿透击由真实技能按钮发动，首球不受力且后续碰撞恢复正常', async ({ page }) => {
+  await startCreativePractice(page, ['穿透击']);
+  await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    for (let id = 1; id <= 15; id++) debug.removeBall(id);
+    debug.setGroups(0, 'solids');
+    debug.setBall(0, { x: -0.5, y: 0 });
+    debug.setBall(1, { x: 0, y: 0 });
+    debug.setBall(2, { x: 0.3, y: 0 });
+    debug.setCurrentPlayer(0);
+  });
+  const button = page.locator('[data-skills="0"] .skill-card').filter({ hasText: '穿透击' });
+  await expect(button).toBeEnabled();
+  await button.click();
+  const active = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(active.enhancements[0].pierceNextShot).toBe(true);
+  expect(active.skills[0].find(instance => instance.skillId === 'pierceShot')!.remainingUses).toBe(0);
+  await expect(button).toBeDisabled();
+  await expect(page.locator('.skill-announce')).toContainText('穿透击');
+  const rolling = await page.evaluate(() => {
+    const debug = window.__creativeEight!;
+    // 12% 足够穿过首球并碰到第二球，但第二球不会撞库后返回干扰首球。
+    debug.strike(0, 0.12);
+    return debug.getState();
+  });
+  expect(rolling.phase).toBe('rolling');
+  expect(rolling.enhancements[0].pierceNextShot).toBe(false);
+  await expect.poll(async () => page.evaluate(() => window.__creativeEight!.getState().phase), { timeout: 60_000 }).not.toBe('rolling');
+  const stopped = await page.evaluate(() => window.__creativeEight!.getState());
+  expect(stopped.outcome?.firstContact).toBe(1);
+  expect(stopped.simulation.balls.find(ball => ball.id === 1)!.position.x).toBeCloseTo(0, 8);
+  expect(stopped.simulation.balls.find(ball => ball.id === 1)!.velocity).toEqual({ x: 0, y: 0 });
+  expect(stopped.simulation.balls.find(ball => ball.id === 2)!.position.x).toBeGreaterThan(0.4);
+  expect(stopped.simulation.balls.find(ball => ball.id === 0)!.position.x).toBeLessThan(
+    stopped.simulation.balls.find(ball => ball.id === 2)!.position.x,
+  );
 });

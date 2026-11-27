@@ -38,6 +38,8 @@ export interface SimulationState {
   balls: BallState[];
   step: number;
   braking: BrakingEffect[];
+  /** Temporary next-shot pocket capture bonus from 幸运袋口; reset when the shot ends. */
+  pocketRadiusBonus?: number;
 }
 
 export interface PocketDefinition { id: number; position: Vec2 }

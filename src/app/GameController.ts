@@ -29,6 +29,12 @@ import { SkillMachine, consumeSkillInstance } from '../skills/skillMachine';
 import { getHandCandidates, createHandAdjustment, commitHandAdjustment } from '../skills/handMicroAdjustment';
 import { createHairdryerEffect, getHairdryerCandidates, HAIRDRYER_DURATION_MS } from '../skills/hairdryer';
 import { FakeFreeBallMachine, type FakeFreeBallResolution } from '../skills/fakeFreeBall';
+import {
+  ENHANCED_ENGLISH_MULTIPLIER,
+  LUCKY_POCKET_RADIUS_BONUS,
+  neutralShotEnhancements,
+  type ShotEnhancements,
+} from '../skills/shotEnhancements';
 import type { SkillId, SkillInstance } from '../skills/skillTypes';
 import { otherSeat, seatName, type GamePhase, type MatchSetup, type Seat } from './matchTypes';
 import type { DebugApi } from './debugTypes';
@@ -78,6 +84,7 @@ export class GameController {
   private phase: GamePhase = 'menu';
   private human = { angle: 0, power: 0.56, spin: { x: 0, y: 0 } };
   private machines: [SkillMachine, SkillMachine] = [new SkillMachine(), new SkillMachine()];
+  private enhancements: [ShotEnhancements, ShotEnhancements] = [neutralShotEnhancements(), neutralShotEnhancements()];
   private targeting: TargetingState | null = null;
   private fake: FakeState | null = null;
   private fakeShotResolution: FakeFreeBallResolution | null = null;
@@ -114,6 +121,7 @@ export class GameController {
       onPower: power => { this.cancelCharge(); this.human.power = Math.max(MIN_SHOT_POWER, Math.min(1, power)); },
       onSpin: (x, y) => { this.human.spin = clampSpinToFace(x, y); },
       onStrike: () => this.humanStrike(),
+      onReposition: () => this.repositionCueBall(),
       onCamera: () => this.cycleCamera(),
       onPause: () => this.togglePause(),
       onSettings: () => { this.cancelCharge(); this.settingsDialog.open(this.settingsState()); },
@@ -219,7 +227,9 @@ export class GameController {
     this.handAnimating = false;
     this.cueLocked = false;
     this.placement = null;
+    this.cueReplacementAvailable = null;
     this.targeting = null;
+    this.enhancements = [neutralShotEnhancements(), neutralShotEnhancements()];
     this.fake = null;
     this.fakeShotResolution = null;
     this.shotContext = null;
@@ -334,6 +344,7 @@ export class GameController {
     this.hud.resetGroupAnnouncement();
     this.clock = new MatchClock();
     this.machines = [new SkillMachine(), new SkillMachine()];
+    this.enhancements = [neutralShotEnhancements(), neutralShotEnhancements()];
     this.targeting = null;
     this.fake = null;
     this.fakeShotResolution = null;
@@ -370,7 +381,7 @@ export class GameController {
   }
 
   private showDraftFor(seat: Seat, overtime: boolean): void {
-    const candidates = drawUniqueCandidates(SKILL_IDS, this.rng, overtime ? 2 : 5);
+    const candidates = drawUniqueCandidates(SKILL_IDS, this.rng, overtime ? 2 : 7);
     this.draft = { seat, overtime, candidates };
     const canChoose = this.isHumanSeat(seat);
     if (!canChoose) {
@@ -419,11 +430,16 @@ export class GameController {
   private isHumanSeat(seat: Seat): boolean { return this.setup.playMode === 'practice' || seat === 0; }
   /** Pre-break slider power, restored once the break shot resolves. */
   private breakPowerRestore: number | null = null;
+  /** A confirmed ball-in-hand can be reopened until this turn actually shoots. */
+  private cueReplacementAvailable: Seat | null = null;
   private isInteractivePhase(): boolean { return !this.paused && !this.handAnimating && (this.phase === 'aiming' || this.phase === 'ballInHand'); }
   private isPlacementPhase(): boolean { return this.phase === 'ballInHand' || this.phase === 'breakPlacement'; }
   /** Turn hand-off: free ball first, otherwise the break still needs placement. */
   private phaseForTurn(): GamePhase {
-    if (this.rule.ballInHand) return 'ballInHand';
+    if (this.rule.ballInHand) {
+      this.cueReplacementAvailable = this.rule.currentPlayer;
+      return 'ballInHand';
+    }
     return this.rule.isBreak ? 'breakPlacement' : 'aiming';
   }
 
@@ -517,6 +533,7 @@ export class GameController {
       return true;
     }
     const wasBreak = this.phase === 'breakPlacement';
+    if (!wasBreak) this.cueReplacementAvailable = seat;
     this.rule.ballInHand = false;
     this.phase = 'aiming';
     if (wasBreak && this.isHumanSeat(seat)) {
@@ -528,8 +545,22 @@ export class GameController {
     }
     this.message = wasBreak
       ? `${seatName(seat)}已摆好白球，瞄准球堆后按住左键向后拖动蓄力开球。`
-      : `${seatName(seat)}已放置白球，可以瞄准击球。`;
+      : this.isHumanSeat(seat)
+        ? `${seatName(seat)}已放置白球，可以瞄准击球；点「重摆」可再次调整位置。`
+        : `${seatName(seat)}已放置白球，可以瞄准击球。`;
     return true;
+  }
+
+  private repositionCueBall(): void {
+    const seat = this.rule.currentPlayer;
+    if (this.phase !== 'aiming' || !this.canHumanStrike() || this.cueReplacementAvailable !== seat) return;
+    this.cancelCharge();
+    this.cueLocked = false;
+    this.placement = null;
+    this.rule.ballInHand = true;
+    this.phase = 'ballInHand';
+    this.message = `${seatName(seat)}重新摆放自由球：拖动白球或使用 WASD 调整，Space / Enter 确定。`;
+    this.updateHud();
   }
 
   private canHumanStrike(): boolean {
@@ -604,11 +635,20 @@ export class GameController {
       if (this.isHumanSeat(seat)) this.hud.toast('请先在球桌上放置白球');
       this.phase = 'ballInHand';
       this.rule.ballInHand = true;
+      this.cueReplacementAvailable = seat;
       return false;
     }
     this.shotContext = prepareShot({ state: this.rule, simulation: this.simulation.getSnapshot() });
     this.simulation.shooter = seat;
-    this.simulation.strike(angle, power, spin);
+    this.simulation.strike(angle, power, spin, {
+      ...this.enhancements[seat],
+      pierceFirstContact: this.enhancements[seat].pierceNextShot,
+    });
+    this.enhancements[seat] = neutralShotEnhancements();
+    // English is a per-shot input, not a persistent player setting. The strike
+    // above consumes the current value synchronously; the next shot starts clean.
+    this.human.spin = { x: 0, y: 0 };
+    this.cueReplacementAvailable = null;
     this.rule.ballInHand = false;
     this.cueLocked = false;
     this.phase = 'rolling';
@@ -690,6 +730,7 @@ export class GameController {
     const seat = resolution.freeBallFor;
     this.rule.currentPlayer = seat;
     this.rule.ballInHand = true;
+    this.cueReplacementAvailable = seat;
     this.rule.winner = null;
     this.phase = 'ballInHand';
     this.fake = null;
@@ -712,6 +753,18 @@ export class GameController {
     if (instance.skillId === 'hairdryer') {
       return this.phase === 'rolling' && this.rule.currentPlayer === otherSeat(seat) && !this.fakeShotResolution &&
         getHairdryerCandidates(this.simulation.state).length > 0;
+    }
+    if (instance.skillId === 'enhancedEnglish') {
+      return this.isInteractivePhase() && this.rule.currentPlayer === seat && !this.fake &&
+        this.enhancements[seat].sideSpinMultiplier === 1;
+    }
+    if (instance.skillId === 'luckyPocket') {
+      return this.isInteractivePhase() && this.rule.currentPlayer === seat && !this.fake &&
+        this.enhancements[seat].pocketRadiusBonus === 0;
+    }
+    if (instance.skillId === 'pierceShot') {
+      return this.isInteractivePhase() && this.rule.currentPlayer === seat && !this.fake &&
+        !this.enhancements[seat].pierceNextShot;
     }
     return this.isInteractivePhase() && this.rule.currentPlayer === seat && !this.fake;
   }
@@ -744,6 +797,35 @@ export class GameController {
       this.audio.skill();
       this.hud.toast(this.message);
       this.aiReadyAt = performance.now() + 1200;
+      this.updateHud();
+      return true;
+    }
+    if (instance.skillId === 'enhancedEnglish' || instance.skillId === 'luckyPocket') {
+      this.machines[seat].commitTargeting();
+      if (instance.skillId === 'enhancedEnglish') {
+        this.enhancements[seat].sideSpinMultiplier = ENHANCED_ENGLISH_MULTIPLIER;
+        this.message = `${seatName(seat)}发动「加塞强化」：下一杆侧旋增强 50%。`;
+      } else {
+        this.enhancements[seat].pocketRadiusBonus = LUCKY_POCKET_RADIUS_BONUS;
+        this.message = `${seatName(seat)}发动「幸运袋口」：下一杆袋口捕获范围扩大。`;
+      }
+      this.cancelCharge();
+      this.hud.announceSkill(seat, SKILL_CATALOG[instance.skillId].name);
+      this.audio.skill();
+      this.hud.toast(this.message);
+      this.aiReadyAt = performance.now() + 250;
+      this.updateHud();
+      return true;
+    }
+    if (instance.skillId === 'pierceShot') {
+      this.machines[seat].commitTargeting();
+      this.enhancements[seat].pierceNextShot = true;
+      this.message = `${seatName(seat)}发动「穿透击」：下一杆白球将穿过第一颗碰到的球。`;
+      this.cancelCharge();
+      this.hud.announceSkill(seat, SKILL_CATALOG.pierceShot.name);
+      this.audio.skill();
+      this.hud.toast(this.message);
+      this.aiReadyAt = performance.now() + 250;
       this.updateHud();
       return true;
     }
@@ -877,8 +959,29 @@ export class GameController {
       if (position) this.placeCueBall(1, position);
       if (this.fake) return;
     }
+    const englishSkill = this.machines[1].getInventory().find(instance => instance.skillId === 'enhancedEnglish' && this.skillEligible(1, instance));
+    const englishChance = this.setup.difficulty === 'hard' ? 0.8 : this.setup.difficulty === 'normal' ? 0.55 : 0.3;
+    if (englishSkill && !this.rule.isBreak && this.rng.next() < englishChance) {
+      void this.useSkill(1, englishSkill.instanceId);
+      return;
+    }
+    const luckySkill = this.machines[1].getInventory().find(instance => instance.skillId === 'luckyPocket' && this.skillEligible(1, instance));
+    const luckyChance = this.setup.difficulty === 'hard' ? 0.85 : this.setup.difficulty === 'normal' ? 0.6 : 0.35;
+    if (luckySkill && this.rng.next() < luckyChance) {
+      void this.useSkill(1, luckySkill.instanceId);
+      return;
+    }
+    const pierceSkill = this.machines[1].getInventory().find(instance => instance.skillId === 'pierceShot' && this.skillEligible(1, instance));
+    const pierceChance = this.setup.difficulty === 'hard' ? 0.7 : this.setup.difficulty === 'normal' ? 0.45 : 0.25;
+    if (pierceSkill && !this.rule.isBreak && this.rng.next() < pierceChance) {
+      void this.useSkill(1, pierceSkill.instanceId);
+      return;
+    }
     try {
       const shot = planShot({ state: this.rule, simulation: this.simulation.getSnapshot() }, this.rng, this.setup.difficulty);
+      if (this.enhancements[1].sideSpinMultiplier > 1 && shot.spin.x === 0) {
+        shot.spin.x = this.rng.next() < 0.5 ? -0.45 : 0.45;
+      }
       this.strike(1, shot.angle, shot.power, shot.spin);
     } catch {
       this.strike(1, this.rng.range(-Math.PI, Math.PI), 0.35, { x: 0, y: 0 });
@@ -999,6 +1102,8 @@ export class GameController {
       charging: this.charging,
       locked: this.cueLocked,
       canStrike: this.isInteractivePhase() && this.isHumanSeat(this.rule.currentPlayer) && !!this.simulation.state.balls.find(ball => ball.id === 0)?.onTable,
+      canRepositionCue: this.phase === 'aiming' && this.canHumanStrike()
+        && this.cueReplacementAvailable === this.rule.currentPlayer,
       canUseSkills: [this.isHumanSeat(0), this.isHumanSeat(1)],
       skills: [this.machines[0].getInventory(), this.machines[1].getInventory()],
       catalog: SKILL_IDS.map(id => SKILL_CATALOG[id]),
@@ -1008,7 +1113,7 @@ export class GameController {
 
   getDebugApi(): DebugApi {
     return {
-      getState: () => ({ phase: this.phase, rule: this.rule, simulation: this.simulation.getSnapshot(), skills: [this.machines[0].getInventory(), this.machines[1].getInventory()], elapsedMs: this.clock.elapsed, charging: this.charging, cueLocked: this.cueLocked, view: this.view.getDebugState(), placementCursor: this.placement, fake: this.fake ? { owner: this.fake.owner, status: this.fake.machine.status, elapsedMs: this.fake.machine.elapsedMs } : null, human: { angle: this.human.angle, power: this.human.power, spin: { ...this.human.spin } } }),
+      getState: () => ({ phase: this.phase, rule: this.rule, simulation: this.simulation.getSnapshot(), outcome: this.simulation.currentOutcome, skills: [this.machines[0].getInventory(), this.machines[1].getInventory()], enhancements: [{ ...this.enhancements[0] }, { ...this.enhancements[1] }], elapsedMs: this.clock.elapsed, charging: this.charging, cueLocked: this.cueLocked, view: this.view.getDebugState(), placementCursor: this.placement, fake: this.fake ? { owner: this.fake.owner, status: this.fake.machine.status, elapsedMs: this.fake.machine.elapsedMs } : null, human: { angle: this.human.angle, power: this.human.power, spin: { ...this.human.spin } } }),
       advanceTime: (ms: number) => {
         if (this.phase === 'menu' || this.phase === 'gameOver') return;
         this.clock.advance(ms);
@@ -1032,7 +1137,7 @@ export class GameController {
         this.rule.isBreak = false;
         this.updateHud();
       },
-      setCurrentPlayer: (seat: Seat) => { this.rule.currentPlayer = seat; this.phase = 'aiming'; this.rule.ballInHand = false; this.aiReadyAt = Number.POSITIVE_INFINITY; this.updateHud(); },
+      setCurrentPlayer: (seat: Seat) => { this.rule.currentPlayer = seat; this.phase = 'aiming'; this.rule.ballInHand = false; this.cueReplacementAvailable = null; this.aiReadyAt = Number.POSITIVE_INFINITY; this.updateHud(); },
       setBall: (ballId: number, position: Vec2) => {
         const ball = this.simulation.state.balls.find(item => item.id === ballId);
         if (ball) { ball.position = { ...position }; ball.velocity = { x: 0, y: 0 }; ball.motion = 'stationary'; ball.onTable = true; ball.pocketed = false; }
@@ -1049,6 +1154,7 @@ export class GameController {
         this.settingsDialog.sync(this.settingsState());
       },
       renderScale: (scale: number) => this.view.setRenderScale(scale),
+      renderFrame: (timeSeconds: number) => this.view.render(timeSeconds),
       audio: () => this.audio.getDebugState(),
       nodeReport: () => this.view.debugNodeReport(),
       cueAim: () => this.view.debugCueAim(),

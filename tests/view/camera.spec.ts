@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { describe, expect, it } from 'vitest';
-import { CameraController } from '../../src/view/CameraController';
+import { cameraInOverheadVolume, CameraController } from '../../src/view/CameraController';
 
 describe('对局双镜头', () => {
   it('瞄准第一人称，击球与摆球缓动切顶视，回到瞄准恢复第一人称', () => {
@@ -90,6 +90,21 @@ describe('对局双镜头', () => {
     controller.zoom(160);
     settle(3000);
     expect(camera.position.y).toBeCloseTo(3.35, 1);
+  });
+
+  it('顶视下降途中保持吊灯隐藏，越过灯罩后才恢复', () => {
+    const lampBounds = new THREE.Box3(
+      new THREE.Vector3(-0.9, 2.59, -0.35),
+      new THREE.Vector3(0.9, 3.87, 0.35),
+    );
+    // Top view and the first part of top -> aim are still above the lamp.
+    expect(cameraInOverheadVolume(new THREE.Vector3(0, 5.36, 0.01), lampBounds)).toBe(true);
+    expect(cameraInOverheadVolume(new THREE.Vector3(-0.6, 3.1, 0), lampBounds)).toBe(true);
+    // A normal orbit camera shares the lamp's height but is outside its footprint.
+    expect(cameraInOverheadVolume(new THREE.Vector3(0, 3.04, 3.68), lampBounds)).toBe(false);
+    // The settled first-person camera is safely below the shade.
+    expect(cameraInOverheadVolume(new THREE.Vector3(-1.22, 1.81, 0), lampBounds)).toBe(false);
+    expect(cameraInOverheadVolume(new THREE.Vector3(0, 5.36, 0), new THREE.Box3())).toBe(false);
   });
 
   it('第一人称机位水平钳制在房间内、越过库边时抬到轨顶之上（round 7 防穿模）', () => {

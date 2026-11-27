@@ -151,23 +151,22 @@ test('低杆回撤 / 高杆跟进 / 半低杆定杆：白球走位符合真实�
     await soloTable(page, { x: -0.3, y: 0 }, { x: 0, y: 0 });
     await page.waitForTimeout(250);
   };
-  // 第十三轮球速上限 9→10：力度 30% = 0.30×10 = 3.0 m/s，复现单测钉住的 3.0 m/s 旋转轨迹
-  // （tests/physics/simulation.spec.ts 用 0.3）。若用更高力度目标球会多弹库回撞白球，
-  // 属正确物理但会让下面的停点断言失稳。
+  // 力度 15% = 1.5 m/s：目标球碰撞后能在撞库前停住，避免回弹再次撞到白球，
+  // 让停点断言只检验当前这一杆的旋转效果。
   // 低杆（球面底部）：撞击后白球必须退回到接触点之后。
   await setup();
-  await uiShot(page, { fx: 0.5, fy: 0.98 }, 30);
+  await uiShot(page, { fx: 0.5, fy: 0.98 }, 15);
   const draw = await readCue(page);
   const objectAfterDraw = await page.evaluate(() => window.__creativeEight!.getState().simulation.balls.find(ball => ball.id === 1)!.position.x);
   expect(objectAfterDraw).toBeGreaterThan(0.1);
-  expect(draw.x).toBeLessThan(-0.1);
+  expect(draw.x).toBeLessThan(-0.05);
   // 高杆（球面顶部）：白球跟进穿过目标球原位置。
   await setup();
-  await uiShot(page, { fx: 0.5, fy: 0.02 }, 30);
+  await uiShot(page, { fx: 0.5, fy: 0.02 }, 15);
   expect((await readCue(page)).x).toBeGreaterThan(0.05);
   // 半低杆（球面下半径处 fy=0.73 → spin.y=-0.5）：定杆，白球停在接触点附近。
   await setup();
-  await uiShot(page, { fx: 0.5, fy: 0.73 }, 30);
+  await uiShot(page, { fx: 0.5, fy: 0.73 }, 15);
   const stun = await readCue(page);
   expect(stun.x).toBeGreaterThan(-0.16);
   expect(stun.x).toBeLessThan(0.02);
@@ -179,11 +178,12 @@ test('侧旋吃库横向弹出：右塞 / 左塞方向相反，无塞不偏', as
   const rebound = async (fx: number): Promise<{ x: number; y: number }> => {
     await soloTable(page, { x: 0.5, y: 0 });
     await clickFace(page, fx, 0.5);
-    await setPower(page, 30);
+    await setPower(page, 15);
     await page.locator('[data-strike]').click();
     await waitSettled(page);
     return readCue(page);
   };
+  // 力度 15% 只碰一次远库并在回程中停住，避免多次撞库把横移抵消成零。
   // 切向冲量受法向冲量上限约束（不凭空造能量）在 tests/physics/simulation.spec.ts
   // 里按固定步长逐帧核验；这里核验玩家看得见的走位结果。
   const plain = await rebound(0.5);

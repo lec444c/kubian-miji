@@ -178,6 +178,52 @@ describe('collisions, cushions and pockets', () => {
     expect(sim.currentOutcome?.flewOffTable).toEqual([]);
   });
 
+  it('applies next-shot side-spin enhancement without changing speed or vertical spin', () => {
+    const plain = simulationWith(createBall(0, { x: -0.9, y: 0 }));
+    plain.strike(0, 0.4, { x: 0.5, y: 0.2 });
+    const boosted = simulationWith(createBall(0, { x: -0.9, y: 0 }));
+    boosted.strike(0, 0.4, { x: 0.5, y: 0.2 }, { sideSpinMultiplier: 1.5 });
+    const a = plain.state.balls[0]!;
+    const b = boosted.state.balls[0]!;
+    expect(b.velocity).toEqual(a.velocity);
+    expect(b.angularVelocity.x).toBeCloseTo(a.angularVelocity.x, 12);
+    expect(b.angularVelocity.y).toBeCloseTo(a.angularVelocity.y, 12);
+    expect(Math.abs(b.angularVelocity.z)).toBeCloseTo(Math.abs(a.angularVelocity.z) * 1.5, 10);
+  });
+
+  it('does not invent side spin when enhanced english is used on a centre hit', () => {
+    const sim = simulationWith(createBall(0, { x: -0.9, y: 0 }));
+    sim.strike(0, 0.4, { x: 0, y: 0 }, { sideSpinMultiplier: 1.5 });
+    expect(sim.state.balls[0]!.angularVelocity.z).toBe(0);
+  });
+
+  it('captures just outside the normal pocket radius only while lucky pocket is active', () => {
+    const setup = (): Simulation => {
+      const sim = simulationWith(createBall(1, { x: 0, y: 0.54 }));
+      const ball = sim.state.balls[0]!;
+      ball.velocity = { x: 0, y: 0.001 };
+      ball.angularVelocity = { x: 0, y: ball.velocity.y / BALL_RADIUS, z: 0 };
+      ball.motion = 'rolling';
+      return sim;
+    };
+    const normal = setup();
+    normal.step();
+    expect(normal.state.balls[0]).toMatchObject({ onTable: true, pocketed: false });
+
+    const lucky = setup();
+    lucky.state.pocketRadiusBonus = 0.02;
+    lucky.step();
+    expect(lucky.state.balls[0]).toMatchObject({ onTable: false, pocketed: true, motion: 'pocketed' });
+  });
+
+  it('resets lucky pocket after the enhanced shot stops', () => {
+    const sim = simulationWith(createBall(0, { x: -0.5, y: 0 }));
+    sim.strike(0, 0.2, { x: 0, y: 0 }, { pocketRadiusBonus: 0.02 });
+    expect(sim.state.pocketRadiusBonus).toBe(0.02);
+    sim.runUntilStopped(4000);
+    expect(sim.state.pocketRadiusBonus).toBe(0);
+  });
+
   it('decelerates a rolling ball at cloth friction (~0.7 m/s^2, round 12)', () => {
     const sim = simulationWith(createBall(0, { x: -0.5, y: 0 }));
     sim.state.balls[0]!.velocity = { x: 1, y: 0 };
@@ -192,20 +238,26 @@ describe('collisions, cushions and pockets', () => {
 
 describe('round 8 spin: contact point drives real roll, draw and english', () => {
   /** Cue 30 cm behind an object ball on the +x axis, straight full-ball hit.
-   *  Power 0.3 keeps the strike at exactly 3 m/s after the round-13 max-speed
-   *  raise (9 -> 10): at higher speeds the object ball rebounds off rails and
-   *  returns into the cue, which is correct physics but invalidates the
-   *  final-position assertions below. */
+   *  After the first contact, isolate the cue ball so a later object-ball rail
+   *  rebound cannot create a second contact and mask the draw/follow result. */
   function contactSetup(): Simulation {
     return simulationWith(createBall(0, { x: -0.3, y: 0 }), createBall(1, { x: 0, y: 0 }));
+  }
+
+  function runCueAfterContact(sim: Simulation): void {
+    for (let i = 0; i < 4000 && sim.isMoving(); i += 1) {
+      sim.step();
+      if (sim.currentOutcome?.firstContact !== null && sim.state.balls.length > 1) {
+        sim.state.balls = sim.state.balls.filter(ball => ball.id === 0);
+      }
+    }
   }
 
   it('low tip (draw) pulls the cue ball back after contact', () => {
     const sim = contactSetup();
     sim.strike(0, 0.3, { x: 0, y: -1 });
-    sim.runUntilStopped(4000);
+    runCueAfterContact(sim);
     expect(sim.currentOutcome?.firstContact).toBe(1);
-    expect(sim.state.balls[1]!.position.x).toBeGreaterThan(0.1);
     // Contact happens at x = -2R; genuine backspin must return the cue past it.
     expect(sim.state.balls[0]!.position.x).toBeLessThan(-0.1);
     expect(sim.allStopped()).toBe(true);
@@ -214,7 +266,7 @@ describe('round 8 spin: contact point drives real roll, draw and english', () =>
   it('high tip (follow) drives the cue ball through the object ball', () => {
     const sim = contactSetup();
     sim.strike(0, 0.3, { x: 0, y: 1 });
-    sim.runUntilStopped(4000);
+    runCueAfterContact(sim);
     expect(sim.currentOutcome?.firstContact).toBe(1);
     expect(sim.state.balls[0]!.position.x).toBeGreaterThan(0.05);
   });
@@ -222,7 +274,7 @@ describe('round 8 spin: contact point drives real roll, draw and english', () =>
   it('half-low tip stuns: the cue ball stays at the contact point', () => {
     const sim = contactSetup();
     sim.strike(0, 0.3, { x: 0, y: -0.5 });
-    sim.runUntilStopped(4000);
+    runCueAfterContact(sim);
     const cueX = sim.state.balls[0]!.position.x;
     expect(cueX).toBeGreaterThan(-0.14);
     expect(cueX).toBeLessThan(0);
@@ -267,6 +319,40 @@ describe('round 8 spin: contact point drives real roll, draw and english', () =>
     expect(english.y).toBeGreaterThan(0.05);
     // The tangential kick is capped by the normal impulse: no energy is created.
     expect(Math.hypot(english.x, english.y)).toBeLessThan(Math.abs(plain.x) * 1.35);
+  });
+
+  it('neutral angled rail hit keeps the rebound straight without inventing side spin', () => {
+    const sim = simulationWith(createBall(0, { x: 0, y: 0 }));
+    sim.strike(Math.PI / 4, 0.5);
+    let railStep = -1;
+    let reboundHeading = 0;
+    const origin = { x: 0, y: 0 };
+
+    for (let i = 0; i < 400; i += 1) {
+      sim.step();
+      const cue = sim.state.balls[0]!;
+      if (railStep < 0 && sim.currentOutcome?.cushionContacts.includes(0)) {
+        railStep = i;
+        origin.x = cue.position.x;
+        origin.y = cue.position.y;
+        reboundHeading = Math.atan2(cue.velocity.y, cue.velocity.x);
+        expect(cue.angularVelocity.z).toBeCloseTo(0, 12);
+        expect(cue.motion).toBe('rolling');
+        expect(cue.angularVelocity.x).toBeCloseTo(-cue.velocity.y / BALL_RADIUS, 8);
+        expect(cue.angularVelocity.y).toBeCloseTo(cue.velocity.x / BALL_RADIUS, 8);
+        continue;
+      }
+      if (railStep < 0) continue;
+      if (i > railStep + 120 || (sim.currentOutcome?.cushionContacts.length ?? 0) > 1) break;
+      if (Math.hypot(cue.velocity.x, cue.velocity.y) <= 0.01) continue;
+      const dx = cue.position.x - origin.x;
+      const dy = cue.position.y - origin.y;
+      const along = dx * Math.cos(reboundHeading) + dy * Math.sin(reboundHeading);
+      const lateral = -dx * Math.sin(reboundHeading) + dy * Math.cos(reboundHeading);
+      if (along > 0.02) expect(Math.abs(lateral)).toBeLessThan(1e-6);
+    }
+
+    expect(railStep).toBeGreaterThanOrEqual(0);
   });
 
   it('opposite side spin kicks the rebound the opposite way', () => {

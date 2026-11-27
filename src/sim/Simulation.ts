@@ -157,10 +157,10 @@ function inPocketLiner(x: number, y: number, pocket: PocketDefinition): boolean 
   return x * Math.sign(pocket.position.x) >= CORNER_BOX_MIN_X && y * Math.sign(pocket.position.y) >= CORNER_BOX_MIN_Y;
 }
 
-function inPocketCapture(x: number, y: number, pocket: PocketDefinition): boolean {
+function inPocketCapture(x: number, y: number, pocket: PocketDefinition, radius = POCKET_RADIUS): boolean {
   const dx = x - pocket.position.x;
   const dy = y - pocket.position.y;
-  return dx * dx + dy * dy < POCKET_RADIUS * POCKET_RADIUS || inPocketLiner(x, y, pocket);
+  return dx * dx + dy * dy < radius * radius || inPocketLiner(x, y, pocket);
 }
 
 export type BallRestingConflict = 'pocketed' | 'jaw' | 'cushion';
@@ -219,11 +219,24 @@ function refreshMotion(ball: BallState): void {
   ball.motion = 'sliding';
 }
 
-/** Rail friction turns side spin into a tangential impulse (english). n is the
- * inward rail normal, normalImpulse the rebound speed change along it. The
- * tangential impulse is capped by the normal impulse so spin never adds energy,
- * and the matching torque bleeds away the spin that produced it. */
+/** A cushion changes the direction of travel abruptly. Re-establish natural
+ * roll for the rebound instead of carrying the pre-impact roll spin into the
+ * cloth; otherwise neutral shots curve after the rail as if they had english. */
+function refreshRailMotion(ball: BallState): void {
+  if (speedOf(ball) <= STOP_SPEED) {
+    stopBall(ball);
+    return;
+  }
+  setRolling(ball);
+}
+
+/** Rail friction turns existing side spin into a tangential impulse (english).
+ * It must not create side spin from a neutral angled hit: tangential sliding
+ * at the cushion is not cue english and caused every flat shot to swerve after
+ * the rebound. n is the inward rail normal and normalImpulse the rebound speed
+ * change along it. */
 function applyRailSpin(ball: BallState, nx: number, ny: number, normalImpulse: number): void {
+  if (Math.abs(ball.angularVelocity.z) <= EPSILON) return;
   const tx = -ny;
   const ty = nx;
   const slipTangent = ball.velocity.x * tx + ball.velocity.y * ty - ball.angularVelocity.z * BALL_RADIUS;
@@ -265,6 +278,15 @@ function reduceSpeed(ball: BallState, amount: number): void {
   ball.velocity.y *= nextSpeed / speed;
 }
 
+export interface ShotOptions {
+  /** Multiplies the requested side-spin contact point; vertical spin is unchanged. */
+  sideSpinMultiplier?: number;
+  /** Added to every pocket's circular capture radius for this shot only. */
+  pocketRadiusBonus?: number;
+  /** The cue ball passes through its first ball contact without exchanging impulse. */
+  pierceFirstContact?: boolean;
+}
+
 /** Pure-TypeScript deterministic 2D pool simulation. All distances are metres. */
 export class Simulation {
   public state: SimulationState;
@@ -275,6 +297,8 @@ export class Simulation {
 
   private nextShotId = 1;
   private shotActive = false;
+  private pierceFirstContactPending = false;
+  private piercedBallId: number | null = null;
 
   public constructor(initialState?: SimulationState, shooter: 0 | 1 = 0) {
     this.state = initialState
@@ -283,31 +307,41 @@ export class Simulation {
           balls: [createBall(0, { x: -TABLE_HALF_X / 2, y: 0 })],
           step: 0,
           braking: [],
+          pocketRadiusBonus: 0,
         };
     this.shooter = shooter;
   }
 
   /** Start a shot. Angle is in radians and power is normalized to [0, 1]. */
-  public strike(angle: number, power: number, spin: { x: number; y: number } = { x: 0, y: 0 }): ShotOutcome {
+  public strike(angle: number, power: number, spin: { x: number; y: number } = { x: 0, y: 0 }, options: ShotOptions = {}): ShotOutcome {
     assertFinite(angle, 'angle');
     assertFinite(power, 'power');
     assertFinite(spin.x, 'spin.x');
     assertFinite(spin.y, 'spin.y');
+    const sideSpinMultiplier = options.sideSpinMultiplier ?? 1;
+    const pocketRadiusBonus = options.pocketRadiusBonus ?? 0;
+    assertFinite(sideSpinMultiplier, 'sideSpinMultiplier');
+    assertFinite(pocketRadiusBonus, 'pocketRadiusBonus');
+    if (sideSpinMultiplier < 0 || sideSpinMultiplier > 2) throw new Error('sideSpinMultiplier must be between 0 and 2');
+    if (pocketRadiusBonus < 0 || pocketRadiusBonus > POCKET_RADIUS) throw new Error('pocketRadiusBonus must be between 0 and POCKET_RADIUS');
     if (this.isMoving()) throw new Error('Cannot strike while balls are moving');
     if (power < 0) throw new Error('power must be non-negative');
 
     const cue = this.state.balls.find(ball => ball.id === 0);
     if (!cue || !cue.onTable || cue.pocketed) throw new Error('Cue ball is not available');
 
+    this.pierceFirstContactPending = options.pierceFirstContact === true;
+    this.piercedBallId = null;
     const clampedPower = Math.min(1, power);
     const speed = MAX_SHOT_SPEED * clampedPower;
     cue.velocity.x = Math.cos(angle) * speed;
     cue.velocity.y = Math.sin(angle) * speed;
+    this.state.pocketRadiusBonus = pocketRadiusBonus;
     // Round 8: spin is a real contact point on the cue ball face, normalized to
     // the miscue limit (half a radius). Side spin therefore scales with shot
     // speed, exactly like the torque of an off-centre tip impulse.
-    const side = Math.max(-1, Math.min(1, spin.x));
-    cue.angularVelocity.z = -side * TIP_OFFSET * speed / BALL_RADIUS;
+    const side = Math.max(-1, Math.min(1, spin.x * sideSpinMultiplier));
+    cue.angularVelocity.z = side === 0 ? 0 : -side * TIP_OFFSET * speed / BALL_RADIUS;
     if (speed > STOP_SPEED) {
       // Vertical offset: centre = natural roll, above centre = follow (up to
       // 2x natural roll), -0.5 = genuine stun (no roll spin) and the bottom edge
@@ -437,6 +471,7 @@ export class Simulation {
     for (const ball of this.state.balls) {
       if (ball.onTable && !ball.pocketed && speedOf(ball) <= STOP_SPEED) stopBall(ball);
     }
+    this.state.pocketRadiusBonus = 0;
     if (this.currentOutcome) this.currentOutcome.endedStep = this.state.step;
     this.shotActive = false;
   }
@@ -501,7 +536,21 @@ export class Simulation {
     const dy = b.position.y - a.position.y;
     const minDistance = BALL_RADIUS * 2;
     const distanceSquared = dx * dx + dy * dy;
+    const cue = a.id === 0 ? a : b.id === 0 ? b : null;
+    const other = cue === a ? b : cue === b ? a : null;
+    if (cue && other && this.piercedBallId === other.id) {
+      if (distanceSquared < minDistance * minDistance) return false;
+      this.piercedBallId = null;
+    }
     if (distanceSquared >= minDistance * minDistance) return false;
+    if (cue && other && this.pierceFirstContactPending) {
+      this.pierceFirstContactPending = false;
+      this.piercedBallId = other.id;
+      this.recordFirstContact(a, b);
+      const strength = Math.min(1, speedOf(cue) / MAX_SHOT_SPEED);
+      this.onEvent?.({ kind: 'ballHit', strength });
+      return false;
+    }
     if (speedOf(a) <= STOP_SPEED && speedOf(b) <= STOP_SPEED && distanceSquared > (minDistance - 1e-7) ** 2) {
       return false;
     }
@@ -561,8 +610,9 @@ export class Simulation {
 
   private captureAtPocket(ball: BallState): void {
     if (!ball.onTable || ball.pocketed) return;
+    const radius = POCKET_RADIUS + Math.max(0, this.state.pocketRadiusBonus ?? 0);
     for (const pocket of POCKETS) {
-      if (!inPocketCapture(ball.position.x, ball.position.y, pocket)) continue;
+      if (!inPocketCapture(ball.position.x, ball.position.y, pocket, radius)) continue;
       this.pocketBall(ball, pocket);
       return;
     }
@@ -616,7 +666,7 @@ export class Simulation {
         ball.velocity.x *= 0.985;
         ball.velocity.y *= 0.985;
         applyRailSpin(ball, ux, uy, normalImpulse);
-        refreshMotion(ball);
+        refreshRailMotion(ball);
         this.recordCushion(ball, recorded);
       }
     }
@@ -635,7 +685,7 @@ export class Simulation {
         ball.velocity.x = -ball.velocity.x * CUSHION_RESTITUTION;
         ball.velocity.y *= 0.985;
         applyRailSpin(ball, 1, 0, normalImpulse);
-        refreshMotion(ball);
+        refreshRailMotion(ball);
         this.recordCushion(ball, recorded);
       }
     } else if (ball.position.x > maxX && ball.velocity.x > 0) {
@@ -645,7 +695,7 @@ export class Simulation {
         ball.velocity.x = -ball.velocity.x * CUSHION_RESTITUTION;
         ball.velocity.y *= 0.985;
         applyRailSpin(ball, -1, 0, normalImpulse);
-        refreshMotion(ball);
+        refreshRailMotion(ball);
         this.recordCushion(ball, recorded);
       }
     }
@@ -657,7 +707,7 @@ export class Simulation {
         ball.velocity.y = -ball.velocity.y * CUSHION_RESTITUTION;
         ball.velocity.x *= 0.985;
         applyRailSpin(ball, 0, 1, normalImpulse);
-        refreshMotion(ball);
+        refreshRailMotion(ball);
         this.recordCushion(ball, recorded);
       }
     } else if (ball.position.y > maxY && ball.velocity.y > 0) {
@@ -667,7 +717,7 @@ export class Simulation {
         ball.velocity.y = -ball.velocity.y * CUSHION_RESTITUTION;
         ball.velocity.x *= 0.985;
         applyRailSpin(ball, 0, -1, normalImpulse);
-        refreshMotion(ball);
+        refreshRailMotion(ball);
         this.recordCushion(ball, recorded);
       }
     }

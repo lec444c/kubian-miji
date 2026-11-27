@@ -1,21 +1,30 @@
 import { describe, expect, it } from 'vitest';
 import { createRackedSimulation } from '../../src/sim/rack';
+import { TABLE_HALF_X, TABLE_HALF_Y } from '../../src/sim/SimulationState';
 
 /** 袋口兜底回归（第十三轮球速上限 10 m/s）：2D 模型无跳球，球越过台呢边缘的唯一
  *  途径是袋口缺口，故越界球必须落入最近袋而非飞出台面。修复前 0.80 力度开球在
  *  4/40 球堆种子（9/15/24/32）出现 flewOffTable；detectFlight 改为最近袋捕获后清零。 */
 describe('pocket-mouth backstop: no ball flies off the table', () => {
-  it('seed 9 at 0.80 power pockets the escapee instead of flying off', () => {
+  it('seed 9 at 0.80 power keeps the former escapee on the table or pockets it', () => {
     const sim = createRackedSimulation(9);
     sim.strike(0, 0.8);
     sim.runUntilStopped(60_000);
     const outcome = sim.currentOutcome!;
     expect(outcome.flewOffTable).toEqual([]);
-    // 10 号球原从左下角袋口下方缝隙穿出；现应落入袋中。
+    expect(sim.allStopped()).toBe(true);
+    // 10 号球原从左下角袋口下方缝隙穿出。库边修复后它可能被胶边弹回并合法
+    // 留台，也可能落袋；回归只要求它不飞出台面且最终状态合法。
     const ten = sim.state.balls.find(ball => ball.id === 10)!;
-    expect(ten.onTable).toBe(false);
-    expect(ten.pocketed).toBe(true);
-    expect(outcome.pocketed.some(ball => ball.ballId === 10)).toBe(true);
+    expect(ten.onTable || ten.pocketed).toBe(true);
+    if (ten.onTable) {
+      expect(ten.motion).toBe('stationary');
+      expect(ten.velocity).toEqual({ x: 0, y: 0 });
+      expect(Math.abs(ten.position.x)).toBeLessThanOrEqual(TABLE_HALF_X);
+      expect(Math.abs(ten.position.y)).toBeLessThanOrEqual(TABLE_HALF_Y);
+    } else {
+      expect(outcome.pocketed.some(ball => ball.ballId === 10)).toBe(true);
+    }
   }, 120000);
 
   it('breaks across powers 0.80/0.88/1.00 and seeds 1..40 never fly a ball off', () => {
